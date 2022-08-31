@@ -13,36 +13,40 @@
 enum e_ttype
 {
 	PIPE, // 0
-	EMPTY, // 1
-	STRING, // 2
-	HERE_DOC, // 3
-	RED_INPUT, // 4
-	RED_APPEND, // 5
-	RED_OUTPUT // 6
+	STRING, // 1
+	HERE_DOC, // 2
+	RED_INPUT, // 3
+	RED_APPEND, // 4
+	RED_OUTPUT   // 5
 };
 
 typedef	struct s_token
 {
-	char	*str;
+	char	*str; // Default NULL
 	enum	e_ttype type;
-	struct	s_token	*prev;
-	struct	s_token	*next;
+	struct	s_token	*prev; // Default NULL
+	struct	s_token	*next; // Default NULL
 }	t_token;
 
-typedef	struct s_ms
+typedef	struct s_minishell
 {
-	t_token	token;
-}	t_ms;
+	char	**env;
+	t_token	*token;
+}	t_minishell;
+
+extern t_minishell ms;
+
+// TOKENIZE
+t_token	*tokenize(char *str);
+t_token	*init_token(char *str, enum e_ttype type);
+void	token_addback(t_token **token, t_token *new_token);
+void	parse_token_string(t_token **token, char *str, int *pos);
 
 
+// UTILS
+int		is_whitespace(char c);
 size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *str);
-char	**ft_split(char const *str, char c);
+char	*ft_strchr(const char *s, int c);
 void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strncmp(const char *str1, const char *str2, size_t n);
-char	*ft_replace(char *str, char from, char from2, char to);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 #endif

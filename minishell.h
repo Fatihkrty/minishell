@@ -8,7 +8,9 @@
 
 # define true 1
 # define false 0
-
+# define SINGLE_QUOTE '\''
+# define DOUBLE_QUOTE '"'
+# define DOLLAR_OP '$'
 
 enum e_ttype
 {
@@ -28,10 +30,18 @@ typedef	struct s_token
 	struct	s_token	*next; // Default NULL
 }	t_token;
 
+typedef	struct s_commander
+{
+	char	*command;
+	char	**arguments;
+	struct t_command *prev;
+	struct t_command *next;
+}	t_commander;
+
 typedef	struct s_minishell
 {
-	char	**env;
 	t_token	*token;
+	t_commander	*commander;
 }	t_minishell;
 
 extern t_minishell ms;
@@ -48,5 +58,6 @@ int		is_whitespace(char c);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 void	*ft_calloc(size_t count, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 #endif

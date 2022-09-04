@@ -10,8 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
+void	*ft_memcpy2(void *dest, const void *src, size_t n)
+{
+	size_t	i;
 
+	if (dest == src || n == 0)
+		return (dest);
+	i = 0;
+	while (i < n)
+	{
+		*((char *)dest + i) = *((char *)src + i);
+		i++;
+	}
+	return (dest);
+}
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	len;
@@ -27,7 +40,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return (0);
-	ft_memcpy(result, s1, len);
+	ft_memcpy2(result, s1, len);
 	result[len] = '\0';
 	return (result);
 }

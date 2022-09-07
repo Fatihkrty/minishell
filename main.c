@@ -30,17 +30,22 @@ void	commander_addback(t_commander **commander, t_commander *new_commander)
 	}
 }
 
+char	**init_arg_arr()
+{
+	char	**arg;
+	arg = ft_calloc(sizeof(char **), 2);
+	return (arg);
+}
+
 char	*clean_quote_with_type(char *str, char type, int *pos)
 {
 	char *head;
 	char *new_str;
 	char *resp;
-	char *tmp;
 
 	head = str;
 	resp = "";
 	str++;
-	tmp = NULL;
 	while (*str)
 	{
 		while (*str && *str != type)
@@ -50,26 +55,21 @@ char	*clean_quote_with_type(char *str, char type, int *pos)
 		}
 		(*pos)++;
 		new_str = ft_substr(head, 1, str - head - 1);
-		tmp = resp;
 		resp = ft_strjoin(resp, new_str);
-		free(new_str);
-		if(*tmp)
-			free(tmp);
 		head = str;
 		str++;
 	}
-	// printf("STRING: %s LEN: %zu TYPE: %c\n\n", resp, ft_strlen(resp), type);
 	return (resp);
 }
 
-char	*clean_quote(char *str, int type, int is_command)
+char	*clean_quote(char *str)
 {
 	int		i;
 	char	*data;
 
 	i = 0;
 	data = NULL;
-	if (type == STRING && !ft_strchr(str, DOLLAR_OP))
+	if (!ft_strchr(str, DOLLAR_OP))
 	{
 		while (str[i])
 		{
@@ -77,12 +77,7 @@ char	*clean_quote(char *str, int type, int is_command)
 				data = clean_quote_with_type(str, DOUBLE_QUOTE, &i);
 			else if (str[i] == SINGLE_QUOTE)
 				data = clean_quote_with_type(str, SINGLE_QUOTE, &i);
-			else if (is_operator(str[i]))
-			{
-				printf("OPERATOR: %s\n", str[i]);
-				data = str;
-			}
-			else if (!is_whitespace(str[i]))
+			else
 			{
 				data = ft_strtrim(str, " ");
 				i += ft_strlen(data);
@@ -93,33 +88,27 @@ char	*clean_quote(char *str, int type, int is_command)
 	return(data);
 }
 
-char	**arg_arr_push(char **arg_arr, char *str)
+void	arg_arr_push(char ***arg_arr, char *str)
 {
-	int		i;
+	// TODO Freelenecek ..
 	int		len;
+	int		i;
+	char	**head;
 	char	**new_arr;
 
-	if (!arg_arr)
-	{
-		arg_arr = ft_calloc(sizeof(char *), 1);
-		return (arg_arr);
-	}
-	len = 0;
-	while (arg_arr[len])
-	{
-		// printf("ARGS: %s\n", arg_arr[len]);
-		len++;
-	}
-	new_arr = ft_calloc(sizeof(char *), len + 1);
 	i = 0;
+	len = 0;
+	head = *arg_arr;
+	while (head[len])
+		len++;
+	new_arr = ft_calloc(sizeof(char **), len + 2);
 	while (i < len)
 	{
-		new_arr[i] = arg_arr[i];
+		new_arr[i] = head[i];
 		i++;
 	}
 	new_arr[i] = str;
-	// free(arg_arr);
-	return (new_arr);
+	*arg_arr = new_arr;
 }
 
 void	lexical_analysis()
@@ -131,36 +120,50 @@ void	lexical_analysis()
 	t_commander	*commander;
 
 	token = ms.token;
-	commander = NULL;
 	is_command = true;
-	args = NULL;
+	commander = NULL;
 	while (token)
 	{
-		if (token->str)
-			data = clean_quote(token->str, token->type, is_command);
+		if (token->type == STRING)
+			data = clean_quote(token->str);
+		else
+			data = token->str;
 		if (is_command)
-			printf("COMMAND: %s\n", token->str);
+		{
+			args = init_arg_arr();
+			commander_addback(&commander, init_commander(token->str, args));
+			// printf("COMMAND: %s\n", token->str);
+		}
 		else
 		{
-			printf("ARGUMENTS: %s\n", data);
-			//args = arg_arr_push(args, data);
+			// printf("ARGUMENTS: %s\n", data);
+			arg_arr_push(&args, data);
+			commander->arguments = args;
 		}
 		is_command = false;
 		if (token->type == PIPE)
 			is_command = true;
 		token = token->next;
 	}
-// 	while (commander)
-// 	{
-// 		printf("COMMAND: %s\n", commander->command);
-// 		commander = commander->next;
-// 	}
-// 	while (*args)
-// 	{
-// 		if (*args)
-// 		printf("%s\n", *args);
-// 		args++;
-// 	}
+	int i = 0;
+	while (commander)
+	{
+		i = 0;
+		printf("COMMANDER COMMAND: %s\n", commander->command);
+		while (commander->arguments[i])
+		{
+			printf("COMMANDER ARGS: %s\n", commander->arguments[i]);
+			i++;
+		}
+		commander = commander->next;
+	}
+	printf("UZUN: %d\n", i);
+	// i = 0;
+	// while (args[i])
+	// {
+	// 	printf("ARGS DATA: %s\n", args[i]);
+	// 	i++;
+	// }
 }
 
 int main(int ac, char **av)
@@ -169,16 +172,15 @@ int main(int ac, char **av)
 	t_token	*token;
 
 	input = "\"echo\" >  \" \" \"   merhaba   \"  birsürüboşluk>>   '$US\"ER' | \"merhaba2\"\"me'\"rh\"'aba45\" >> \"\" merhabaa3 << \"merhaba4\" merhaba";
-	// input = "\"deneme\"mes\"aji\" \0";
-	// input = "\"echo  \" 'deneme'";
+	input = "ls -l -a -h > file1 > abc << file2 | deneme 123 456 | fatih >> deneme2";
 	printf("LEN: %d INPUT: %s\n", ft_strlen(input), input);
 	ms.token = tokenize(input);
-	token = ms.token;
-	while(token)
-	{
-		printf("String:=>%s-Type: %d Len: %d\n", token->str, token->type, ft_strlen(token->str));
-		token = token->next;
-	}
-	//lexical_analysis();
+	// token = ms.token;
+	// while(token)
+	// {
+	// 	printf("String:=>%s-Type: %d Len: %d\n", token->str, token->type, ft_strlen(token->str));
+	// 	token = token->next;
+	// }
+	lexical_analysis();
 	// system("leaks a.out");
 }

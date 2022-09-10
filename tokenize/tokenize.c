@@ -42,9 +42,12 @@ int	find_end_pos(char *str, int end_pos, char type)
 
 int	without_quote_parse(char *str, int end_pos)
 {
-	while (str[end_pos] && !is_whitespace(str[end_pos]))
+	while (str[end_pos])
 	{
-		// printf("ACACBACB: %d\n", end_pos);
+		if (is_whitespace(str[end_pos]))
+			break;
+		if(is_operator(str + end_pos))
+			break;
 		end_pos++;
 	}
 	return (end_pos);

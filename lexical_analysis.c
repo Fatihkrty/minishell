@@ -8,6 +8,7 @@ void	lexical_analysis()
 	char		**args;
 	t_token		*token;
 	t_commander	*commander;
+	t_commander	*last_commander;
 
 	token = ms.token;
 	is_command = true;

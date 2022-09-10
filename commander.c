@@ -12,7 +12,7 @@ t_commander *init_commander(char *command, char **args)
 	return (commander);
 }
 
-void	commander_addback(t_commander **commander, t_commander *new_commander)
+t_commander	*commander_addback(t_commander **commander, t_commander *new_commander)
 {
 	t_commander *i_commander;
 
@@ -26,4 +26,5 @@ void	commander_addback(t_commander **commander, t_commander *new_commander)
 		i_commander->next = new_commander;
 		new_commander->prev = i_commander;
 	}
+	return (new_commander);
 }

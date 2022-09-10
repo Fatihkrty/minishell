@@ -6,4 +6,4 @@ all:
 run: all
 	./a.out
 debug:
-	gcc main.c ./utils/*.c ./tokenize/*.c -lreadline -ggdb
+	gcc main.c lexical_analysis.c commander.c ./utils/*.c ./tokenize/*.c -lreadline -ggdb

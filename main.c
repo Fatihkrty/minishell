@@ -102,6 +102,6 @@ int main(int ac, char **av)
 		printf("String: %s Type: %d Len: %d\n", token->str, token->type, ft_strlen(token->str));
 		token = token->next;
 	}
-	//lexical_analysis();
+	lexical_analysis();
 	// system("leaks a.out");
 }

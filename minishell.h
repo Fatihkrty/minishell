@@ -52,10 +52,6 @@ t_token	*init_token(char *str, enum e_ttype type);
 void	token_addback(t_token **token, t_token *new_token);
 void	parse_token_string(t_token **token, char *str, int *pos);
 
-//LEXICAL ANALYSIS
-t_commander	*commander_addback(t_commander **commander, t_commander *new_commander);
-t_commander *init_commander(char *command, char **args);
-void	lexical_analysis();
 
 // UTILS
 int		is_whitespace(char c);

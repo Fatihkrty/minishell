@@ -14,12 +14,12 @@
 
 enum e_ttype
 {
-	PIPE, // 0
-	STRING, // 1
-	HERE_DOC, // 2
-	RED_INPUT, // 3
-	RED_APPEND, // 4
-	RED_OUTPUT   // 5
+	PIPE, // 0 |
+	STRING, // 1 dasdsa echo
+	HERE_DOC, // 2 <
+	RED_INPUT, // 3 <<
+	RED_APPEND, // 4 >>
+	RED_OUTPUT   // 5 >
 };
 
 typedef	struct s_token
@@ -34,8 +34,8 @@ typedef	struct s_commander
 {
 	char	*command;
 	char	**arguments;
-	struct t_command *prev;
-	struct t_command *next;
+	struct s_commander *prev;
+	struct s_commander *next;
 }	t_commander;
 
 typedef	struct s_minishell

@@ -70,7 +70,7 @@ char	*clean_quote(char *str)
 	char	*data;
 
 	i = 0;
-	data = NULL;
+	data = str;
 	if (!ft_strchr(str, DOLLAR_OP))
 	{
 		while (str[i])
@@ -80,10 +80,7 @@ char	*clean_quote(char *str)
 			else if (str[i] == SINGLE_QUOTE)
 				data = clean_quote_with_type(str, SINGLE_QUOTE, &i);
 			else
-			{
-				data = ft_strtrim(str, " ");
-				i += ft_strlen(data);
-			}
+				data = str;
 			i++;
 		}
 	}
@@ -100,7 +97,7 @@ void	arg_arr_push(char ***arg_arr, char *str)
 	i = 0;
 	len = 0;
 	head = *arg_arr;
-	while (head[len])
+	while (head && head[len])
 		len++;
 	new_arr = ft_calloc(sizeof(char **), len + 2);
 	while (i < len)
@@ -110,6 +107,14 @@ void	arg_arr_push(char ***arg_arr, char *str)
 	}
 	new_arr[i] = str;
 	*arg_arr = new_arr;
+}
+
+void	fill_commander(char *str)
+{
+	t_commander	*commander;
+	t_commander	*last_commander;
+
+
 }
 
 void	lexical_analysis()
@@ -123,7 +128,7 @@ void	lexical_analysis()
 
 	token = ms.token;
 	is_command = true;
-	args = init_arg_arr();
+	args = NULL;
 	commander = NULL;
 	while (token)
 	{
@@ -134,25 +139,39 @@ void	lexical_analysis()
 		if (is_command)
 		{
 			args = init_arg_arr();
+			if (is_operator(data))
+				data = NULL;
 			last_commander = commander_addback(&commander, init_commander(data));
 		}
-		else
-			arg_arr_push(&args, data);
+		arg_arr_push(&args, data);
 		last_commander->arguments = args;
 		is_command = false;
 		if (token->type == PIPE)
 			is_command = true;
 		token = token->next;
 	}
+	ms.commander = commander;
+	// while (commander)
+	// {
+	// 	int c = 0;
+	// 	printf("COMMANDER COMMAND: %s\n", commander->command);
+	// 	while (commander->arguments[c])
+	// 	{
+	// 		printf("COMMANDER ARGMENTS: %s\n", commander->arguments[c]);
+	// 		c++;
+	// 	}
+	// 	commander = commander->next;
+	// }
+}
+
+void	run_commands()
+{
+	t_commander	*commander;
+
+	commander = ms.commander;
 	while (commander)
 	{
-		int c = 0;
-		printf("COMMANDER COMMAND: %s\n", commander->command);
-		while (commander->arguments[c])
-		{
-			printf("COMMANDER ARGMENTS: %s\n", commander->arguments[c]);
-			c++;
-		}
+		printf("RESULT: %d\n", execve("/bin/ls", commander->arguments, NULL));
 		commander = commander->next;
 	}
 }
@@ -162,16 +181,20 @@ int main(int ac, char **av)
 	char *input;
 	t_token	*token;
 
-	// input = "\"echo\" >  \" \" \"   merhaba   \"  birsürüboşluk>>   '$US\"ER' | \"merhaba2\"\"me'\"rh\"'aba45\" >> \"\" merhabaa3 << \"merhaba4\" merhaba";
-	input = "ls -l -a -h > file1 << file2 | deneme 123 456";
-	printf("LEN: %d INPUT: %s\n", ft_strlen(input), input);
+	//input = "\"echo\" >  \" \" \"   merhaba   \"  birsürüboşluk>>   '$US\"ER' | \"merhaba2\"\"me'\"rh\"'aba45\" >> \"\" merhabaa3 << \"merhaba4\" merhaba";
+	//input = "ls -l -a -h >              file123>>deneme << file2 | deneme 123 456";
+	//input = "echo \"den\"\"eme\" 'fatih'";
+	input = "\"ls\" '-l' -a -h"; // echo deneme "123 4567
+	printf("LEN: %zu INPUT: %s\n", ft_strlen(input), input);
 	ms.token = tokenize(input);
 	token = ms.token;
 	while(token)
 	{
-		printf("String: %s Type: %d Len: %d\n", token->str, token->type, ft_strlen(token->str));
+		printf("String: %s Type: %d Len: %zu\n", token->str, token->type, ft_strlen(token->str));
 		token = token->next;
 	}
 	lexical_analysis();
+	run_commands();
+
 	// system("leaks a.out");
 }

@@ -5,8 +5,16 @@ int	find_end_pos(char *str, int end_pos, char type)
 	end_pos++;
 	while (str[end_pos])
 	{
-		if(str[end_pos] == type && is_whitespace(str[end_pos + 1]))
-			break;
+		if(str[end_pos] == type)
+		{
+			end_pos++;
+			if (is_whitespace(str[end_pos]))
+				break;
+			else
+				while (!is_whitespace(str[end_pos]))
+					end_pos++;
+				return (end_pos);
+		}
 		end_pos++;
 	}
 	return (end_pos);
@@ -17,6 +25,8 @@ int	without_quote_parse(char *str, int end_pos)
 	while (str[end_pos])
 	{
 		if (is_whitespace(str[end_pos]))
+			break;
+		if (is_operator(str + end_pos + 1))
 			break;
 		end_pos++;
 	}
@@ -41,8 +51,12 @@ void	parse_token_string(t_token **token, char *str, int *pos)
 	else
 		end_pos = without_quote_parse(str, end_pos);
 	len = end_pos - *pos + 1;
+	if (is_whitespace(str[end_pos]))
+		len -= 1;
 	token_str = ft_substr(str, *pos, len);
 	*pos = end_pos;
-	if (ft_strlen(token_str) != 1 && token_str[0] != 32)
+	if (ft_strlen(token_str))
 		token_addback(&(*token), init_token(token_str, STRING));
+	else
+		free(token_str);
 }

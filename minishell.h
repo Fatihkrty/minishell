@@ -15,7 +15,7 @@
 enum e_ttype
 {
 	PIPE, // 0 |
-	STRING, // 1 dasdsa echo
+	STRING, // 1 echo
 	HERE_DOC, // 2 <
 	RED_INPUT, // 3 <<
 	RED_APPEND, // 4 >>
@@ -24,23 +24,33 @@ enum e_ttype
 
 typedef	struct s_token
 {
-	char	*str; // Default NULL
+	char	*str;
 	enum	e_ttype type;
-	struct	s_token	*prev; // Default NULL
-	struct	s_token	*next; // Default NULL
+	struct	s_token	*prev;
+	struct	s_token	*next;
 }	t_token;
+
+typedef struct s_arguments
+{
+	char	*arg;
+	enum	e_ttype type;
+	struct	s_arguments *next;
+	struct	s_arguments *prev;
+
+}	t_arguments;
 
 typedef	struct s_commander
 {
 	char	*command;
 	char	**arguments;
-	struct s_commander *prev;
-	struct s_commander *next;
+	struct	s_commander *prev;
+	struct	s_commander *next;
 }	t_commander;
 
 typedef	struct s_minishell
 {
-	t_token	*token;
+	char		**env;
+	t_token		*token;
 	t_commander	*commander;
 }	t_minishell;
 
@@ -52,6 +62,13 @@ t_token	*init_token(char *str, enum e_ttype type);
 void	token_addback(t_token **token, t_token *new_token);
 void	parse_token_string(t_token **token, char *str, int *pos);
 
+//LEXICAL ANALYSIS
+void	lexical_analysis();
+char	*clean_quote(char *str);
+char	**init_arg_arr();
+void	arg_arr_push(char ***arg_arr, char *str);
+t_commander *init_commander(char *command);
+t_commander	*commander_addback(t_commander **commander, t_commander *new_commander);
 
 // UTILS
 int		is_whitespace(char c);

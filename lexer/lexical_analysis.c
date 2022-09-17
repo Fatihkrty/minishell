@@ -23,7 +23,7 @@ void	lexical_analysis()
 		if (lex.is_command)
 		{
 			lex.args = init_arg_arr();
-			lex.last_commander = commander_addback(&lex.commander, init_commander(lex.data));
+			lex.last_commander = commander_addback(&lex.commander, init_commander(lex.data, lex.token->type));
 		}
 		arg_arr_push(&lex.args, lex.data);
 		lex.last_commander->arguments = lex.args;
@@ -36,7 +36,7 @@ void	lexical_analysis()
 	while (lex.commander)
 	{
 		int c = 0;
-		printf("COMMANDER COMMAND: %s\n", lex.commander->command);
+		printf("COMMANDER COMMAND: %s TYPE: %d\n", lex.commander->command, lex.commander->type);
 		while (lex.commander->arguments[c])
 		{
 			printf("COMMANDER ARGMENTS: %s\n", lex.commander->arguments[c]);

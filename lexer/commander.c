@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-t_commander *init_commander(char *command)
+t_commander *init_commander(char *command, int type)
 {
 	t_commander *commander;
 
@@ -9,6 +9,7 @@ t_commander *init_commander(char *command)
 	commander->arguments = NULL;
 	commander->prev = NULL;
 	commander->next = NULL;
+	commander->type = type;
 	return (commander);
 }
 

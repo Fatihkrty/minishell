@@ -41,6 +41,7 @@ typedef struct s_arguments
 
 typedef	struct s_commander
 {
+	int		type;
 	char	*command;
 	char	**arguments;
 	struct	s_commander *prev;
@@ -67,10 +68,11 @@ void	lexical_analysis();
 char	*clean_quote(char *str);
 char	**init_arg_arr();
 void	arg_arr_push(char ***arg_arr, char *str);
-t_commander *init_commander(char *command);
+t_commander *init_commander(char *command, int type);
 t_commander	*commander_addback(t_commander **commander, t_commander *new_commander);
 
 // UTILS
+void	set_env(char **env);
 int		is_whitespace(char c);
 int		is_operator(char *str);
 size_t	ft_strlen(const char *s);

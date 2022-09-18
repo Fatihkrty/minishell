@@ -9,24 +9,22 @@ char	**init_arg_arr()
 }
 
 
-void	arg_arr_push(char ***arg_arr, char *str)
+char	**arg_arr_push(char **arg_arr, char *str)
 {
-	int		len;
 	int		i;
-	char	**head;
+	int		len;
 	char	**new_arr;
 
 	i = 0;
 	len = 0;
-	head = *arg_arr;
-	while (head && head[len])
+	while (arg_arr && arg_arr[len])
 		len++;
 	new_arr = ft_calloc(sizeof(char **), len + 2);
 	while (i < len)
 	{
-		new_arr[i] = head[i];
+		new_arr[i] = arg_arr[i];
 		i++;
 	}
 	new_arr[i] = str;
-	*arg_arr = new_arr;
+	return (new_arr);
 }

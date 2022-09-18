@@ -3,14 +3,60 @@
 
 t_minishell ms;
 
-void	run_commands()
+int	get_path(char *command)
+{
+	int		i;
+	char	*path;
+	char	**path_arr;
+
+	i = 0;
+	path_arr = ms.paths;
+	while (path_arr[i])
+	{
+		path = ft_strjoin(path_arr[i], command);
+		if (!access(path, F_OK))
+		{
+			free(path);
+			return (i);
+		}
+		free(path);
+		i++;
+	}
+	return (-1);
+}
+
+void	run_commands(char *command, char **args)
+{
+	int		path;
+	char	**paths;
+	char	*new_cmd;
+	char	*file;
+
+	paths = ms.paths;
+	new_cmd = ft_strjoin("/", command);
+	path = get_path(new_cmd);
+
+	// TODO Error Fırlatılacak
+	if (path == -1)
+		printf("Path Not Found !\n");
+	file = ft_strjoin(paths[path], new_cmd);
+	//printf("%s - %d - %s - %s\n", new_cmd, path, paths[path], file);
+	execve(file, args, NULL);
+}
+
+/*
+*	Eğer path üzerinde tek yol varsa
+*	':' karakterinden split ile ayırt
+*	edilemiyorsa kontrol edilecek.
+*/
+void	run_all_commands()
 {
 	t_commander	*commander;
 
 	commander = ms.commander;
 	while (commander)
 	{
-		printf("RESULT: %d\n", execve("/bin/ls", commander->arguments, NULL));
+		run_commands(commander->command, commander->arguments);
 		commander = commander->next;
 	}
 }
@@ -18,22 +64,14 @@ void	run_commands()
 int main(int ac, char **av, char **env)
 {
 	char	*input;
-	t_token	*token;
 
-	input = "\"echo\" >  \" \" \"   merhaba   \"  birsürüboşluk>>   '$US\"ER' | \"merhaba2\"\"me'\"rh\"'aba45\" >> \"\" merhabaa3 << \"merhaba4\" merhaba";
-	input = "'ls' '-l' '-a' '-h' > file | deneme 123";
-	set_env(env);
-	printf("%s\n", getenv("USER"));
-	// printf("LEN: %zu INPUT: %s\n", ft_strlen(input), input);
-	// ms.token = tokenize(input);
-	// token = ms.token;
-	// while(token)
-	// {
-	// 	printf("String: %s Type: %d Len: %zu\n", token->str, token->type, ft_strlen(token->str));
-	// 	token = token->next;
-	// }
-	// lexical_analysis();
-	// run_commands();
+	input = "ls -l -a -h";
+
+	ms.env = set_env(env);
+	ms.paths = ft_split(get_env("PATH"), ':');
+	ms.token = tokenize(input);
+	ms.commander = lexical_analysis();
+	run_all_commands();
 
 	// system("leaks a.out");
 }

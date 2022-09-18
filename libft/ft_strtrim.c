@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 void	*ft_memcpy2(void *dest, const void *src, size_t n)
 {
 	size_t	i;

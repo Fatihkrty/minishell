@@ -18,6 +18,7 @@ t_commander	*lexical_analysis()
 	int			is_command;
 	char		*data;
 	char		**args;
+	char		**tmp;
 	t_token		*token;
 	t_commander	*commander;
 	t_commander	*last_commander;
@@ -37,8 +38,13 @@ t_commander	*lexical_analysis()
 			args = init_arg_arr();
 			last_commander = commander_addback(&commander, init_commander(data, token->type));
 		}
-		args = arg_arr_push(args, data);
-		last_commander->arguments = args;
+		if (token->type != PIPE)
+		{
+			tmp = args;
+			args = arg_arr_push(args, data);
+			free(tmp);
+			last_commander->arguments = args;
+		}
 		is_command = false;
 		if (token->type == PIPE)
 			is_command = true;

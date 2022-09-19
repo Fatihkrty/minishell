@@ -25,6 +25,22 @@ int	get_path(char *command)
 	return (-1);
 }
 
+void	run_cmd(char *file, char **args)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		sleep(4);
+		execve(file, args, NULL);
+	}
+	wait(NULL);
+	printf("Main process");
+
+	
+}
+
 void	run_commands(char *command, char **args)
 {
 	int		path;
@@ -38,16 +54,22 @@ void	run_commands(char *command, char **args)
 
 	// TODO Error Fırlatılacak
 	if (path == -1)
+	{
 		printf("Path Not Found !\n");
+		return ;
+	}
 	file = ft_strjoin(paths[path], new_cmd);
-	//printf("%s - %d - %s - %s\n", new_cmd, path, paths[path], file);
-	execve(file, args, NULL);
+	free(new_cmd);
+	run_cmd(file, args);
+	free(file);
 }
 
 /*
 *	Eğer path üzerinde tek yol varsa
 *	':' karakterinden split ile ayırt
 *	edilemiyorsa kontrol edilecek.
+*	@param void
+*	@return non-return
 */
 void	run_all_commands()
 {
@@ -65,13 +87,17 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "ls -l -a -h";
+	// input = "lssds";
+	input = "echo \"den\"\"e\"\"me\"";
 
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	ms.token = tokenize(input);
+	// token_test();
 	ms.commander = lexical_analysis();
+	// lexer_test();
 	run_all_commands();
 
 	// system("leaks a.out");
 }
+

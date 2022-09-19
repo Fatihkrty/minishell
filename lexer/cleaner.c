@@ -8,7 +8,8 @@ char	*clean_quote_with_type(char *str, char type, int *pos)
 	char	*tmp;
 
 	head = str;
-	resp = "";
+	resp = ft_calloc(sizeof(char *), 1);
+	tmp = resp;
 	str++;
 	while (*str)
 	{
@@ -19,9 +20,11 @@ char	*clean_quote_with_type(char *str, char type, int *pos)
 		}
 		(*pos)++;
 		new_str = ft_substr(head, 1, str - head - 1);
+		tmp = resp;
 		resp = ft_strjoin(resp, new_str);
 		head = str;
 		free(new_str);
+		free(tmp);
 		str++;
 	}
 	return (resp);

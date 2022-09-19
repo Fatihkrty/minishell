@@ -5,6 +5,7 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <errno.h>
 
 # define true 1
 # define false 0
@@ -29,15 +30,6 @@ typedef	struct s_token
 	struct	s_token	*prev;
 	struct	s_token	*next;
 }	t_token;
-
-typedef struct s_arguments
-{
-	char	*arg;
-	enum	e_ttype type;
-	struct	s_arguments *next;
-	struct	s_arguments *prev;
-
-}	t_arguments;
 
 typedef	struct s_commander
 {

@@ -12,7 +12,6 @@ void    token_test()
 	}
 }
 
-
 void    lexer_test()
 {
     t_commander *commander;
@@ -21,7 +20,7 @@ void    lexer_test()
     while (commander)
 	{
 		int c = 0;
-		printf("COMMANDER COMMAND: %s TYPE: %d\n", commander->command, commander->type);
+		printf("COMMANDER COMMAND: %s LEN: %zu TYPE: %d\n", commander->command, ft_strlen(commander->command), commander->type);
 		while (commander->arguments[c])
 		{
 			printf("COMMANDER ARGMENTS: %s\n", commander->arguments[c]);

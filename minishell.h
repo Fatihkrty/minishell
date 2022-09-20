@@ -34,6 +34,15 @@ typedef	struct s_token
 	struct	s_token	*next;
 }	t_token;
 
+typedef struct s_redirect
+{
+	char	*arg;
+	enum	e_ttype type;
+	struct	s_redirect *next;
+	struct	s_redirect *prev;
+
+} t_redirect;
+
 typedef	struct s_commander
 {
 	int		type;

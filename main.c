@@ -78,8 +78,10 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
+	// ls -l -a > file < deneme | 
+
 	// input = "lssds";
-	input = "ls -l -a -h > file";
+	input = "cat < file.txt";
 	// input = "cat > file.txt";
 
 	ms.env = set_env(env);
@@ -87,7 +89,7 @@ int main(int ac, char **av, char **env)
 	ms.token = tokenize(input);
 	// token_test();
 	ms.commander = lexical_analysis();
-	// lexer_test();
+	lexer_test();
 	start_commander();
 
 	// system("leaks a.out");

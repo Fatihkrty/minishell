@@ -3,26 +3,29 @@
 
 t_minishell ms;
 
-int	get_path(char *command)
+char	*get_path(char *command)
 {
 	int		i;
 	char	*path;
+	char	*new_cmd;
 	char	**path_arr;
 
 	i = 0;
 	path_arr = ms.paths;
+	new_cmd = ft_strjoin("/", command);
 	while (path_arr[i])
 	{
-		path = ft_strjoin(path_arr[i], command);
+		path = ft_strjoin(path_arr[i], new_cmd);
 		if (!access(path, F_OK))
 		{
-			free(path);
-			return (i);
+			free(new_cmd);
+			return (path);
 		}
 		free(path);
 		i++;
 	}
-	return (-1);
+	free(new_cmd);
+	return (NULL);
 }
 
 void	run_cmd(char *file, char **args)
@@ -30,55 +33,43 @@ void	run_cmd(char *file, char **args)
 	int	pid;
 
 	pid = fork();
-	if (pid == 0)
+	if (pid == CHILD_PROCESS)
 	{
-		sleep(4);
 		execve(file, args, NULL);
 	}
-	wait(NULL);
-	printf("Main process");
-
-	
+	else
+		wait(NULL);
 }
 
-void	run_commands(char *command, char **args)
+void	run_commander(t_commander *commander)
 {
-	int		path;
-	char	**paths;
-	char	*new_cmd;
-	char	*file;
+	char	*path;
 
-	paths = ms.paths;
-	new_cmd = ft_strjoin("/", command);
-	path = get_path(new_cmd);
-
-	// TODO Error Fırlatılacak
-	if (path == -1)
+	path = get_path(commander->command);
+	if (!path)
 	{
-		printf("Path Not Found !\n");
+		// TODO Error Fırlatılacak
+		perror("ERROR");
 		return ;
 	}
-	file = ft_strjoin(paths[path], new_cmd);
-	free(new_cmd);
-	run_cmd(file, args);
-	free(file);
+	if (commander->type = STRING)
+		run_cmd(path, commander->arguments);
+	free(path);
 }
 
 /*
 *	Eğer path üzerinde tek yol varsa
 *	':' karakterinden split ile ayırt
 *	edilemiyorsa kontrol edilecek.
-*	@param void
-*	@return non-return
 */
-void	run_all_commands()
+void	start_commander()
 {
 	t_commander	*commander;
 
 	commander = ms.commander;
 	while (commander)
 	{
-		run_commands(commander->command, commander->arguments);
+		run_commander(commander);
 		commander = commander->next;
 	}
 }
@@ -88,7 +79,8 @@ int main(int ac, char **av, char **env)
 	char	*input;
 
 	// input = "lssds";
-	input = "echo \"den\"\"e\"\"me\"";
+	input = "ls -l -a -h > file";
+	// input = "cat > file.txt";
 
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
@@ -96,7 +88,7 @@ int main(int ac, char **av, char **env)
 	// token_test();
 	ms.commander = lexical_analysis();
 	// lexer_test();
-	run_all_commands();
+	start_commander();
 
 	// system("leaks a.out");
 }

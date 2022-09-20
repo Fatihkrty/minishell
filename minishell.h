@@ -6,9 +6,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # define true 1
 # define false 0
+# define CHILD_PROCESS 0
 # define SINGLE_QUOTE '\''
 # define DOUBLE_QUOTE '"'
 # define DOLLAR_OP '$'

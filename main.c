@@ -12,6 +12,8 @@ char	*get_path(char *command)
 
 	i = 0;
 	path_arr = ms.paths;
+	if (!path_arr)
+		return (NULL);
 	new_cmd = ft_strjoin("/", command);
 	while (path_arr[i])
 	{
@@ -52,8 +54,9 @@ void	run_commander(t_commander *commander)
 		perror("ERROR");
 		return ;
 	}
-	if (commander->type = STRING)
+	if (commander->type == STRING)
 		run_cmd(path, commander->arguments);
+
 	free(path);
 }
 
@@ -78,20 +81,14 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	// ls -l -a > file < deneme | 
-
-	// input = "lssds";
-	input = "cat < file.txt";
-	// input = "cat > file.txt";
-
+	input = "ls -l -a > file";
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	ms.token = tokenize(input);
-	// token_test();
+	token_test();
 	ms.commander = lexical_analysis();
 	lexer_test();
-	start_commander();
+	// start_commander();
 
 	// system("leaks a.out");
 }
-

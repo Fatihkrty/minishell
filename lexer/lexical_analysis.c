@@ -13,6 +13,17 @@ void	init_variables(t_lexer *lex)
 	lex->commander = NULL;
 }
 */
+
+// void	set_commander(t_token *token)
+// {
+// 	char		*args;
+// 	char		*str;
+// 	t_commander	*last_commander;
+
+// 	args = init_arg_arr();
+// 	last_commander = commander_addback(&commander, init_commander(data, token->type));
+// }
+
 t_commander	*lexical_analysis()
 {
 	int			is_command;
@@ -38,7 +49,7 @@ t_commander	*lexical_analysis()
 			args = init_arg_arr();
 			last_commander = commander_addback(&commander, init_commander(data, token->type));
 		}
-		if (token->type != PIPE)
+		if (token->type == STRING)
 		{
 			tmp = args;
 			args = arg_arr_push(args, data);

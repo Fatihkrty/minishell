@@ -36,7 +36,7 @@ typedef	struct s_token
 
 typedef struct s_redirect
 {
-	char	*arg;
+	char	*arg; // file
 	enum	e_ttype type;
 	struct	s_redirect *next;
 	struct	s_redirect *prev;
@@ -45,11 +45,11 @@ typedef struct s_redirect
 
 typedef	struct s_commander
 {
-	int		type;
-	char	*command;
-	char	**arguments;
+	int		type; // {"ls" "-l" "-a" "-h" ">" "file" NULL}
+	char	*command; // 
+	char	**arguments; // {"ls" "-l" "-a" "-h" ">" "file" "<" "deneme" NULL}
 	struct	s_commander *prev;
-	struct	s_commander *next;
+	struct	s_commander *next; // < file
 }	t_commander;
 
 typedef	struct s_minishell
@@ -68,7 +68,7 @@ t_token	*init_token(char *str, enum e_ttype type);
 void	token_addback(t_token **token, t_token *new_token);
 void	parse_token_string(t_token **token, char *str, int *pos);
 
-//LEXICAL ANALYSIS
+// LEXICAL ANALYSIS
 char		*clean_quote(char *str);
 char		**init_arg_arr();
 char		**arg_arr_push(char **arg_arr, char *str);
@@ -76,9 +76,15 @@ t_commander	*lexical_analysis();
 t_commander *init_commander(char *command, int type);
 t_commander	*commander_addback(t_commander **commander, t_commander *new_commander);
 
+// BUILT-IN FUNC
+void	env_func();
+int		get_env_len();
+void	unset(char *str);
+void	export(char *str);
+
 // UTILS
-char	**set_env(char **env);
 char	*get_env(char *str);
+char	**set_env(char **env);
 int		is_whitespace(char c);
 int		is_operator(char *str);
 
@@ -91,7 +97,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 
-//TESTER
+// TESTER
 void    token_test();
 void    lexer_test();
 

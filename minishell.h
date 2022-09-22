@@ -8,6 +8,7 @@
 # include <errno.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 # define true 1
 # define false 0
@@ -45,10 +46,12 @@ typedef	struct s_commander
 
 typedef	struct s_minishell
 {
+	int			out_fd;
 	char		**env;
 	char		**paths;
 	t_token		*token;
 	t_commander	*commander;
+	t_commander	*last_cmd;
 }	t_minishell;
 
 extern t_minishell ms;
@@ -72,6 +75,9 @@ void	env_func();
 int		get_env_len();
 void	unset(char *str);
 void	export(char *str);
+
+// CMD
+void	start_commander();
 
 // UTILS
 char	*get_env(char *str);

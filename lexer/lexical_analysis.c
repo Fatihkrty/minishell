@@ -12,22 +12,6 @@ void	init_variables(t_lexer *lex)
 	lex->commander = NULL;
 }
 */
-
-// void	set_commander(t_token *token)
-// {
-// 	char		*args;
-// 	char		*str;
-// 	t_commander	*last_commander;
-
-// 	args = init_arg_arr();
-// 	last_commander = commander_addback(&commander, init_commander(data, token->type));
-// }
-
-int	is_new_command(int type)
-{
-	return (type == HERE_DOC || type == RED_INPUT || type == RED_APPEND || RED_OUTPUT);
-}
-
 t_commander	*lexical_analysis()
 {
 	int			is_command;

@@ -1,4 +1,3 @@
-#include "lexer.h"
 #include "../minishell.h"
 
 /*
@@ -24,6 +23,11 @@ void	init_variables(t_lexer *lex)
 // 	last_commander = commander_addback(&commander, init_commander(data, token->type));
 // }
 
+int	is_new_command(int type)
+{
+	return (type == HERE_DOC || type == RED_INPUT || type == RED_APPEND || RED_OUTPUT);
+}
+
 t_commander	*lexical_analysis()
 {
 	int			is_command;
@@ -34,31 +38,29 @@ t_commander	*lexical_analysis()
 	t_commander	*commander;
 	t_commander	*last_commander;
 
-	token = ms.token;
-	is_command = true;
 	args = NULL;
 	commander = NULL;
+	token = ms.token;
+	is_command = true;
 	while (token)
 	{
 		if (token->type == STRING)
 			data = clean_quote(token->str);
 		else
+		{
 			data = token->str;
+			is_command = true;
+		}
 		if (is_command)
 		{
 			args = init_arg_arr();
 			last_commander = commander_addback(&commander, init_commander(data, token->type));
 		}
-		if (token->type == STRING)
-		{
-			tmp = args;
-			args = arg_arr_push(args, data);
-			free(tmp);
-			last_commander->arguments = args;
-		}
+		tmp = args;
+		args = arg_arr_push(args, data);
+		free(tmp);
+		last_commander->arguments = args;
 		is_command = false;
-		if (token->type == PIPE)
-			is_command = true;
 		token = token->next;
 	}
 	return (commander);

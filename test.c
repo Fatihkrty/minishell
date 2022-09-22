@@ -26,6 +26,7 @@ void    lexer_test()
 			printf("COMMANDER ARGMENTS: %s\n", commander->arguments[c]);
 			c++;
 		}
+		printf("\n");
 		commander = commander->next;
 	}
 }

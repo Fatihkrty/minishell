@@ -34,22 +34,13 @@ typedef	struct s_token
 	struct	s_token	*next;
 }	t_token;
 
-typedef struct s_redirect
-{
-	char	*arg; // file
-	enum	e_ttype type;
-	struct	s_redirect *next;
-	struct	s_redirect *prev;
-
-} t_redirect;
-
 typedef	struct s_commander
 {
-	int		type; // {"ls" "-l" "-a" "-h" ">" "file" NULL}
-	char	*command; // 
-	char	**arguments; // {"ls" "-l" "-a" "-h" ">" "file" "<" "deneme" NULL}
+	int		type;
+	char	*command;
+	char	**arguments;
 	struct	s_commander *prev;
-	struct	s_commander *next; // < file
+	struct	s_commander *next;
 }	t_commander;
 
 typedef	struct s_minishell

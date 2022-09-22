@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include "./lexer/lexer.h"
 
 t_minishell ms;
 
@@ -81,7 +80,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "ls -l -a > file";
+	input = "echo deneme > file";
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	ms.token = tokenize(input);

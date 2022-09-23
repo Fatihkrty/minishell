@@ -213,3 +213,20 @@ Output
 
 Append Mode
 	- Dosya işlemlerinde append mode üzerine ekle demektir. Veriyi yönlendirirken (>> output) çıktı girişte alınıp mevcut veri ile birleştirilir.
+
+Pipes
+	- C dili, Unix ve Linux tabanlı sistemlerde processler arası veri iletimi yapmak için kullanılır. Adından da anlaşılacağı üzere boru mantığı ile çalışan bu yapıda fifo first in first out çalışma mantığı vardır. borunun bir ucu veri gönderirken bir ucu veri dinler. Borunun gönderme ucundan 256 byte veri tek seferde basılabilirken okurken byte byte okunmak zorundadır.
+
+Environment Variables
+	- Çevre Değişkenleri Unix & Linux tabanlı sistemlerde herkes tarafından erişilebilen ortak değerlerin tutulduğu değişkenler olarak düşünülebilir. genellikle büyük harflerle tanımlanırlar.
+
+Builtins
+	- Yerleşik komutlar. Unix & Linux tabanlı sistemlerde halihazırda yazılmış olan PATH enviromentında belirtilmiş yollarda bulunabilen çalıştırılabilir komutlardır.
+
+Readline
+	- C dilinde readline fonksiyonu kullanıcıdan girdi alınmasını sağlayan yapıdır.
+
+
+EXTERNAL FUNCS
+	- char *readline(const char *prompt)
+	- 

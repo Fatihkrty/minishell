@@ -1,8 +1,11 @@
 #include "../minishell.h"
 
+
+
 void    check_command(t_commander *commander)
 {
-
+    if (commander->type != STRING)
+        printf("COMMANDER TYPE IS NOT STRING\n");
 }
 
 void    start_commander()

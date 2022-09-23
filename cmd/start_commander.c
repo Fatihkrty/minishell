@@ -43,6 +43,43 @@ void    red_input(t_commander *commander)
 
 }
 
+int check_endline(char *input, char *endline)
+{
+    int len;
+
+    len = ft_strlen(endline);
+    if (ft_strlen(input) == len)
+        if (!ft_strncmp(input, endline, len))
+            return (true);
+    return (false);
+}
+
+void    red_heredoc(t_commander *commander)
+{
+    char    *tmp;
+    char    *input;
+    char    *result;
+    char    *endline;
+
+    input = NULL;
+    tmp = input;
+    result = "";
+    endline = commander->arguments[0];
+    while (1)
+    {
+        input = readline("heredoc>> ");
+        if (check_endline(input, endline))
+            break;
+        input = ft_strjoin(input, "\n");
+        tmp = result;
+        result = ft_strjoin(result, input);
+        free(input);
+        if (*tmp)
+            free(tmp);
+    }
+    printf("%s", result);
+}
+
 void    check_command()
 {
     t_commander *commander;
@@ -56,6 +93,8 @@ void    check_command()
             red_output(commander, APPEND);
         else if (commander->type == RED_INPUT)
             red_input(commander);
+        else if (commander->type == HERE_DOC)
+            red_heredoc(commander);
         else if (commander->type == PIPE)
             break;
         commander = commander->next;

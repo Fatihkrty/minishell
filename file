@@ -12,3 +12,17 @@ subject.md
 test.c
 tokenize
 utils
+Makefile
+a.out
+builtin_funcs
+cmd
+file
+lexer
+libft
+main.c
+minishell.h
+minishell_func_tutor.txt
+subject.md
+test.c
+tokenize
+utils

@@ -29,15 +29,15 @@ void    run_cmd(char **args)
     char    *path;
 
     path = get_path(*args);
-    // printf("Run cmd is start. out_fd: %d\n", ms.out_fd);
+    if (!path)
+        printf("Path Not Found !\n");
     pid = fork();
     if (pid == -1)
         printf("Process fork error !\n");
     else if (pid == CHILD_PROCESS)
     {
-        printf("Fork created\n");
-        dup2(ms.out_fd, 1);
         dup2(ms.in_fd, 0);
+        dup2(ms.out_fd, 1);
         execve(path, args, NULL);
     }
     else

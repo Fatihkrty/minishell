@@ -10,12 +10,17 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
+// Bool defines
 # define true 1
 # define false 0
-# define CHILD_PROCESS 0
-# define SINGLE_QUOTE '\''
-# define DOUBLE_QUOTE '"'
+
+// Program defines
 # define DOLLAR_OP '$'
+# define DOUBLE_QUOTE '"'
+# define SINGLE_QUOTE '\''
+# define CHILD_PROCESS 0
+
+// File Mode defines
 # define REPLACE 1
 # define APPEND 0
 
@@ -64,8 +69,8 @@ void	token_addback(t_token **token, t_token *new_token);
 void	parse_token_string(t_token **token, char *str, int *pos);
 
 // LEXICAL ANALYSIS
-char	*clean_quote(t_token *token);
 char		**init_arg_arr();
+char		*clean_quote(t_token *token);
 char		**arg_arr_push(char **arg_arr, char *str);
 t_commander	*lexical_analysis();
 t_commander *init_commander(char *command, int type);

@@ -16,6 +16,8 @@
 # define SINGLE_QUOTE '\''
 # define DOUBLE_QUOTE '"'
 # define DOLLAR_OP '$'
+# define REPLACE 1
+# define APPEND 0
 
 enum e_ttype
 {
@@ -45,6 +47,7 @@ typedef	struct s_commander
 
 typedef	struct s_minishell
 {
+	int			in_fd;
 	int			out_fd;
 	char		**env;
 	char		**paths;

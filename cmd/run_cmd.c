@@ -37,7 +37,7 @@ void    run_cmd(char **args)
     {
         printf("Fork created\n");
         dup2(ms.out_fd, 1);
-        // printf("Path: %s\n", path);
+        dup2(ms.in_fd, 0);
         execve(path, args, NULL);
     }
     else

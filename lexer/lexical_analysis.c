@@ -14,8 +14,6 @@ void	init_variables(t_lexer *lex)
 */
 t_commander	*lexical_analysis()
 {
-	int			is_command;
-	char		*data;
 	char		**args;
 	char		**tmp;
 	t_token		*token;
@@ -25,26 +23,19 @@ t_commander	*lexical_analysis()
 	args = NULL;
 	commander = NULL;
 	token = ms.token;
-	is_command = true;
 	while (token)
 	{
-		if (token->type == STRING)
-			data = clean_quote(token->str);
-		else
+		if (token->type == PIPE || token->prev == NULL)
 		{
-			data = token->str;
-			is_command = true;
-		}
-		if (is_command)
-		{
+			if (token->type == PIPE)
+				token = token->next;
 			args = init_arg_arr();
-			last_commander = commander_addback(&commander, init_commander(data, token->type));
+			last_commander = commander_addback(&commander, init_commander(clean_quote(token), token->type));
 		}
 		tmp = args;
-		args = arg_arr_push(args, data);
+		args = arg_arr_push(args, clean_quote(token));
 		free(tmp);
 		last_commander->arguments = args;
-		is_command = false;
 		token = token->next;
 	}
 	return (commander);

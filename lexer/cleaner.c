@@ -30,11 +30,15 @@ char	*clean_quote_with_type(char *str, char type, int *pos)
 	return (resp);
 }
 
-char	*clean_quote(char *str)
+char	*clean_quote(t_token *token)
 {
-	int	i;
+	char	*str;
+	int		i;
 
 	i = 0;
+	if (token->type != STRING)
+		return (token->str);
+	str = token->str;
 	if (!ft_strchr(str, DOLLAR_OP))
 	{
 		while (str[i])

@@ -14,7 +14,6 @@ int main(int ac, char **av, char **env)
 	ms.token = tokenize(input);
 	// token_test();
 	ms.commander = lexical_analysis();
-	ms.last_cmd = ms.commander;
 	ms.out_fd = 1;
 	lexer_test();
 	start_commander();

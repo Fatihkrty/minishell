@@ -51,7 +51,6 @@ typedef	struct s_minishell
 	char		**paths;
 	t_token		*token;
 	t_commander	*commander;
-	t_commander	*last_cmd;
 }	t_minishell;
 
 extern t_minishell ms;

@@ -6,7 +6,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "echo -n '' << file | echo deneme";
+	input = "cat << file | echo deneme";
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	ms.token = tokenize(input);

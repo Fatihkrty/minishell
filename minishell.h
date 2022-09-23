@@ -52,6 +52,7 @@ typedef	struct s_commander
 
 typedef	struct s_minishell
 {
+	int			fd[2];
 	int			in_fd;
 	int			out_fd;
 	char		**env;

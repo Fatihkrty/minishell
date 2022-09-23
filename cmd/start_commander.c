@@ -65,19 +65,35 @@ void    red_heredoc(t_commander *commander)
     tmp = input;
     result = "";
     endline = commander->arguments[0];
-    while (1)
+    pipe(ms.fd);
+    int pid = fork();
+    if (pid == 0)
     {
-        input = readline("heredoc>> ");
-        if (check_endline(input, endline))
-            break;
-        input = ft_strjoin(input, "\n");
-        tmp = result;
-        result = ft_strjoin(result, input);
-        free(input);
-        if (*tmp)
-            free(tmp);
+        close(ms.fd[0]);
+        while (1)
+        {
+            input = readline("heredoc>> ");
+            if (check_endline(input, endline))
+                break;
+            input = ft_strjoin(input, "\n");
+            tmp = result;
+            result = ft_strjoin(result, input);
+            free(input);
+            if (*tmp)
+                free(tmp);
+        }
+        write(ms.fd[1], result, ft_strlen(result));
+        free(result);
+        close(ms.fd[1]);
+        exit(0);
     }
-    printf("%s", result);
+    else
+    {
+        close(ms.fd[1]);
+        wait(NULL);
+        dup2(ms.fd[0], 0);
+        close(ms.fd[0]);
+    }
 }
 
 void    check_command()

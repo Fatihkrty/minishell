@@ -39,7 +39,6 @@ void    run_cmd(char **args)
         dup2(ms.in_fd, 0);
         dup2(ms.out_fd, 1);
         execve(path, args, NULL);
+        exit(0);
     }
-    else
-        wait(NULL);
 }

@@ -63,7 +63,7 @@ void	token_addback(t_token **token, t_token *new_token);
 void	parse_token_string(t_token **token, char *str, int *pos);
 
 // LEXICAL ANALYSIS
-char		*clean_quote(char *str);
+char	*clean_quote(t_token *token);
 char		**init_arg_arr();
 char		**arg_arr_push(char **arg_arr, char *str);
 t_commander	*lexical_analysis();

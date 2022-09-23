@@ -8,7 +8,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "echo 123456765 > file > dosya | deneme 123";
+	input = "echo 123456765 > file |  echo 123";
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	ms.token = tokenize(input);

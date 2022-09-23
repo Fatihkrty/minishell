@@ -38,7 +38,6 @@ typedef	struct s_token
 typedef	struct s_commander
 {
 	int		type;
-	char	*command;
 	char	**arguments;
 	struct	s_commander *prev;
 	struct	s_commander *next;
@@ -76,6 +75,7 @@ void	unset(char *str);
 void	export(char *str);
 
 // CMD
+void    run_cmd();
 void	start_commander();
 
 // UTILS

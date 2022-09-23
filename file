@@ -1,0 +1,20 @@
+total 112K
+drwxrwxr-x 10 fatih fatih 4.0K Sep 23 17:06 .
+drwxr-xr-x  3 fatih fatih 4.0K Sep 20 19:45 ..
+drwxrwxr-x  8 fatih fatih 4.0K Sep 23 15:34 .git
+-rw-rw-r--  1 fatih fatih   19 Sep 18 13:55 .gitignore
+drwxrwxr-x  2 fatih fatih 4.0K Sep 18 13:55 .vscode
+-rw-rw-r--  1 fatih fatih  212 Sep 23 14:15 Makefile
+-rwxrwxr-x  1 fatih fatih  24K Sep 23 17:06 a.out
+drwxrwxr-x  2 fatih fatih 4.0K Sep 23 13:54 builtin_funcs
+drwxrwxr-x  2 fatih fatih 4.0K Sep 23 16:43 cmd
+-rwxrwxr-x  1 fatih fatih    0 Sep 23 17:06 file
+drwxrwxr-x  2 fatih fatih 4.0K Sep 23 13:54 lexer
+drwxrwxr-x  2 fatih fatih 4.0K Sep 18 18:23 libft
+-rw-rw-r--  1 fatih fatih  380 Sep 23 17:06 main.c
+-rw-rw-r--  1 fatih fatih 2.1K Sep 23 16:45 minishell.h
+-rw-rw-r--  1 fatih fatih 9.8K Sep 18 13:55 minishell_func_tutor.txt
+-rw-rw-r--  1 fatih fatih  13K Sep 23 13:54 subject.md
+-rw-rw-r--  1 fatih fatih  543 Sep 23 16:31 test.c
+drwxrwxr-x  2 fatih fatih 4.0K Sep 20 13:45 tokenize
+drwxrwxr-x  2 fatih fatih 4.0K Sep 18 18:23 utils

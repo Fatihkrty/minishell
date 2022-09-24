@@ -30,10 +30,16 @@ void    run_cmd(char **args)
 
     path = get_path(*args);
     if (!path)
-        printf("Path Not Found !\n");
+	{
+		perror("PATH ERROR");
+		return ;
+	}
     pid = fork();
     if (pid == -1)
-        printf("Process fork error !\n");
+	{
+        perror("FORK ERROR");
+		return ;
+	}
     else if (pid == CHILD_PROCESS)
     {
         dup2(ms.in_fd, 0);
@@ -41,4 +47,6 @@ void    run_cmd(char **args)
         execve(path, args, NULL);
         exit(0);
     }
+	else
+		wait(NULL);
 }

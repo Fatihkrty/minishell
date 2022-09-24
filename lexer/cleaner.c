@@ -1,11 +1,11 @@
 #include "../minishell.h"
 
-char	*clean_quote_with_type(char *str, char type, int *pos)
+char *clean_quote_with_type(char *str, char type, int *pos)
 {
-	char	*head;
-	char	*new_str;
-	char	*resp;
-	char	*tmp;
+	char *head;
+	char *new_str;
+	char *resp;
+	char *tmp;
 
 	head = str;
 	resp = ft_calloc(sizeof(char *), 1);
@@ -30,13 +30,13 @@ char	*clean_quote_with_type(char *str, char type, int *pos)
 	return (resp);
 }
 
-char	*clean_quote(t_token *token)
+char *clean_quote(t_token *token)
 {
-	char	*str;
-	int		i;
+	char *str;
+	int i;
 
 	i = 0;
-	if (token->type != STRING)
+	if (token->type != COMMAND)
 		return (token->str);
 	str = token->str;
 	if (!ft_strchr(str, DOLLAR_OP))
@@ -52,5 +52,5 @@ char	*clean_quote(t_token *token)
 			i++;
 		}
 	}
-	return(str);
+	return (str);
 }

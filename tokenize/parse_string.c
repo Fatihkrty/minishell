@@ -1,11 +1,11 @@
 #include "../minishell.h"
 
-int	find_end_pos(char *str, int end_pos, char type)
+int find_end_pos(char *str, int end_pos, char type)
 {
 	end_pos++;
 	while (str[end_pos])
 	{
-		if(str[end_pos] == type)
+		if (str[end_pos] == type)
 		{
 			end_pos++;
 			if (is_whitespace(str[end_pos]))
@@ -13,14 +13,14 @@ int	find_end_pos(char *str, int end_pos, char type)
 			else
 				while (!is_whitespace(str[end_pos]))
 					end_pos++;
-				return (end_pos);
+			return (end_pos);
 		}
 		end_pos++;
 	}
 	return (end_pos);
 }
 
-int	without_quote_parse(char *str, int end_pos)
+int without_quote_parse(char *str, int end_pos)
 {
 	while (str[end_pos])
 	{
@@ -33,11 +33,11 @@ int	without_quote_parse(char *str, int end_pos)
 	return (end_pos);
 }
 
-void	parse_token_string(t_token **token, char *str, int *pos)
+void parse_token_string(t_token **token, char *str, int *pos)
 {
-	int		len;
-	int		end_pos;
-	char	*token_str;
+	int len;
+	int end_pos;
+	char *token_str;
 
 	end_pos = *pos;
 	if (str[end_pos] == DOUBLE_QUOTE && str[end_pos + 1] == DOUBLE_QUOTE)
@@ -56,7 +56,7 @@ void	parse_token_string(t_token **token, char *str, int *pos)
 	token_str = ft_substr(str, *pos, len);
 	*pos = end_pos;
 	if (ft_strlen(token_str))
-		token_addback(&(*token), init_token(token_str, STRING));
+		token_addback(&(*token), init_token(token_str, COMMAND));
 	else
 		free(token_str);
 }

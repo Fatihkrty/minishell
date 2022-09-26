@@ -111,7 +111,7 @@ Mandatory Part
     		- pwd komutu opsiyonlar olmadan sadece pwd
     		- export komutu opsiyonlar olmadan
     		- unset komutu opsiyonlar olmadan
-    		- env komutu opsiyonlar ve arguments olmadan
+    		- env komutu opsiyonlar ve execute olmadan
     		- exit komutu opsiyonlar olmadan
   		- Readline() işlevi bellek sızıntılarına neden olabilir. Onları düzeltmek zorunda değilsin. Ancak bu kendi kodunuz anlamına gelmez, evet yazdığınız kodda bellek sızıntısı olabilir.
 

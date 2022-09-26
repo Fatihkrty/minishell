@@ -5,7 +5,7 @@ t_commander *init_commander()
 	t_commander *commander;
 
 	commander = ft_calloc(sizeof(t_commander), 1);
-	commander->arguments = NULL;
+	commander->execute = NULL;
 	commander->prev = NULL;
 	commander->next = NULL;
 	return (commander);

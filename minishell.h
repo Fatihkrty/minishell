@@ -44,8 +44,8 @@ typedef struct s_token
 
 typedef struct s_commander
 {
-	char				**arguments;
-	char				**red;
+	char				**execute;
+	char				**redirects;
 	struct s_commander	*prev;
 	struct s_commander	*next;
 } t_commander;
@@ -88,9 +88,8 @@ void run_cmd();
 void start_commander();
 
 // REDIRECT_FUNCS
-void red_input(t_commander *commander);
-void red_heredoc(t_commander *commander);
-void red_output(t_commander *commander, int mode);
+void red_output(char *file, int mode);
+
 
 // UTILS
 char *get_env(char *str);

@@ -20,16 +20,16 @@ void    lexer_test()
     while (commander)
 	{
 		int c = 0;
-		while (commander->arguments && commander->arguments[c])
+		while (commander->execute && commander->execute[c])
 		{
-			printf("COMMANDER ARGUMENTS: %s\n", commander->arguments[c]);
+			printf("COMMANDER ARGUMENTS: %s\n", commander->execute[c]);
 			c++;
 		}
 		printf("\n");
 		c = 0;
-		while (commander->red && commander->red[c])
+		while (commander->redirects && commander->redirects[c])
 		{
-			printf("COMMANDER REDIRECTS: %s\n", commander->red[c]);
+			printf("COMMANDER REDIRECTS: %s\n", commander->redirects[c]);
 			c++;
 		}
 		printf("----------------------------------------\n");

@@ -4,7 +4,7 @@
 t_commander *lexical_analysis()
 {
 	char		**tmp;
-	char		**red;
+	char		**redirects;
 	char		**args;
 	t_token		*token;
 	t_commander	*commander;
@@ -17,7 +17,7 @@ t_commander *lexical_analysis()
 			if (token->type == PIPE)
 				token = token->next;
 			args = init_args();
-			red = init_args();
+			redirects = init_args();
 			commander = init_commander();
 			commander_addback(&ms.commander, commander);
 		}
@@ -29,19 +29,19 @@ t_commander *lexical_analysis()
 		}
 		else
 		{
-			tmp = red;
-			red = push_args(red, token->str);
+			tmp = redirects;
+			redirects = push_args(redirects, token->str);
 			free(tmp);
 			token = token->next;
 			if (token)
 			{
-				tmp = red;
-				red = push_args(red, token->str);
+				tmp = redirects;
+				redirects = push_args(redirects, token->str);
 				free(tmp);
 			}
 		}
-		commander->arguments = args;
-		commander->red = red;
+		commander->execute = args;
+		commander->redirects = redirects;
 		if (token)
 			token = token->next;
 	}

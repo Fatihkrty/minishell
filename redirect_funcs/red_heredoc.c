@@ -21,7 +21,7 @@ void red_heredoc(t_commander *commander)
 	input = NULL;
 	tmp = input;
 	result = "";
-	endline = commander->arguments[0];
+	endline = commander->execute[0];
 	pipe(ms.fd);
 	int pid = fork();
 	if (pid == 0)

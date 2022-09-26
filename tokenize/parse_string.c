@@ -60,7 +60,6 @@ void parse_token_string(t_token **token, char *str, int *pos)
 	if (is_whitespace(str[end_pos]))
 		len -= 1;
 	token_str = ft_substr(str, *pos, len);
-	printf("TOKEN_STR: %s\n", token_str);
 	*pos = end_pos;
 	if (ft_strlen(token_str))
 		token_addback(&(*token), init_token(token_str, STRING));

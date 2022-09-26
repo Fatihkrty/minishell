@@ -22,13 +22,23 @@ t_commander *lexical_analysis()
 			commander_addback(&ms.commander, commander);
 		}
 		if (token->type == STRING)
+		{
+			tmp = args;
 			args = push_args(args, clean_quote(token->str));
+			free(tmp);
+		}
 		else
 		{
+			tmp = red;
 			red = push_args(red, token->str);
+			free(tmp);
 			token = token->next;
 			if (token)
+			{
+				tmp = red;
 				red = push_args(red, token->str);
+				free(tmp);
+			}
 		}
 		commander->arguments = args;
 		commander->red = red;

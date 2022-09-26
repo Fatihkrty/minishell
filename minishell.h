@@ -26,7 +26,7 @@
 
 enum e_ttype
 {
-	PIPE,
+	PIPE = 1,
 	STRING,
 	HERE_DOC,
 	RED_INPUT,

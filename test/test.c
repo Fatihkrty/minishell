@@ -22,7 +22,7 @@ void    lexer_test()
 		int c = 0;
 		while (commander->arguments && commander->arguments[c])
 		{
-			printf("COMMANDER ARGMENTS: %s\n", commander->arguments[c]);
+			printf("COMMANDER ARGUMENTS: %s\n", commander->arguments[c]);
 			c++;
 		}
 		printf("\n");

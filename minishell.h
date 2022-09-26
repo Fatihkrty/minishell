@@ -57,6 +57,7 @@ typedef struct s_minishell
 	int out_fd;
 	char **env;
 	char **paths;
+	int	*process_id;
 	t_token *token;
 	t_commander *commander;
 } t_minishell;

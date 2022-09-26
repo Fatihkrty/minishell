@@ -6,7 +6,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "echo deneme > file";
+	input = "echo deneme > file 123 | grep abc > file | asd asd";
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	ms.token = tokenize(input);

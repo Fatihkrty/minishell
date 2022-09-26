@@ -27,7 +27,7 @@
 enum e_ttype
 {
 	PIPE,
-	COMMAND,
+	STRING,
 	HERE_DOC,
 	RED_INPUT,
 	RED_APPEND,
@@ -44,10 +44,10 @@ typedef struct s_token
 
 typedef struct s_commander
 {
-	int type;
-	char **arguments;
-	struct s_commander *prev;
-	struct s_commander *next;
+	char				**arguments;
+	char				**red;
+	struct s_commander	*prev;
+	struct s_commander	*next;
 } t_commander;
 
 typedef struct s_minishell
@@ -64,18 +64,18 @@ typedef struct s_minishell
 extern t_minishell ms;
 
 // TOKENIZE
-t_token *tokenize(char *str);
-t_token *init_token(char *str, enum e_ttype type);
-void token_addback(t_token **token, t_token *new_token);
-void parse_token_string(t_token **token, char *str, int *pos);
+t_token		*tokenize(char *str);
+t_token		*init_token(char *str, enum e_ttype type);
+void		token_addback(t_token **token, t_token *new_token);
+void		parse_token_string(t_token **token, char *str, int *pos);
 
 // LEXICAL ANALYSIS
-char **init_arg_arr();
-char *clean_quote(t_token *token);
-char **arg_arr_push(char **arg_arr, char *str);
-t_commander *lexical_analysis();
-t_commander *init_commander(char *command, int type);
-t_commander *commander_addback(t_commander **commander, t_commander *new_commander);
+char		**init_args();
+char		*clean_quote(char	*str);
+char		**push_args(char **arg_arr, char *str);
+t_commander	*lexical_analysis();
+t_commander	*init_commander();
+void		commander_addback(t_commander **commander, t_commander *new_commander);
 
 // BUILTIN_FUNC
 void	env_func();

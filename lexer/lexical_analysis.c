@@ -1,30 +1,39 @@
 #include "../minishell.h"
 
+
 t_commander *lexical_analysis()
 {
-	char **args;
-	char **tmp;
-	t_token *token;
-	t_commander *commander;
-	t_commander *last_commander;
+	char		**tmp;
+	char		**red;
+	char		**args;
+	t_token		*token;
+	t_commander	*commander;
 
-	commander = NULL;
 	token = ms.token;
 	while (token)
 	{
-		if (token->type != COMMAND || token->prev == NULL)
+		if (token->type == PIPE || token->prev == NULL)
 		{
-			args = init_arg_arr();
-			last_commander = commander_addback(&commander, init_commander(clean_quote(token), token->type));
+			if (token->type == PIPE)
+				token = token->next;
+			args = init_args();
+			red = init_args();
+			commander = init_commander();
+			commander_addback(&ms.commander, commander);
 		}
-		if (token->type == COMMAND)
+		if (token->type == STRING)
+			args = push_args(args, clean_quote(token->str));
+		else
 		{
-			tmp = args;
-			args = arg_arr_push(args, clean_quote(token));
-			free(tmp);
-			last_commander->arguments = args;
+			red = push_args(red, token->str);
+			token = token->next;
+			if (token)
+				red = push_args(red, token->str);
 		}
-		token = token->next;
+		commander->arguments = args;
+		commander->red = red;
+		if (token)
+			token = token->next;
 	}
 	return (commander);
 }

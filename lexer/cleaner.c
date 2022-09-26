@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char *clean_quote_with_type(char *str, char type, int *pos)
+char *clean_quote_with_type(char *str, char type)
 {
 	char *head;
 	char *new_str;
@@ -14,11 +14,7 @@ char *clean_quote_with_type(char *str, char type, int *pos)
 	while (*str)
 	{
 		while (*str && *str != type)
-		{
 			str++;
-			(*pos)++;
-		}
-		(*pos)++;
 		new_str = ft_substr(head, 1, str - head - 1);
 		tmp = resp;
 		resp = ft_strjoin(resp, new_str);
@@ -30,27 +26,23 @@ char *clean_quote_with_type(char *str, char type, int *pos)
 	return (resp);
 }
 
-char *clean_quote(t_token *token)
+char *clean_quote(char *str)
 {
-	char *str;
-	int i;
+	int 	i;
+	char	*head;
 
 	i = 0;
-	if (token->type != COMMAND)
-		return (token->str);
-	str = token->str;
+	head = str;
 	if (!ft_strchr(str, DOLLAR_OP))
 	{
-		while (str[i])
+		while (*str)
 		{
-			if (str[i] == DOUBLE_QUOTE)
-				str = clean_quote_with_type(str, DOUBLE_QUOTE, &i);
-			else if (str[i] == SINGLE_QUOTE)
-				str = clean_quote_with_type(str, SINGLE_QUOTE, &i);
-			else
-				str = str;
-			i++;
+			if (*str == DOUBLE_QUOTE)
+				return clean_quote_with_type(head, DOUBLE_QUOTE);
+			else if (*str == SINGLE_QUOTE)
+				return clean_quote_with_type(head, SINGLE_QUOTE);
+			str++;
 		}
 	}
-	return (str);
+	return (head);
 }

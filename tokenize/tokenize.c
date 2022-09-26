@@ -37,7 +37,7 @@ t_token	*tokenize(char *str)
 	pos = 0;
 	token = NULL;
 	len = ft_strlen(str);
-	while (str[pos] && pos < len)
+	while (pos < len && str[pos])
 	{
 		if (str[pos] == '>' && str[pos + 1] == '>')
 		{

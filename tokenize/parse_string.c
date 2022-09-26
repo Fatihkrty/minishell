@@ -56,7 +56,7 @@ void parse_token_string(t_token **token, char *str, int *pos)
 	token_str = ft_substr(str, *pos, len);
 	*pos = end_pos;
 	if (ft_strlen(token_str))
-		token_addback(&(*token), init_token(token_str, COMMAND));
+		token_addback(&(*token), init_token(token_str, STRING));
 	else
 		free(token_str);
 }

@@ -1,15 +1,15 @@
 #include "../minishell.h"
 
-char	**init_arg_arr()
+char	**init_args()
 {
 	char	**arg;
 
-	arg = ft_calloc(sizeof(char **), 2);
+	arg = ft_calloc(sizeof(char *), 1);
 	return (arg);
 }
 
 
-char	**arg_arr_push(char **arg_arr, char *str)
+char	**push_args(char **arg_arr, char *str)
 {
 	int		i;
 	int		len;
@@ -19,7 +19,7 @@ char	**arg_arr_push(char **arg_arr, char *str)
 	len = 0;
 	while (arg_arr && arg_arr[len])
 		len++;
-	new_arr = ft_calloc(sizeof(char **), len + 2);
+	new_arr = ft_calloc(sizeof(char *), len + 2);
 	while (i < len)
 	{
 		new_arr[i] = arg_arr[i];

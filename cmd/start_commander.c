@@ -14,7 +14,7 @@ void	run_redirects(char **redirects)
 
 }
 
-int	create_process(t_commander *commander)
+int	create_process(t_commander *commander, t_fd_router *router)
 {
 	int			pid;
 
@@ -26,45 +26,44 @@ int	create_process(t_commander *commander)
 	}
 	if (pid == CHILD_PROCESS)
 	{
-		run_redirects(commander->redirects);
-		run_cmd(commander->execute);
+		// run_redirects(commander->redirects);
+		run_cmd(commander->execute, router->fd);
 	}
 	return (pid);
-
 }
 
-int	get_process_len()
-{
-	int			len;
-	t_commander *commander;
-
-	len = 0;
-	commander = ms.commander;
-	while(commander)
-	{
-		len++;
-		commander = commander->next;
-	}
-	return (len);
-}
 
 void start_commander()
 {
+	int i;
 	t_commander	*commander;
+	t_fd_router	*router;
 
+	i = 0;
+	route_pipes();
 	commander = ms.commander;
-	ms.process_id = malloc(sizeof(int) * get_process_len());
-	int i = 0;
+	router = ms.router;
 	while (commander)
 	{
-		ms.process_id[i] = create_process(commander);
+		run_cmd(commander->execute, router->fd);
+		router = router->next;
 		commander = commander->next;
 		i++;
 	}
-	i = 0;
-	while (i < get_process_len())
+	close(ms.fd[0]);
+	close(ms.fd[1]);
+	// router = ms.router;
+	// while (router)
+	// {
+	// 	close(router->fd[0]);
+	// 	close(router->fd[1]);
+	// 	router = router->next;
+	// }
+	router = ms.router;
+	while (router)
 	{
-		waitpid(ms.process_id[i], NULL, 0);
-		i++;
+		wait(NULL);
+		router = router->next;
 	}
+	
 }

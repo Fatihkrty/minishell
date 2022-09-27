@@ -23,7 +23,7 @@ char    *get_path(char *cmd)
     return (NULL);
 }
 
-void    run_cmd(char **args)
+void    run_cmd(char **args, int *fd)
 {
     int     pid;
     char    *path;
@@ -40,13 +40,27 @@ void    run_cmd(char **args)
         perror("FORK ERROR");
 		return ;
 	}
-    else if (pid == CHILD_PROCESS)
+    if (pid == CHILD_PROCESS)
     {
-        dup2(ms.in_fd, 0);
-        dup2(ms.out_fd, 1);
+        // printf("PROCESS: %s\n", *args);
+        // printf("STDIN: %d\n", fd[0]);
+        // printf("STDOUT: %d\n-------------\n", fd[1]);
+        // close(fd[0]);
+        printf("Process Olustu: %s\n", *args);
+		dup2(ms.fd[1], 1);
+		dup2(ms.fd[0], 0);
+		close(ms.fd[0]);
+		close(ms.fd[1]);
         execve(path, args, NULL);
-        exit(0);
+        exit(1);
     }
-	else
-		wait(NULL);
+    // close(fd[1]);
+    // wait(NULL);
+    // dup2(fd[0], 0);
+    // close(fd[0]);
+    // char str[2000];
+    // read(fd[0], str, 2000);
+    // close(fd[0]);
+    // str[2000] = 0;
+    // printf("%s\n", str);
 }

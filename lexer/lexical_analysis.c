@@ -20,6 +20,7 @@ t_commander *lexical_analysis()
 			redirects = init_args();
 			commander = init_commander();
 			commander_addback(&ms.commander, commander);
+			ms.process_count++;
 		}
 		if (token->type == STRING)
 		{

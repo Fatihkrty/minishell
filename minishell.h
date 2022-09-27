@@ -34,12 +34,21 @@ enum e_ttype
 	RED_OUTPUT
 };
 
+// fd[0] = STDIN = 0
+// fd[1] = STDOUT = 1
+typedef	struct s_fd_router
+{
+	int					fd[2];
+	struct s_fd_router *next;
+	struct s_fd_router *prev;
+}	t_fd_router;
+
 typedef struct s_token
 {
-	char *str;
-	enum e_ttype type;
-	struct s_token *prev;
-	struct s_token *next;
+	char			*str;
+	enum	e_ttype	type;
+	struct	s_token	*prev;
+	struct	s_token	*next;
 } t_token;
 
 typedef struct s_commander
@@ -52,14 +61,16 @@ typedef struct s_commander
 
 typedef struct s_minishell
 {
-	int fd[2];
-	int in_fd;
-	int out_fd;
-	char **env;
-	char **paths;
-	int	*process_id;
-	t_token *token;
-	t_commander *commander;
+	int			fd[2];
+	int			in_fd;
+	int			out_fd;
+	int			*process_id;
+	int			process_count;
+	char		**env;
+	char		**paths;
+	t_token		*token;
+	t_fd_router	*router;
+	t_commander	*commander;
 } t_minishell;
 
 extern t_minishell ms;
@@ -78,6 +89,9 @@ t_commander	*lexical_analysis();
 t_commander	*init_commander();
 void		commander_addback(t_commander **commander, t_commander *new_commander);
 
+//ROUTER PIPES
+void	route_pipes();
+
 // BUILTIN_FUNC
 void	env_func();
 int		get_env_len();
@@ -93,19 +107,19 @@ void red_output(char *file, int mode);
 
 
 // UTILS
-char *get_env(char *str);
-char **set_env(char **env);
-int is_whitespace(char c);
-int is_operator(char *str);
+char	*get_env(char *str);
+char	**set_env(char **env);
+int		is_whitespace(char c);
+int		is_operator(char *str);
 
 // LIBFT UTILS
-size_t ft_strlen(const char *s);
-char *ft_strchr(const char *s, int c);
-char **ft_split(char const *str, char c);
-void *ft_calloc(size_t count, size_t size);
-char *ft_strjoin(char const *s1, char const *s2);
-int ft_strncmp(const char *str1, const char *str2, size_t n);
-char *ft_substr(char const *str, unsigned int start, size_t len);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	**ft_split(char const *str, char c);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strncmp(const char *str1, const char *str2, size_t n);
+char	*ft_substr(char const *str, unsigned int start, size_t len);
 
 // TESTER
 void token_test();

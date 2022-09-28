@@ -23,22 +23,20 @@ char    *get_path(char *cmd)
     return (NULL);
 }
 
-void close_all_fd()
+void    close_all_fd()
 {
-    t_fd_router *router;
+    t_pipes *pipes;
 
-    router = ms.router;
-	while (router->next)
+    pipes = ms.pipes;
+	while (pipes->next)
 	{
-        // printf("File Closed: %d\n", router->fd[0]);
-        // printf("File Closed: %d\n", router->fd[1]);
-		close(router->fd[0]);
-		close(router->fd[1]);
-		router = router->next;
+		close(pipes->fd[0]);
+		close(pipes->fd[1]);
+		pipes = pipes->next;
 	}
 }
 
-void    run_cmd(t_commander *cmd, t_fd_router *router)
+void    run_cmd(t_commander *cmd, t_pipes *pipes)
 {
     int     pid;
     char    *path;
@@ -50,31 +48,26 @@ void    run_cmd(t_commander *cmd, t_fd_router *router)
 		return ;
 	}
     pid = fork();
+    if (pid == -1)
+    {
+        perror("FORK ERROR");
+        return ;
+    }
     if (pid == CHILD_PROCESS)
     {
-        if (router->prev == NULL)
+        if (ms.process_count > 1)
         {
-            printf("Process one: %s\n", *(cmd->execute));
-            dup2(router->fd[1], 1);
+            if (pipes->prev == NULL)
+                dup2(pipes->fd[1], 1);
+            else if (pipes->next == NULL)
+                dup2(pipes->prev->fd[0], 0);
+            else
+            {
+                dup2(pipes->prev->fd[0], 0);
+                dup2(pipes->fd[1], 1);
+            }
             close_all_fd();
-            execve(path, cmd->execute, NULL);
         }
-        else if (router->next == NULL)
-        {
-            printf("Process Last Str: %s\n", *(cmd->execute));
-            dup2(router->prev->fd[0], 0);
-            close_all_fd();
-            execve(path, cmd->execute, NULL);
-        }
-        else
-        {
-            printf("Process two: %s\n", *(cmd->execute));
-            dup2(router->prev->fd[0], 0);
-            dup2(router->fd[1], 1);
-            close_all_fd();
-            execve(path, cmd->execute, NULL);
-        }
+        execve(path, cmd->execute, NULL);
     }
-    // close_all_fd();
-
 }

@@ -34,12 +34,12 @@ enum e_ttype
 	RED_OUTPUT
 };
 
-typedef	struct s_fd_router
+typedef	struct s_pipes
 {
 	int					fd[2];
-	struct s_fd_router *next;
-	struct s_fd_router *prev;
-}	t_fd_router;
+	struct s_pipes *next;
+	struct s_pipes *prev;
+}	t_pipes;
 
 typedef struct s_token
 {
@@ -51,6 +51,7 @@ typedef struct s_token
 
 typedef struct s_commander
 {
+	int					fd[2];
 	char				**execute;
 	char				**redirects;
 	struct s_commander	*prev;
@@ -67,7 +68,7 @@ typedef struct s_minishell
 	char		**env;
 	char		**paths;
 	t_token		*token;
-	t_fd_router	*router;
+	t_pipes		*pipes;
 	t_commander	*commander;
 } t_minishell;
 
@@ -87,7 +88,7 @@ t_commander	*lexical_analysis();
 t_commander	*init_commander();
 void		commander_addback(t_commander **commander, t_commander *new_commander);
 
-//ROUTER PIPES
+//pipes PIPES
 void	create_pipes();
 
 // BUILTIN_FUNC
@@ -99,7 +100,7 @@ void	export(char *str);
 // CMD
 void 	close_all_fd();
 void 	start_commander();
-void    run_cmd(t_commander *cmd, t_fd_router *router);
+void    run_cmd(t_commander *cmd, t_pipes *pipes);
 
 // REDIRECT_FUNCS
 void red_output(char *file, int mode);

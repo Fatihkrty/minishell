@@ -49,6 +49,9 @@ void start_commander()
 		commander = commander->next;
 	}
 	printf("End While\n");
+	wait(NULL);
+	// wait(NULL);
+	printf("End Program\n");
 	// close_all_fd();
 	// int len = ms.process_count;
 	// while (len > 0)

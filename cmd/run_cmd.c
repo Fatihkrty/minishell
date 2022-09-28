@@ -30,6 +30,8 @@ void close_all_fd()
     router = ms.router;
 	while (router->next)
 	{
+        // printf("File Closed: %d\n", router->fd[0]);
+        // printf("File Closed: %d\n", router->fd[1]);
 		close(router->fd[0]);
 		close(router->fd[1]);
 		router = router->next;
@@ -52,26 +54,27 @@ void    run_cmd(t_commander *cmd, t_fd_router *router)
     {
         if (router->prev == NULL)
         {
-            printf("Process Str: %s\n", *(cmd->execute));
+            printf("Process one: %s\n", *(cmd->execute));
             dup2(router->fd[1], 1);
+            close_all_fd();
+            execve(path, cmd->execute, NULL);
         }
         else if (router->next == NULL)
         {
             printf("Process Last Str: %s\n", *(cmd->execute));
             dup2(router->prev->fd[0], 0);
+            close_all_fd();
+            execve(path, cmd->execute, NULL);
         }
         else
         {
+            printf("Process two: %s\n", *(cmd->execute));
             dup2(router->prev->fd[0], 0);
             dup2(router->fd[1], 1);
+            close_all_fd();
+            execve(path, cmd->execute, NULL);
         }
-        close_all_fd();
-        execve(path, cmd->execute, NULL);
     }
-    else
-    {
-        wait(NULL);
-        wait(NULL);
-        // close_all_fd();
-    }
+    // close_all_fd();
+
 }

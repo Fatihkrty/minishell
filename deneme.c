@@ -16,20 +16,19 @@ int main()
         close(fd[1]);
         close(fd2[0]);
         close(fd2[1]);
-        execlp("echo", "echo", "\n", "deneme", "\n", "abc", "\n", "123", NULL);
-
+        execlp("ping", "ping", "-c", "5", "google.com", NULL);
     }
 
     int pid2 = fork();
     if (pid2 == CHILD_PROCESS)
     {
         dup2(fd[0], 0);
-        dup2(fd2[1], 1);
         close(fd[0]);
         close(fd[1]);
+        dup2(fd2[1], 1);
         close(fd2[0]);
         close(fd2[1]);
-        execlp("grep", "grep", "abc", NULL);
+        execlp("grep", "grep", "bayt", NULL);
     }
 
     int pid3 = fork();
@@ -40,16 +39,16 @@ int main()
         close(fd[1]);
         close(fd2[0]);
         close(fd2[1]);
-        execlp("grep", "grep", "abc", NULL);
+        execlp("grep", "grep", "bayt", NULL);
     }
 
     close(fd[0]);
     close(fd[1]);
+    waitpid(pid, NULL, 0);
+    waitpid(pid2, NULL, 0);
     close(fd2[0]);
     close(fd2[1]);
 
-    wait(NULL);
-    wait(NULL);
-    wait(NULL);
+
 
 }

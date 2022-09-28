@@ -26,7 +26,7 @@ void	router_addback(t_fd_router **router, t_fd_router *new_router)
 	}
 }
 
-void	route_pipes()
+void	create_pipes()
 {
 	int	len;
 	t_fd_router	*router;
@@ -34,28 +34,15 @@ void	route_pipes()
 	len = ms.process_count;
 	while(len > 0)
 	{
+		printf("Router Created\n");
 		router_addback(&ms.router, init_router());
 		len--;
 	}
 	router = ms.router;
-	while (router)
+	while (router->next)
 	{
+		printf("Pipe Created\n");
 		pipe(router->fd);
 		router = router->next;
 	}
-	router = ms.router;
-	dup2(router->next->fd[1], router->fd[1]);
-	// while (router->next)
-	// {
-	// 	dup2(router->fd[0], router->next->fd[0]);
-	// 	dup2(router->fd[1], router->next->fd[1]);
-	// 	router = router->next;
-	// }
-	// router = ms.router;
-	// while (router->next)
-	// {
-	// 	dup2(router->fd[1], router->next->fd[0]);
-	// 	// dup2(router->fd[0], router->next->fd[0]);
-	// 	router = router->next;
-	// }
 }

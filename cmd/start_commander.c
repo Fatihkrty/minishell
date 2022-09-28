@@ -27,7 +27,7 @@ int	create_process(t_commander *commander, t_fd_router *router)
 	if (pid == CHILD_PROCESS)
 	{
 		// run_redirects(commander->redirects);
-		run_cmd(commander->execute, router->fd);
+		// run_cmd(commander->execute, router->fd);
 	}
 	return (pid);
 }
@@ -35,35 +35,26 @@ int	create_process(t_commander *commander, t_fd_router *router)
 
 void start_commander()
 {
-	int i;
 	t_commander	*commander;
 	t_fd_router	*router;
 
-	i = 0;
-	route_pipes();
 	commander = ms.commander;
+	create_pipes();
 	router = ms.router;
 	while (commander)
 	{
-		run_cmd(commander->execute, router->fd);
+		printf("While Process\n");
+		run_cmd(commander, router);
 		router = router->next;
 		commander = commander->next;
-		i++;
 	}
-	close(ms.fd[0]);
-	close(ms.fd[1]);
-	// router = ms.router;
-	// while (router)
+	printf("End While\n");
+	// close_all_fd();
+	// int len = ms.process_count;
+	// while (len > 0)
 	// {
-	// 	close(router->fd[0]);
-	// 	close(router->fd[1]);
-	// 	router = router->next;
+	// 	wait(NULL);
 	// }
-	router = ms.router;
-	while (router)
-	{
-		wait(NULL);
-		router = router->next;
-	}
+	
 	
 }

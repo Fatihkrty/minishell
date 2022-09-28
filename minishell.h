@@ -34,8 +34,6 @@ enum e_ttype
 	RED_OUTPUT
 };
 
-// fd[0] = STDIN = 0
-// fd[1] = STDOUT = 1
 typedef	struct s_fd_router
 {
 	int					fd[2];
@@ -90,7 +88,7 @@ t_commander	*init_commander();
 void		commander_addback(t_commander **commander, t_commander *new_commander);
 
 //ROUTER PIPES
-void	route_pipes();
+void	create_pipes();
 
 // BUILTIN_FUNC
 void	env_func();
@@ -99,8 +97,9 @@ void	unset(char *str);
 void	export(char *str);
 
 // CMD
-void run_cmd();
-void start_commander();
+void 	close_all_fd();
+void 	start_commander();
+void    run_cmd(t_commander *cmd, t_fd_router *router);
 
 // REDIRECT_FUNCS
 void red_output(char *file, int mode);

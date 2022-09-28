@@ -23,44 +23,55 @@ char    *get_path(char *cmd)
     return (NULL);
 }
 
-void    run_cmd(char **args, int *fd)
+void close_all_fd()
+{
+    t_fd_router *router;
+
+    router = ms.router;
+	while (router->next)
+	{
+		close(router->fd[0]);
+		close(router->fd[1]);
+		router = router->next;
+	}
+}
+
+void    run_cmd(t_commander *cmd, t_fd_router *router)
 {
     int     pid;
     char    *path;
 
-    path = get_path(*args);
+    path = get_path(*(cmd->execute));
     if (!path)
 	{
 		perror("PATH ERROR");
 		return ;
 	}
     pid = fork();
-    if (pid == -1)
-	{
-        perror("FORK ERROR");
-		return ;
-	}
     if (pid == CHILD_PROCESS)
     {
-        // printf("PROCESS: %s\n", *args);
-        // printf("STDIN: %d\n", fd[0]);
-        // printf("STDOUT: %d\n-------------\n", fd[1]);
-        // close(fd[0]);
-        printf("Process Olustu: %s\n", *args);
-		dup2(ms.fd[1], 1);
-		dup2(ms.fd[0], 0);
-		close(ms.fd[0]);
-		close(ms.fd[1]);
-        execve(path, args, NULL);
-        exit(1);
+        if (router->prev == NULL)
+        {
+            printf("Process Str: %s\n", *(cmd->execute));
+            dup2(router->fd[1], 1);
+        }
+        else if (router->next == NULL)
+        {
+            printf("Process Last Str: %s\n", *(cmd->execute));
+            dup2(router->prev->fd[0], 0);
+        }
+        else
+        {
+            dup2(router->prev->fd[0], 0);
+            dup2(router->fd[1], 1);
+        }
+        close_all_fd();
+        execve(path, cmd->execute, NULL);
     }
-    // close(fd[1]);
-    // wait(NULL);
-    // dup2(fd[0], 0);
-    // close(fd[0]);
-    // char str[2000];
-    // read(fd[0], str, 2000);
-    // close(fd[0]);
-    // str[2000] = 0;
-    // printf("%s\n", str);
+    else
+    {
+        wait(NULL);
+        wait(NULL);
+        // close_all_fd();
+    }
 }

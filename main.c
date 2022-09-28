@@ -6,7 +6,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "echo 'deneme 123\nabc\n456' | grep total";
+	input = "ping -c 5 google.com | grep from";
 	ms.process_count = 0;
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');

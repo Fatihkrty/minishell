@@ -35,4 +35,5 @@ void	start_process()
 		waitpid(ms.pids[pos], NULL, 0);
 		pos++;
 	}
+	free(ms.pids);
 }

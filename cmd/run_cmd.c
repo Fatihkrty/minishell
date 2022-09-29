@@ -72,5 +72,8 @@ void    run_cmd(t_process *cmd, int pos)
         execve(path, cmd->execute, NULL);
     }
 	else
+	{
+		free(path);
 		ms.pids[pos] = pid;
+	}
 }

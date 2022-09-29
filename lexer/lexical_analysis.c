@@ -1,9 +1,39 @@
 #include "../minishell.h"
 
+char	**append_arguments(char **args, char *str)
+{
+	char	**tmp;
+	char	**new_args;
+
+	tmp = args;
+	new_args = push_args(args, clean_quote(str));
+	free(tmp);
+	return (new_args);
+}
+
+char	**append_redirects(t_token **token, char **redirects)
+{
+	char	**tmp;
+	t_token	*i_token;
+
+	i_token = *token;
+	tmp = redirects;
+	redirects = push_args(redirects, i_token->str);
+	free(tmp);
+	i_token = i_token->next;
+	*token = i_token->next;
+	if (i_token)
+	{
+		tmp = redirects;
+		redirects = push_args(redirects, clean_quote(i_token->str));
+		free(tmp);
+	}
+	return (redirects);
+}
+
 
 t_process *lexical_analysis()
 {
-	char		**tmp;
 	char		**redirects;
 	char		**args;
 	t_token		*token;
@@ -23,24 +53,9 @@ t_process *lexical_analysis()
 			ms.process_count++;
 		}
 		if (token->type == STRING)
-		{
-			tmp = args;
-			args = push_args(args, clean_quote(token->str));
-			free(tmp);
-		}
+			args = append_arguments(args, token->str);
 		else
-		{
-			tmp = redirects;
-			redirects = push_args(redirects, token->str);
-			free(tmp);
-			token = token->next;
-			if (token)
-			{
-				tmp = redirects;
-				redirects = push_args(redirects, token->str);
-				free(tmp);
-			}
-		}
+			redirects = append_redirects(&token, redirects);
 		process->execute = args;
 		process->redirects = redirects;
 		if (token)

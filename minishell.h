@@ -71,7 +71,7 @@ void		parse_token_string(t_token **token, char *str, int *pos);
 
 // LEXICAL ANALYSIS
 char		**init_args();
-char		*clean_quote(char	*str);
+char		*clean_quote(char *str);
 char		**push_args(char **arg_arr, char *str);
 t_process	*lexical_analysis();
 t_process	*init_process();

@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char	**init_args()
+char	**init_array()
 {
 	char	**arg;
 
@@ -9,7 +9,7 @@ char	**init_args()
 }
 
 
-char	**push_args(char **arg_arr, char *str)
+char	**push_array(char **arg_arr, char *str)
 {
 	int		i;
 	int		len;

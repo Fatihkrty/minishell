@@ -7,7 +7,7 @@ void    token_test()
     token = ms.token;
     while(token)
 	{
-		printf("String: %s Type: %d Len: %zu\n", token->str, token->type, ft_strlen(token->str));
+		printf("Token Str => [%s] Type: [%d] Len: [%zu]\n", token->str, token->type, ft_strlen(token->str));
 		token = token->next;
 	}
 }

@@ -1,68 +1,66 @@
 #include "../minishell.h"
 
-int find_end_pos(char *str, int end_pos, char type)
+void	find_end_pos(char **str, char type)
 {
-	end_pos++;
-	while (str[end_pos])
+	(*str)++;
+	while (**str)
 	{
-		if (str[end_pos] == type)
+		if (**str == type)
 		{
-			end_pos++;
-			if (is_whitespace(str[end_pos]) || is_operator(str + end_pos))
-			{
-				end_pos--;
+			(*str)++;
+			if (is_whitespace(**str) || is_operator(*str))
 				break;
-			}
 			else
-			{
-				while (!is_whitespace(str[end_pos]) && !is_operator(str + end_pos))
-					end_pos++;
-				end_pos--;
-			}
-			return (end_pos);
+				while (**str && !is_whitespace(**str) && !is_operator(*str))
+					(*str)++;
+			return ;
 		}
-		end_pos++;
+		(*str)++;
 	}
-	return (end_pos);
 }
 
-int without_quote_parse(char *str, int end_pos)
+void	without_quote_parse(char **str)
 {
-	while (str[end_pos])
-	{
-		if (is_whitespace(str[end_pos]))
-			break;
-		if (is_operator(str + end_pos + 1))
-			break;
-		end_pos++;
-	}
-	return (end_pos);
-}
-
-void parse_token_string(t_token **token, char *str, int *pos)
-{
-	int len;
-	int end_pos;
+	int	len;
 	char *token_str;
+	char *head;
 
-	end_pos = *pos;
-	if (str[end_pos] == DOUBLE_QUOTE && str[end_pos + 1] == DOUBLE_QUOTE)
-		end_pos++;
-	else if (str[end_pos] == SINGLE_QUOTE && str[end_pos + 1] == SINGLE_QUOTE)
-		end_pos++;
-	else if (str[end_pos] == DOUBLE_QUOTE)
-		end_pos = find_end_pos(str, end_pos, DOUBLE_QUOTE);
-	else if (str[end_pos] == SINGLE_QUOTE)
-		end_pos = find_end_pos(str, end_pos, SINGLE_QUOTE);
+	head = *str;
+	while (**str)
+	{
+		if (is_whitespace(**str))
+			break;
+		if (is_operator(*str))
+			break;
+		(*str)++;
+	}
+}
+
+void	skip_whitespace(char **str, char **head)
+{
+	while (**str && is_whitespace(**str))
+		(*str)++;
+	*head = *str;
+}
+
+void parse_token_string(char **str)
+{
+	int		len;
+	char	*token_str;
+	char	*head;
+
+	skip_whitespace(str, &head);
+	if (**str && **str == DOUBLE_QUOTE)
+		find_end_pos(str, DOUBLE_QUOTE);
+	else if (**str && **str == SINGLE_QUOTE)
+		find_end_pos(str, SINGLE_QUOTE);
 	else
-		end_pos = without_quote_parse(str, end_pos);
-	len = end_pos - *pos + 1;
-	if (is_whitespace(str[end_pos]))
-		len -= 1;
-	token_str = ft_substr(str, *pos, len);
-	*pos = end_pos;
-	if (ft_strlen(token_str))
-		token_addback(&(*token), init_token(token_str, STRING));
-	else
-		free(token_str);
+	without_quote_parse(str);
+	len = *str - head;
+	if (len > 0)
+	{
+		token_str = ft_substr(head, 0, len);
+		printf("Token Str=> |%s| => Len: %zu Int Len: %d\n", token_str, ft_strlen(token_str), len);
+		token_addback(&ms.token, init_token(token_str, STRING));
+	}
 }

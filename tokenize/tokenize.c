@@ -28,36 +28,36 @@ void	token_addback(t_token **token, t_token *new_token)
 	}
 }
 
-t_token	*tokenize(char *str)
+void	tokenize(char *str)
 {
-	int		pos;
-	int		len;
-	t_token	*token;
-
-	pos = 0;
-	token = NULL;
-	len = ft_strlen(str);
-	while (pos < len && str[pos])
+	while (*str)
 	{
-		if (str[pos] == '>' && str[pos + 1] == '>')
+		if (*str == '>' && *(str + 1) == '>')
 		{
-			token_addback(&token, init_token(">>", RED_APPEND));
-			pos++;
+			token_addback(&ms.token, init_token(">>", RED_APPEND));
+			str+=2;
 		}
-		else if (str[pos] == '<' && str[pos + 1] == '<')
+		else if (*str == '<' && *(str + 1) == '<')
 		{
-			token_addback(&token, init_token("<<", HERE_DOC));
-			pos++;
+			token_addback(&ms.token, init_token("<<", HERE_DOC));
+			str+=2;
 		}
-		else if (str[pos] == '|')
-			token_addback(&token, init_token("|", PIPE));
-		else if (str[pos] == '<')
-			token_addback(&token, init_token("<", RED_INPUT));
-		else if (str[pos] == '>')
-			token_addback(&token, init_token(">", RED_OUTPUT));
+		else if (*str == '|')
+		{
+			token_addback(&ms.token, init_token("|", PIPE));
+			str++;
+		}
+		else if (*str == '<')
+		{
+			token_addback(&ms.token, init_token("<", RED_INPUT));
+			str++;
+		}
+		else if (*str == '>')
+		{
+			token_addback(&ms.token, init_token(">", RED_OUTPUT));
+			str++;
+		}
 		else
-			parse_token_string(&token, str, &pos);
-		pos++;
+			parse_token_string(&str);
 	}
-	return (token);
 }

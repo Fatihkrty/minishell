@@ -64,16 +64,16 @@ typedef struct s_minishell
 extern t_minishell ms;
 
 // TOKENIZE
-t_token		*tokenize(char *str);
+void		tokenize(char *str);
 t_token		*init_token(char *str, enum e_ttype type);
 void		token_addback(t_token **token, t_token *new_token);
-void		parse_token_string(t_token **token, char *str, int *pos);
+void		parse_token_string(char **str);
 
 // LEXICAL ANALYSIS
-char		**init_args();
+char		**init_array();
 char		*clean_quote(char *str);
-char		**push_args(char **arg_arr, char *str);
-t_process	*lexical_analysis();
+char		**push_array(char **arg_arr, char *str);
+t_process	*lexer();
 t_process	*init_process();
 void		process_addback(t_process **process, t_process *new_process);
 

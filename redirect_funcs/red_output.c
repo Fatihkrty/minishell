@@ -10,6 +10,6 @@ void red_output(char *file, int mode)
 		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	if (fd == -1)
 		printf("Can not open file ! %d\n", fd);
-	else
-		ms.out_fd = fd;
+	// else
+	// 	ms.out_fd = fd;
 }

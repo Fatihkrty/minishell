@@ -14,20 +14,25 @@ void	run_redirects(char **redirects)
 
 }
 
-void start_commander()
+void	start_process()
 {
-	t_pipes	*pipes;
-	t_commander	*commander;
+	int			pos;
+	t_process	*process;
 
-	commander = ms.commander;
-	create_pipes();
-	pipes = ms.pipes;
-	while (commander)
+	pos = 0;
+	process = ms.process;
+	ms.pids = ft_calloc(sizeof(int), ms.process_count);
+	while (process)
 	{
-		run_cmd(commander, pipes);
-		pipes = pipes->next;
-		commander = commander->next;
+		run_cmd(process, pos);
+		process = process->next;
+		pos++;
 	}
-	wait(NULL);
-	wait(NULL);
+	pos = 0;
+	while (pos < ms.process_count)
+	{
+		close_all_fd();
+		waitpid(ms.pids[pos], NULL, 0);
+		pos++;
+	}
 }

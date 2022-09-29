@@ -25,18 +25,19 @@ char    *get_path(char *cmd)
 
 void    close_all_fd()
 {
-    t_pipes *pipes;
 
-    pipes = ms.pipes;
-	while (pipes->next)
+	t_process *process;
+
+	process = ms.process;
+	while (process)
 	{
-		close(pipes->fd[0]);
-		close(pipes->fd[1]);
-		pipes = pipes->next;
+		close(process->fd[0]);
+		close(process->fd[1]);
+		process = process->next;
 	}
 }
 
-void    run_cmd(t_commander *cmd, t_pipes *pipes)
+void    run_cmd(t_process *cmd, int pos)
 {
     int     pid;
     char    *path;
@@ -57,17 +58,19 @@ void    run_cmd(t_commander *cmd, t_pipes *pipes)
     {
         if (ms.process_count > 1)
         {
-            if (pipes->prev == NULL)
-                dup2(pipes->fd[1], 1);
-            else if (pipes->next == NULL)
-                dup2(pipes->prev->fd[0], 0);
+            if (cmd->prev == NULL)
+                dup2(cmd->fd[1], 1);
+            else if (cmd->next == NULL)
+                dup2(cmd->prev->fd[0], 0);
             else
             {
-                dup2(pipes->prev->fd[0], 0);
-                dup2(pipes->fd[1], 1);
+                dup2(cmd->prev->fd[0], 0);
+                dup2(cmd->fd[1], 1);
             }
             close_all_fd();
         }
         execve(path, cmd->execute, NULL);
     }
+	else
+		ms.pids[pos] = pid;
 }

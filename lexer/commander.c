@@ -1,28 +1,29 @@
 #include "../minishell.h"
 
-t_commander *init_commander()
+t_process *init_process()
 {
-	t_commander *commander;
+	t_process *process;
 
-	commander = ft_calloc(sizeof(t_commander), 1);
-	commander->execute = NULL;
-	commander->prev = NULL;
-	commander->next = NULL;
-	return (commander);
+	process = ft_calloc(sizeof(t_process), 1);
+	pipe(process->fd);
+	process->execute = NULL;
+	process->prev = NULL;
+	process->next = NULL;
+	return (process);
 }
 
-void	commander_addback(t_commander **commander, t_commander *new_commander)
+void	process_addback(t_process **process, t_process *new_process)
 {
-	t_commander *i_commander;
+	t_process *i_process;
 
-	i_commander = *commander;
-	if (!(i_commander))
-		*commander = new_commander;
+	i_process = *process;
+	if (!(i_process))
+		*process = new_process;
 	else
 	{
-		while (i_commander->next)
-			i_commander = i_commander->next;
-		i_commander->next = new_commander;
-		new_commander->prev = i_commander;
+		while (i_process->next)
+			i_process = i_process->next;
+		i_process->next = new_process;
+		new_process->prev = i_process;
 	}
 }

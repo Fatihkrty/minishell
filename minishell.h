@@ -34,13 +34,6 @@ enum e_ttype
 	RED_OUTPUT
 };
 
-typedef	struct s_pipes
-{
-	int					fd[2];
-	struct s_pipes *next;
-	struct s_pipes *prev;
-}	t_pipes;
-
 typedef struct s_token
 {
 	char			*str;
@@ -49,27 +42,23 @@ typedef struct s_token
 	struct	s_token	*next;
 } t_token;
 
-typedef struct s_commander
+typedef struct s_process
 {
 	int					fd[2];
 	char				**execute;
 	char				**redirects;
-	struct s_commander	*prev;
-	struct s_commander	*next;
-} t_commander;
+	struct s_process	*prev;
+	struct s_process	*next;
+} t_process;
 
 typedef struct s_minishell
 {
-	int			fd[2];
-	int			in_fd;
-	int			out_fd;
-	int			*process_id;
+	int			*pids;
 	int			process_count;
 	char		**env;
 	char		**paths;
 	t_token		*token;
-	t_pipes		*pipes;
-	t_commander	*commander;
+	t_process	*process;
 } t_minishell;
 
 extern t_minishell ms;
@@ -84,12 +73,9 @@ void		parse_token_string(t_token **token, char *str, int *pos);
 char		**init_args();
 char		*clean_quote(char	*str);
 char		**push_args(char **arg_arr, char *str);
-t_commander	*lexical_analysis();
-t_commander	*init_commander();
-void		commander_addback(t_commander **commander, t_commander *new_commander);
-
-//pipes PIPES
-void	create_pipes();
+t_process	*lexical_analysis();
+t_process	*init_process();
+void		process_addback(t_process **process, t_process *new_process);
 
 // BUILTIN_FUNC
 void	env_func();
@@ -99,8 +85,8 @@ void	export(char *str);
 
 // CMD
 void 	close_all_fd();
-void 	start_commander();
-void    run_cmd(t_commander *cmd, t_pipes *pipes);
+void 	start_process();
+void    run_cmd(t_process *cmd, int pos);
 
 // REDIRECT_FUNCS
 void red_output(char *file, int mode);

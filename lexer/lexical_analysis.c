@@ -1,13 +1,13 @@
 #include "../minishell.h"
 
 
-t_commander *lexical_analysis()
+t_process *lexical_analysis()
 {
 	char		**tmp;
 	char		**redirects;
 	char		**args;
 	t_token		*token;
-	t_commander	*commander;
+	t_process	*process;
 
 	token = ms.token;
 	while (token)
@@ -18,8 +18,8 @@ t_commander *lexical_analysis()
 				token = token->next;
 			args = init_args();
 			redirects = init_args();
-			commander = init_commander();
-			commander_addback(&ms.commander, commander);
+			process = init_process();
+			process_addback(&ms.process, process);
 			ms.process_count++;
 		}
 		if (token->type == STRING)
@@ -41,10 +41,10 @@ t_commander *lexical_analysis()
 				free(tmp);
 			}
 		}
-		commander->execute = args;
-		commander->redirects = redirects;
+		process->execute = args;
+		process->redirects = redirects;
 		if (token)
 			token = token->next;
 	}
-	return (commander);
+	return (process);
 }

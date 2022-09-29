@@ -14,25 +14,25 @@ void    token_test()
 
 void    lexer_test()
 {
-    t_commander *commander;
+    t_process *process;
 
-    commander = ms.commander;
-    while (commander)
+    process = ms.process;
+    while (process)
 	{
 		int c = 0;
-		while (commander->execute && commander->execute[c])
+		while (process->execute && process->execute[c])
 		{
-			printf("COMMANDER ARGUMENTS: %s\n", commander->execute[c]);
+			printf("COMMANDER ARGUMENTS: %s\n", process->execute[c]);
 			c++;
 		}
 		printf("\n");
 		c = 0;
-		while (commander->redirects && commander->redirects[c])
+		while (process->redirects && process->redirects[c])
 		{
-			printf("COMMANDER REDIRECTS: %s\n", commander->redirects[c]);
+			printf("COMMANDER REDIRECTS: %s\n", process->redirects[c]);
 			c++;
 		}
 		printf("----------------------------------------\n");
-		commander = commander->next;
+		process = process->next;
 	}
 }

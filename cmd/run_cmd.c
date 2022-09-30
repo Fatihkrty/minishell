@@ -25,7 +25,6 @@ char    *get_path(char *cmd)
 
 void    close_all_fd()
 {
-
 	t_process *process;
 
 	process = ms.process;
@@ -70,6 +69,7 @@ void    run_cmd(t_process *cmd, int pos)
             close_all_fd();
         }
 		run_redirects(cmd);
+		printf("Geldi\n");
      	execve(path, cmd->execute, NULL);
     }
 	else

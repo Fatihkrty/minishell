@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char	**set_env(char **env)
+void	set_env(char **env)
 {
 	size_t	i;
 	size_t	len;
@@ -15,5 +15,5 @@ char	**set_env(char **env)
 	result = ft_calloc(sizeof(char **), len + 1);
 	while (++i < len)
 		result[i] = env[i];
-	return (result);
+	ms.env = result;
 }

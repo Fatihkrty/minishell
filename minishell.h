@@ -46,8 +46,8 @@ typedef struct s_token
 typedef struct s_process
 {
 	int					fd[2];
-	char				**execute;
-	char				**redirects;
+	char				**execute; // freelendi
+	char				**redirects; // freelendi
 	struct s_process	*prev;
 	struct s_process	*next;
 } t_process;
@@ -57,7 +57,7 @@ typedef struct s_minishell
 	int			*pids;
 	int			process_count;
 	char		**env;
-	char		**paths;
+	char		**paths; // freelendi
 	t_token		*token;
 	t_process	*process;
 } t_minishell;
@@ -98,7 +98,7 @@ void	red_output(char *file, int mode);
 
 // UTILS
 char	*get_env(char *str);
-char	**set_env(char **env);
+void	set_env(char **env);
 int		is_whitespace(char c);
 int		is_operator(char *str);
 

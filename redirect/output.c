@@ -11,5 +11,4 @@ void	red_output(char *file, int mode)
 	if (fd == -1)
 		printf("Can not open file ! %d\n", fd);
 	dup2(fd, 1);
-
 }

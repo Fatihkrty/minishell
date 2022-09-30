@@ -22,5 +22,6 @@ void	run_redirects(t_process *process)
 	{
 		if (is_operator(process->redirects[i]) == HERE_DOC)
 			red_heredoc(process->redirects[i + 1]);
+		i++;
 	}
 }

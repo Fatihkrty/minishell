@@ -1,0 +1,23 @@
+total 224
+drwxr-xr-x  22 fkaratay  2021_istanbul    748 Sep 30 18:49 .
+drwxr-xr-x   8 fkaratay  2021_istanbul    272 Sep 30 16:42 ..
+-rw-r--r--@  1 fkaratay  2021_istanbul   8196 Sep 30 16:41 .DS_Store
+drwxr-xr-x  14 fkaratay  2021_istanbul    476 Sep 30 16:35 .git
+-rw-r--r--   1 fkaratay  2021_istanbul     19 Sep 16 15:06 .gitignore
+drwxr-xr-x   4 fkaratay  2021_istanbul    136 Sep 16 16:22 .vscode
+-rw-r--r--   1 fkaratay  2021_istanbul    290 Sep 30 15:06 Makefile
+-rwxr-xr-x   1 fkaratay  2021_istanbul  52800 Sep 30 18:49 a.out
+drwxr-xr-x   5 fkaratay  2021_istanbul    170 Sep 21 18:43 builtin
+drwxr-xr-x   4 fkaratay  2021_istanbul    136 Sep 29 15:32 cmd
+-rw-r--r--   1 fkaratay  2021_istanbul   1046 Sep 29 12:31 deneme.c
+-rwxr-xr-x   1 fkaratay  2021_istanbul      0 Sep 30 18:49 file3
+drwxr-xr-x   3 fkaratay  2021_istanbul    102 Sep 30 18:19 free
+drwxr-xr-x   6 fkaratay  2021_istanbul    204 Sep 29 14:51 lexer
+-rw-r--r--   1 fkaratay  2021_istanbul   1147 Sep 30 18:49 main.c
+-rw-r--r--   1 fkaratay  2021_istanbul   2358 Sep 30 18:35 minishell.h
+-rw-r--r--@  1 fkaratay  2021_istanbul  10024 Aug 27 01:58 minishell_func_tutor.txt
+drwxr-xr-x   6 fkaratay  2021_istanbul    204 Sep 29 15:39 redirect
+-rw-r--r--   1 fkaratay  2021_istanbul  13474 Sep 26 18:23 subject.md
+drwxr-xr-x   3 fkaratay  2021_istanbul    102 Sep 26 00:40 test
+drwxr-xr-x   4 fkaratay  2021_istanbul    136 Sep 26 00:40 tokenize
+drwxr-xr-x  15 fkaratay  2021_istanbul    510 Sep 22 17:24 utils

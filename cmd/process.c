@@ -15,10 +15,12 @@ void	start_process()
 		pos++;
 	}
 	pos = 0;
+	int a;
 	while (pos < ms.process_count)
 	{
 		close_all_fd();
-		waitpid(ms.pids[pos], NULL, 0);
+		waitpid(ms.pids[pos], &a, 0);
+		// printf("HATA: %d %s\n", a, strerror(a));
 		pos++;
 	}
 	free(ms.pids);

@@ -11,44 +11,36 @@ int check_endline(char *input, char *endline)
 	return (false);
 }
 
-void red_heredoc(t_process *process)
+void red_heredoc(char *endline)
 {
-	// char *tmp;
-	// char *input;
-	// char *result;
-	// char *endline;
+	char *tmp;
+	char *input;
+	char *result;
 
-	// input = NULL;
-	// tmp = input;
-	// result = "";
-	// endline = process->execute[0];
-	// pipe(ms.fd);
+	tmp = ft_calloc(1,1);
+	result = "";
 	// int pid = fork();
 	// if (pid == 0)
 	// {
-	// 	close(ms.fd[0]);
-	// 	while (1)
-	// 	{
-	// 		input = readline("heredoc>> ");
-	// 		if (check_endline(input, endline))
-	// 			break;
-	// 		input = ft_strjoin(input, "\n");
-	// 		tmp = result;
-	// 		result = ft_strjoin(result, input);
-	// 		free(input);
-	// 		if (*tmp)
-	// 			free(tmp);
-	// 	}
-	// 	write(ms.fd[1], result, ft_strlen(result));
-	// 	free(result);
-	// 	close(ms.fd[1]);
-	// 	exit(0);
+		while (1)
+		{
+			input = readline("heredoc >> ");
+			if (check_endline(input, endline))
+				break;
+			input = ft_strjoin(input, "\n");
+			tmp = result;
+			result = ft_strjoin(result, input);
+			free(input);
+			if (*tmp)
+				free(tmp);
+		}
+		write(1, result, ft_strlen(result));
+		free(result);
+		exit(0);
 	// }
 	// else
 	// {
-	// 	close(ms.fd[1]);
 	// 	wait(NULL);
-	// 	dup2(ms.fd[0], 0);
-	// 	close(ms.fd[0]);
+	// 	exit(0);
 	// }
 }

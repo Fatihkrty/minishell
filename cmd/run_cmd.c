@@ -69,7 +69,8 @@ void    run_cmd(t_process *cmd, int pos)
             }
             close_all_fd();
         }
-        execve(path, cmd->execute, NULL);
+		run_redirects(cmd);
+     	execve(path, cmd->execute, NULL);
     }
 	else
 	{

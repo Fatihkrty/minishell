@@ -2,6 +2,8 @@
 
 int		is_operator(char *str)
 {
+	if (!str)
+		return (0);
 	if (str[0] == '<' && str[1] == '<')
 		return (HERE_DOC);
 	if (str[0] == '>' && str[1] == '>')

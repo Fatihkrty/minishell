@@ -1,12 +1,11 @@
 #include "../minishell.h"
 
-void red_input(t_process *process)
+void	red_input(char *file)
 {
 	int fd;
 
-	fd = open(process->execute[0], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		printf("No such file ! %d\n", fd);
-	// else
-	// 	ms.in_fd = fd;
+	dup2(fd, 0);
 }

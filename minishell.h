@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
@@ -70,11 +71,11 @@ void		token_addback(t_token **token, t_token *new_token);
 void		parse_token_string(char **str);
 
 // LEXICAL ANALYSIS
+t_process	*lexer();
+t_process	*init_process();
 char		**init_array();
 char		*clean_quote(char *str);
 char		**push_array(char **arg_arr, char *str);
-t_process	*lexer();
-t_process	*init_process();
 void		process_addback(t_process **process, t_process *new_process);
 
 // BUILTIN_FUNC
@@ -89,7 +90,10 @@ void 	start_process();
 void    run_cmd(t_process *cmd, int pos);
 
 // REDIRECT_FUNCS
-void red_output(char *file, int mode);
+void	red_input(char *file);
+void	red_heredoc(char *endline);
+void	run_redirects(t_process *process);
+void	red_output(char *file, int mode);
 
 
 // UTILS

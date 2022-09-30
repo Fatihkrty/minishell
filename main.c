@@ -9,17 +9,15 @@ void	init_shell(char *input, char **env)
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	tokenize(input);
-	token_test();
 	lexer();
-	lexer_test();
-	// start_process();
+	start_process();
 }
 
 int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "ls 'deneme'abc'def";
+	input = "cat << file";
 	init_shell(input, env);
 
 	// system("leaks a.out");

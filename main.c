@@ -9,7 +9,6 @@ void	init_shell(char *input, char **env)
 	ms.env = set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	tokenize(input);
-	printf("---------------------------------------\n");
 	token_test();
 	lexer();
 	lexer_test();
@@ -20,7 +19,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "ls > file def -la abc";
+	input = "ls 'deneme'abc'def";
 	init_shell(input, env);
 
 	// system("leaks a.out");

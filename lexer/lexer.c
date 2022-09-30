@@ -21,7 +21,7 @@ char	**append_redirects(t_token **token, char **redirects)
 	redirects = push_array(redirects, i_token->str);
 	free(tmp);
 	i_token = i_token->next;
-	*token = i_token->next;
+	*token = i_token;
 	if (i_token)
 	{
 		tmp = redirects;
@@ -53,10 +53,7 @@ t_process *lexer()
 			ms.process_count++;
 		}
 		if (token->type == STRING)
-		{
-			printf("ARG: %s\n", token->str);
 			args = append_arguments(args, token->str);
-		}
 		else
 			redirects = append_redirects(&token, redirects);
 		process->execute = args;

@@ -17,7 +17,7 @@ void	token_addback(t_token **token, t_token *new_token)
 	t_token *i_token;
 
 	i_token = *token;
-	if (!(i_token))
+	if (!i_token)
 		*token = new_token;
 	else
 	{

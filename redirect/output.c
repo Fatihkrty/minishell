@@ -9,6 +9,9 @@ void	red_output(char *file, int mode)
 	else if (mode == APPEND)
 		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	if (fd == -1)
-		printf("Can not open file ! %d\n", fd);
+	{
+		perror("ERROR");
+		return ;
+	}
 	dup2(fd, 1);
 }

@@ -6,25 +6,30 @@ int main()
     int     fd2[2];
 
     pipe(fd);
-    pipe(fd2);
-
+    // pipe(fd2);
+    write(fd[1], "baytfatih\n", 10);
+    // close(fd[1]);
+    // close(fd[0]);
     int pid = fork();
     if (pid == CHILD_PROCESS)
     {
-        // dup2(fd[1], 1);
-        // close(fd[0]);
-        // close(fd[1]);
+        dup2(fd[1], 1);
+        close(fd[0]);
+        close(fd[1]);
         // close(fd2[0]);
         // close(fd2[1]);
+        // write(fd[1], "bayt fatih", 10);
+
         execlp("ping", "ping", "-c", "5", "google.com", NULL);
+        return(0);
     }
 
     int pid2 = fork();
     if (pid2 == CHILD_PROCESS)
     {
-        // dup2(fd[0], 0);
-        // close(fd[0]);
-        // close(fd[1]);
+        dup2(fd[0], 0);
+        close(fd[0]);
+        close(fd[1]);
         // dup2(fd2[1], 1);
         // close(fd2[0]);
         // close(fd2[1]);

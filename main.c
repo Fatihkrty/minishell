@@ -69,6 +69,7 @@ void	init_shell(char *input, char **env)
 {
 	ms.process_count = 0;
 	ms.token = NULL;
+	ms.process = NULL;
 	set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	tokenize(input);
@@ -80,11 +81,13 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	input = "<< test > a";
+	input = "cat << eof | ping google.com -c 5 | grep bytes ";
 	init_shell(input, env);
-	// free_app();
-	// input = "echo deneme";
-	// init_shell(input, env);
+	// while (1)
+	// {
+	// 	input = readline("\nminishell> ");
+	// 	add_history(input);
+	// }
 
 	// system("leaks a.out");
 }

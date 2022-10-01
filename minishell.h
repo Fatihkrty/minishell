@@ -25,6 +25,7 @@
 #define REPLACE 1
 #define APPEND 0
 
+// Type defines
 enum e_ttype
 {
 	PIPE = 1,
@@ -45,19 +46,19 @@ typedef struct s_token
 
 typedef struct s_process
 {
+	pid_t				pid;
 	int					fd[2];
-	char				**execute; // freelendi
-	char				**redirects; // freelendi
+	char				**execute;
+	char				**redirects;
 	struct s_process	*prev;
 	struct s_process	*next;
 } t_process;
 
 typedef struct s_minishell
 {
-	int			*pids;
 	int			process_count;
 	char		**env;
-	char		**paths; // freelendi
+	char		**paths;
 	t_token		*token;
 	t_process	*process;
 } t_minishell;
@@ -87,14 +88,17 @@ void	export(char *str);
 // CMD
 void 	close_all_fd();
 void 	start_process();
-void    run_cmd(t_process *cmd, int pos);
+void    run_cmd(t_process *process);
 
 // REDIRECT_FUNCS
 void	red_input(char *file);
 void	red_heredoc(char *endline);
+void	run_heredoc(t_process *process);
 void	run_redirects(t_process *process);
 void	red_output(char *file, int mode);
 
+// PIPE ROUTER
+void    pipe_route(t_process *process);
 
 // UTILS
 char	*get_env(char *str);

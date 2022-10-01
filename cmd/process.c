@@ -2,26 +2,32 @@
 
 void	start_process()
 {
-	int			pos;
 	t_process	*process;
 
-	pos = 0;
 	process = ms.process;
-	ms.pids = ft_calloc(sizeof(int), ms.process_count);
 	while (process)
 	{
-		run_cmd(process, pos);
+		if (is_operator(process->redirects[0]) == HERE_DOC)
+		{
+			// run_redirects(process);
+			run_heredoc(process);
+		}
 		process = process->next;
-		pos++;
 	}
-	pos = 0;
+	process = ms.process;
+	while (process)
+	{
+		if (is_operator(process->redirects[0]) != HERE_DOC)
+			run_cmd(process);
+		process = process->next;
+	}
 	int a;
-	while (pos < ms.process_count)
+	process = ms.process;
+	while (process)
 	{
 		close_all_fd();
-		waitpid(ms.pids[pos], &a, 0);
-		// printf("HATA: %d %s\n", a, strerror(a));
-		pos++;
+		waitpid(process->pid, &a, 0);
+		printf("PROCESS: %d => %d %s\n", process->pid, a, strerror(a));
+		process = process->next;
 	}
-	free(ms.pids);
 }

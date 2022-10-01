@@ -6,6 +6,9 @@ void	red_input(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		printf("No such file ! %d\n", fd);
+	{
+		perror("ERROR");
+		return ;
+	}
 	dup2(fd, 0);
 }

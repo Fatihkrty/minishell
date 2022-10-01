@@ -30,8 +30,10 @@ void red_heredoc(char *endline, t_process *process)
 	while (1)
 	{
 		input = readline("heredoc >> ");
-		if (check_endline(input, endline))
+		if (check_endline(input, endline) || !input)
 			break;
+		if (!input)
+			input = "eof";
 		input = ft_strjoin(input, "\n");
 		tmp = result;
 		result = ft_strjoin(result, input);

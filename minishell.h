@@ -105,6 +105,7 @@ char	*get_env(char *str);
 void	set_env(char **env);
 int		is_whitespace(char c);
 int		is_operator(char *str);
+int		is_heredoc(t_process *process);
 
 // LIBFT UTILS
 size_t	ft_strlen(const char *s);

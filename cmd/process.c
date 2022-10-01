@@ -7,17 +7,14 @@ void	start_process()
 	process = ms.process;
 	while (process)
 	{
-		if (is_operator(process->redirects[0]) == HERE_DOC)
-		{
-			// run_redirects(process);
+		if (is_heredoc(process))
 			run_heredoc(process);
-		}
 		process = process->next;
 	}
 	process = ms.process;
 	while (process)
 	{
-		if (is_operator(process->redirects[0]) != HERE_DOC)
+		if (!is_heredoc(process))
 			run_cmd(process);
 		process = process->next;
 	}

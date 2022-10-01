@@ -1,5 +1,5 @@
 all:
-	gcc main.c ./utils/*.c ./lexer/*.c ./tokenize/*.c ./test/test.c ./builtin/*.c ./redirect/*.c ./cmd/*.c ./pipes/*.c -lreadline # -fsanitize=address -g
+	gcc main.c ./utils/*.c ./lexer/*.c ./tokenize/*.c ./test/test.c ./builtin/*.c ./redirect/*.c ./cmd/*.c ./pipes/*.c -lreadline -fsanitize=address -g
 run: all
 	./a.out
 debug:

@@ -92,7 +92,7 @@ void    run_cmd(t_process *process);
 
 // REDIRECT_FUNCS
 void	red_input(char *file);
-void	red_heredoc(char *endline);
+void red_heredoc(char *endline, t_process *process);
 void	run_heredoc(t_process *process);
 void	run_redirects(t_process *process);
 void	red_output(char *file, int mode);

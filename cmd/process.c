@@ -27,7 +27,7 @@ void	start_process()
 	{
 		close_all_fd();
 		waitpid(process->pid, &a, 0);
-		printf("PROCESS: %d => %d %s\n", process->pid, a, strerror(a));
+		// printf("PROCESS: %d => %d %s\n", process->pid, a, strerror(a));
 		process = process->next;
 	}
 }

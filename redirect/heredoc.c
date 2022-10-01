@@ -45,7 +45,7 @@ void red_heredoc(char *endline, t_process *process)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (ms.process_count > 1)
+		if (ms.process_count > 1 && process->next != NULL)
 			dup2(process->fd[1], 1);
 		execve("/usr/bin/cat", process->execute, NULL);
 	}

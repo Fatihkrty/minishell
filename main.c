@@ -80,14 +80,23 @@ void	init_shell(char *input, char **env)
 int main(int ac, char **av, char **env)
 {
 	char	*input;
+	char	*tmp;
 
-	input = "echo deneme | cat << eof | grep bytes | ping google.com -c 5 | grep bytes | cat << eof";
-	input = "cat << eof | echo deneme | cat << eof2 ";
+	input = "echo deneme | cat << eof | grep bytes | ping google.com -c 5 > file | grep bytes | cat << eof";
+	input = "cat << eof > file";
 	init_shell(input, env);
+	// input = "";
 	// while (1)
 	// {
+	// 	tmp = input;
 	// 	input = readline("\nminishell> ");
+	// 	if (*tmp)
+	// 		free(tmp);
+	// 	if (!input)
+	// 		break ;
+	// 	init_shell(input, env);
 	// 	add_history(input);
+	// 	// free_app();
 	// }
 
 	// system("leaks a.out");

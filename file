@@ -1,24 +1,5 @@
-Data: <<
-heredoc >> sadas
-heredoc >> sadad
-heredoc >> dadas
-heredoc >> eof
-PROCESS: 0 => 22077 Unknown error 22077
-
-minishell> eof
-PROCESS: 0 => 22077 Unknown error 22077
-
-minishell> file
-PROCESS: 206398 => 256 Unknown error 256
-
-minishell> clear
-PROCESS: 206552 => 256 Unknown error 256
-
-minishell> ca [K[K[Kcat <<eof
-Data: <<
-heredoc >> asd
-heredoc >> eof
-PROCESS: 0 => 22077 Unknown error 22077
-
-minishell> [H[2J
-minishell> ^C
+sdas
+da
+asdsa
+dasda
+asda

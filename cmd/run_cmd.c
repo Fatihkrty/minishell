@@ -1,27 +1,5 @@
 #include "../minishell.h"
 
-char    *get_path(char *cmd)
-{
-    char    *path;
-    char    **paths;
-    char    *new_cmd;
-
-    paths = ms.paths;
-    new_cmd = ft_strjoin("/", cmd);
-    while (*paths)
-    {
-        path = ft_strjoin(*paths, new_cmd);
-        if (!access(path, F_OK))
-        {
-            free(new_cmd);
-            return (path);
-        }
-        free(path);
-        paths++;
-    }
-    free(new_cmd);
-    return (NULL);
-}
 
 void    run_cmd(t_process *process)
 {
@@ -38,7 +16,7 @@ void    run_cmd(t_process *process)
     {
         if (ms.process_count > 1)
             pipe_route(process);
-        run_redirects(process);
+        run_redirects(process, false);
         execve(path, process->execute, NULL);
     }
 	else

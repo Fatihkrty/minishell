@@ -52,7 +52,7 @@ typedef struct s_process
 	char				**redirects;
 	struct s_process	*prev;
 	struct s_process	*next;
-} t_process;
+}	t_process;
 
 typedef struct s_minishell
 {
@@ -92,10 +92,9 @@ void    run_cmd(t_process *process);
 
 // REDIRECT_FUNCS
 void	red_input(char *file);
-void red_heredoc(char *endline, t_process *process);
-void	run_heredoc(t_process *process);
-void	run_redirects(t_process *process);
 void	red_output(char *file, int mode);
+void	run_heredoc(t_process *process, int in);
+void	run_redirects(t_process *process, int heredoc);
 
 // PIPE ROUTER
 void    pipe_route(t_process *process);
@@ -103,8 +102,10 @@ void    pipe_route(t_process *process);
 // UTILS
 char	*get_env(char *str);
 void	set_env(char **env);
+char    *get_path(char *cmd);
 int		is_whitespace(char c);
 int		is_operator(char *str);
+char	*get_endline(char **redirects);
 int		is_heredoc(t_process *process);
 
 // LIBFT UTILS

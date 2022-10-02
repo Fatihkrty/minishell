@@ -14,4 +14,5 @@ void	red_output(char *file, int mode)
 		return ;
 	}
 	dup2(fd, 1);
+	close(fd);
 }

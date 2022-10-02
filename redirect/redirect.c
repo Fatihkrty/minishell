@@ -10,14 +10,14 @@ void	run_redirects(t_process *process, int heredoc)
 	redirects = process->redirects;
 	while (redirects[i])
 	{
-		if (is_operator(process->redirects[i]) == RED_OUTPUT)
-			red_output(process->redirects[i + 1], REPLACE);
-		else if (is_operator(process->redirects[i]) == RED_APPEND)
-			red_output(process->redirects[i + 1], APPEND);
-		else if (is_operator(process->redirects[i]) == RED_INPUT)
-			red_input(process->redirects[i + 1]);
-		else if (is_operator(process->redirects[i]) == HERE_DOC && heredoc)
-			red_heredoc(process->redirects[i + 1]);
+		if (is_operator(redirects[i]) == RED_OUTPUT)
+			red_output(redirects[i + 1], REPLACE);
+		else if (is_operator(redirects[i]) == RED_APPEND)
+			red_output(redirects[i + 1], APPEND);
+		else if (is_operator(redirects[i]) == RED_INPUT)
+			red_input(redirects[i + 1]);
+		else if (is_operator(redirects[i]) == HERE_DOC && heredoc)
+			red_heredoc(redirects[i + 1]);
 		i++;
 	}
 }

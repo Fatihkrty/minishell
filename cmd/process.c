@@ -2,15 +2,13 @@
 
 void	start_process()
 {
-	int			in;
 	t_process	*process;
 
-	in = dup(0);
 	process = ms.process;
 	while (process)
 	{
 		if (is_heredoc(process))
-			run_heredoc(process, in);
+			run_heredoc(process);
 		process = process->next;
 	}
 	process = ms.process;

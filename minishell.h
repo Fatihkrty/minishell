@@ -56,6 +56,7 @@ typedef struct s_process
 
 typedef struct s_minishell
 {
+	int			heredoc_fd[2];
 	int			process_count;
 	char		**env;
 	char		**paths;
@@ -93,8 +94,10 @@ void    run_cmd(t_process *process);
 // REDIRECT_FUNCS
 void	red_input(char *file);
 void	red_output(char *file, int mode);
-void	run_heredoc(t_process *process, int in);
+void	run_heredoc(t_process *process);
 void	run_redirects(t_process *process, int heredoc);
+void	red_heredoc(char *endline);
+void	close_heredoc_fd();
 
 // PIPE ROUTER
 void    pipe_route(t_process *process);

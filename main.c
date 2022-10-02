@@ -83,7 +83,7 @@ int main(int ac, char **av, char **env)
 	char	*tmp;
 
 	input = "echo deneme | cat << eof | grep bytes | ping google.com -c 5 > file | grep bytes | cat << eof";
-	input = "cat << eof > file";
+	input = "cat << eof << eof2 ";
 	init_shell(input, env);
 	// input = "";
 	// while (1)

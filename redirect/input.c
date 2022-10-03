@@ -8,6 +8,6 @@ void	red_input(char *file)
 	if (fd == -1)
 		return perror("ERROR");
 	dup2(fd, 0);
-	close_heredoc_fd();
 	close(fd);
+	close(ms.heredoc_fd[0]);
 }

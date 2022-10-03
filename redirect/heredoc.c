@@ -2,7 +2,7 @@
 
 void	close_heredoc_fd()
 {
-	close(ms.heredoc_fd[0]);
+	// close(ms.heredoc_fd[0]);
 	close(ms.heredoc_fd[1]);
 }
 
@@ -16,7 +16,6 @@ static int check_endline(char *input, char *endline)
 			return (true);
 	return (false);
 }
-
 
 void	red_heredoc(char *endline)
 {
@@ -34,6 +33,6 @@ void	red_heredoc(char *endline)
 		}
 		write(ms.heredoc_fd[1], input, ft_strlen(input));
 		write(ms.heredoc_fd[1], "\n", 1);
-		close(ms.heredoc_fd[1]);
 	}
+	close(ms.heredoc_fd[1]);
 }

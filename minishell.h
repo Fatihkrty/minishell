@@ -36,9 +36,10 @@ enum e_ttype
 	RED_OUTPUT
 };
 
+// Freelendi
 typedef struct s_token
 {
-	char			*str;
+	char			*str; // Freelendi
 	enum	e_ttype	type;
 	struct	s_token	*prev;
 	struct	s_token	*next;
@@ -58,6 +59,7 @@ typedef struct s_minishell
 {
 	int			heredoc_fd[2];
 	int			process_count;
+	int			status;
 	char		**env;
 	char		**paths;
 	t_token		*token;
@@ -73,12 +75,15 @@ void		token_addback(t_token **token, t_token *new_token);
 void		parse_token_string(char **str);
 
 // LEXICAL ANALYSIS
-t_process	*lexer();
+void		lexer();
 t_process	*init_process();
-char		**init_array();
 char		*clean_quote(char *str);
 char		**push_array(char **arg_arr, char *str);
 void		process_addback(t_process **process, t_process *new_process);
+
+// FREE
+void	free_app();
+void	free_token();
 
 // BUILTIN_FUNC
 void	env_func();
@@ -88,7 +93,7 @@ void	export(char *str);
 
 // CMD
 void 	close_all_fd();
-void 	start_process();
+void 	start_cmd();
 void    run_cmd(t_process *process);
 
 // REDIRECT_FUNCS
@@ -108,11 +113,11 @@ void	set_env(char **env);
 char    *get_path(char *cmd);
 int		is_whitespace(char c);
 int		is_operator(char *str);
-char	*get_endline(char **redirects);
 int		is_heredoc(t_process *process);
 
 // LIBFT UTILS
 size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *str);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char const *str, char c);
 void	*ft_calloc(size_t count, size_t size);

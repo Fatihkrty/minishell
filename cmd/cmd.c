@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	start_process()
+void	start_cmd()
 {
 	t_process	*process;
 
@@ -18,13 +18,11 @@ void	start_process()
 			run_cmd(process);
 		process = process->next;
 	}
-	int a;
 	process = ms.process;
 	while (process)
 	{
 		close_all_fd();
-		waitpid(process->pid, &a, 0);
-		// printf("PROCESS: %d => %d %s\n", process->pid, a, strerror(a));
+		waitpid(process->pid, &ms.status, 0);
 		process = process->next;
 	}
 }

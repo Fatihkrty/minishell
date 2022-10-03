@@ -21,18 +21,3 @@ void	run_redirects(t_process *process, int heredoc)
 		i++;
 	}
 }
-
-
-char	*get_endline(char **redirects)
-{
-	int	i;
-
-	i = 0;
-	while (redirects[i])
-	{
-		if (is_operator(redirects[i]) == HERE_DOC)
-			return (redirects[i + 1]);
-		i++;
-	}
-	return (NULL);
-}

@@ -6,6 +6,8 @@ char    *get_path(char *cmd)
     char    **paths;
     char    *new_cmd;
 
+    if (!access(cmd, F_OK))
+        return (ft_strdup(cmd));
     paths = ms.paths;
     new_cmd = ft_strjoin("/", cmd);
     while (*paths)

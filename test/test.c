@@ -22,14 +22,14 @@ void    lexer_test()
 		int c = 0;
 		while (process->execute && process->execute[c])
 		{
-			printf("COMMANDER ARGUMENTS: %s\n", process->execute[c]);
+			printf("PROCESS ARGUMENTS: %s\n", process->execute[c]);
 			c++;
 		}
 		printf("\n");
 		c = 0;
 		while (process->redirects && process->redirects[c])
 		{
-			printf("COMMANDER REDIRECTS: %s\n", process->redirects[c]);
+			printf("PROCESS REDIRECTS: %s\n", process->redirects[c]);
 			c++;
 		}
 		printf("----------------------------------------\n");

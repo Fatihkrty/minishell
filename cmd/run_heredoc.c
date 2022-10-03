@@ -5,6 +5,7 @@ void	run_heredoc(t_process *process)
 {
 	pid_t	pid;
 	char	*path;
+	int		status;
 
 	run_redirects(process, true);
 	path = get_path(process->execute[0]);
@@ -17,10 +18,11 @@ void	run_heredoc(t_process *process)
 		if (ms.process_count > 1 && process->next != NULL)
 			dup2(process->fd[1], 1);
 		close_heredoc_fd();
-		execve(path, process->execute, NULL);
-		exit(0);
+		status = execve(path, process->execute, ms.env);
+		free(path);
+		exit(status);
 	}
 	close_heredoc_fd();
-	wait(NULL);
+	wait(&ms.status);
 	free(path);
 }

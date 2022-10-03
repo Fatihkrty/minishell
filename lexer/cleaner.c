@@ -44,5 +44,5 @@ char *clean_quote(char *str)
 			str++;
 		}
 	}
-	return (head);
+	return (ft_strdup(head));
 }

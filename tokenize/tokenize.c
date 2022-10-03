@@ -32,27 +32,27 @@ void	tokenize(char *str)
 {
 	while (*str)
 	{
-		if (*str == '>' && *(str + 1) == '>')
+		if (is_operator(str) == RED_APPEND)
 		{
 			token_addback(&ms.token, init_token(">>", RED_APPEND));
 			str+=2;
 		}
-		else if (*str == '<' && *(str + 1) == '<')
+		else if (is_operator(str) == HERE_DOC)
 		{
 			token_addback(&ms.token, init_token("<<", HERE_DOC));
 			str+=2;
 		}
-		else if (*str == '|')
+		else if (is_operator(str) == PIPE)
 		{
 			token_addback(&ms.token, init_token("|", PIPE));
 			str++;
 		}
-		else if (*str == '<')
+		else if (is_operator(str) == RED_INPUT)
 		{
 			token_addback(&ms.token, init_token("<", RED_INPUT));
 			str++;
 		}
-		else if (*str == '>')
+		else if (is_operator(str) == RED_OUTPUT)
 		{
 			token_addback(&ms.token, init_token(">", RED_OUTPUT));
 			str++;

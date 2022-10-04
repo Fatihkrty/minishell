@@ -19,10 +19,13 @@ void	start_cmd()
 		process = process->next;
 	}
 	process = ms.process;
+	int a;
 	while (process)
 	{
 		close_all_fd();
-		waitpid(process->pid, &ms.status, 0);
+		waitpid(process->pid, &a, 0);
+		strerror(a);
+		// printf("Child Status: %d\n", a % 256);
 		process = process->next;
 	}
 }

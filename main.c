@@ -30,10 +30,13 @@ int main(int ac, char **av, char **env)
 			free(input);
 			break ;
 		}
-		init_shell(input, env);
-		add_history(input);
+		if (*input)
+		{
+			init_shell(input, env);
+			add_history(input);
+			free_app();
+		}
 		free(input);
-		free_app();
 	}
 	exit(ms.status);
 	// system("leaks a.out");

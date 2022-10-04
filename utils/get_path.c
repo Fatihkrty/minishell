@@ -5,7 +5,16 @@ char    *get_path(char *cmd)
     char    *path;
     char    **paths;
     char    *new_cmd;
+	DIR		*dir;
 
+	dir	= opendir(cmd);
+	if (dir && readdir(dir))
+	{
+		closedir(dir);
+		errno = 21;
+		perror("minishell");
+		exit(errno);
+	}
     if (!access(cmd, F_OK))
         return (ft_strdup(cmd));
     paths = ms.paths;
@@ -22,5 +31,6 @@ char    *get_path(char *cmd)
         paths++;
     }
     free(new_cmd);
-    return (NULL);
+	printf("minishell: %s: Command not found\n", new_cmd + 1);
+    exit(errno);
 }

@@ -27,6 +27,7 @@ void	red_heredoc(char *endline)
 		}
 		write(ms.heredoc_fd[1], input, ft_strlen(input));
 		write(ms.heredoc_fd[1], "\n", 1);
+		free(input);
 	}
 	close(ms.heredoc_fd[1]);
 }

@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <dirent.h>
 
 // Bool defines
 #define true 1
@@ -58,7 +59,7 @@ typedef struct s_process
 typedef struct s_minishell
 {
 	int			parent_pid;
-	int			heredoc_fd[2]; // eof3 gelen veriler
+	int			heredoc_fd[2];
 	int			process_count;
 	int			status;
 	char		**env;

@@ -7,14 +7,12 @@ void    run_cmd(t_process *process)
     char    *path;
     int     status;
 
-    path = get_path(process->execute[0]);
-    if (!path)
-		return perror("PATH ERROR");
     pid = fork();
     if (pid == -1)
         return perror("FORK ERROR");
     if (pid == CHILD_PROCESS)
     {
+		path = get_path(process->execute[0]);
         if (ms.process_count > 1)
             pipe_route(process);
         run_redirects(process);
@@ -23,8 +21,5 @@ void    run_cmd(t_process *process)
         exit(status);
     }
 	else
-	{
-		free(path);
 		process->pid = pid;
-	}
 }

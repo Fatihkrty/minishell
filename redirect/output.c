@@ -4,17 +4,12 @@ void	red_output(char *file, int mode)
 {
 	int		fd;
 
-	file = clean_quote(file);
 	if (mode == REPLACE)
 		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	else if (mode == APPEND)
 		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	if (fd == -1)
-	{
-		perror("ERROR");
-		return ;
-	}
+		return perror("minishell");
 	dup2(fd, 1);
 	close(fd);
-	free(file);
 }

@@ -16,7 +16,7 @@ void	red_heredoc(char *endline)
 	char	*input;
 
 	if (pipe(ms.heredoc_fd) < 0)
-		return perror("PIPE ERROR");
+		return perror("minishell");
 	while (1)
 	{
 		input = readline("heredoc>> ");

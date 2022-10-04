@@ -9,7 +9,7 @@ void    run_cmd(t_process *process)
 
     pid = fork();
     if (pid == -1)
-        return perror("FORK ERROR");
+        return perror("minishell");
     if (pid == CHILD_PROCESS)
     {
 		path = get_path(process->execute[0]);

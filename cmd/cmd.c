@@ -2,12 +2,8 @@
 
 void	start_cmd()
 {
-	int			in;
-	int			out;
 	t_process	*process;
 
-	in = dup(0);
-	out = dup(1);
 	process = ms.process;
 	while (process)
 	{
@@ -15,10 +11,6 @@ void	start_cmd()
 			run_heredoc(process);
 		process = process->next;
 	}
-	dup2(in, 0);
-	dup2(out, 1);
-	close(in);
-	close(out);
 	process = ms.process;
 	while (process)
 	{

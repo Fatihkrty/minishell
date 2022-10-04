@@ -17,6 +17,7 @@ int main(int ac, char **av, char **env)
 	char	*input;
 	char	*tmp;
 
+	ms.parent_pid = getpid();
 	input = "";
 	set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');

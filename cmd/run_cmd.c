@@ -17,7 +17,7 @@ void    run_cmd(t_process *process)
     {
         if (ms.process_count > 1)
             pipe_route(process);
-        run_redirects(process, false);
+        run_redirects(process);
         status = execve(path, process->execute, ms.env);
         free(path);
         exit(status);

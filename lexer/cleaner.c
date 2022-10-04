@@ -20,8 +20,8 @@ char *clean_quote_with_type(char *str, char type)
 		resp = ft_strjoin(resp, new_str);
 		free(new_str);
 		free(tmp);
-		head = str;
 		str++;
+		head = str;
 	}
 	return (resp);
 }

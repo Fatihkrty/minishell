@@ -7,7 +7,7 @@ void	run_heredoc(t_process *process)
 	char	*path;
 	int		status;
 
-	run_redirects(process, true);
+	get_all_inputs(process);
 	path = get_path(process->execute[0]);
 	if (!path)
 		return perror("ERROR");
@@ -17,6 +17,7 @@ void	run_heredoc(t_process *process)
 		dup2(ms.heredoc_fd[0], 0);
 		if (ms.process_count > 1 && process->next != NULL)
 			dup2(process->fd[1], 1);
+		set_all_outputs(process);
 		close(ms.heredoc_fd[0]);
 		close(ms.heredoc_fd[1]);
 		status = execve(path, process->execute, ms.env);

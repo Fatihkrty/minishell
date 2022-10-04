@@ -1,11 +1,5 @@
 #include "../minishell.h"
 
-void	close_heredoc_fd()
-{
-	// close(ms.heredoc_fd[0]);
-	close(ms.heredoc_fd[1]);
-}
-
 static int check_endline(char *input, char *endline)
 {
 	int len;

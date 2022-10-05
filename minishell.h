@@ -11,6 +11,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <dirent.h>
+#include <signal.h>
 
 // Bool defines
 #define true 1
@@ -37,10 +38,9 @@ enum e_ttype
 	RED_OUTPUT
 };
 
-// Freelendi
 typedef struct s_token
 {
-	char			*str; // Freelendi
+	char			*str;
 	enum	e_ttype	type;
 	struct	s_token	*prev;
 	struct	s_token	*next;

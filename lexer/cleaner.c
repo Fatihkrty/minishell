@@ -33,8 +33,8 @@ char *clean_quote(char *str)
 
 	i = 0;
 	head = str;
-	if (!ft_strchr(str, DOLLAR_OP))
-	{
+	// if (!ft_strchr(str, DOLLAR_OP))
+	// {
 		while (*str)
 		{
 			if (*str == DOUBLE_QUOTE)
@@ -43,6 +43,6 @@ char *clean_quote(char *str)
 				return clean_quote_with_type(head, SINGLE_QUOTE);
 			str++;
 		}
-	}
+	// }
 	return (ft_strdup(head));
 }

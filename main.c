@@ -37,7 +37,7 @@ int main(int ac, char **av, char **env)
 	while (ac && av)
 	{
 		signal(SIGINT, &ctrl_c);
-		input = readline("minishell> ");
+		input = readline("\033[34mminishell> \033[0m");
 		if (!input)
 		{
 			printf("exit\n");

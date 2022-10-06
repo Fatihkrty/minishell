@@ -13,6 +13,8 @@ void	run_heredoc(t_process *process)
 	int		status;
 
 	get_all_inputs(process);
+	if (errno == ENOENT)
+		return ;
 	pid = fork();
 	if (pid == 0)
 	{

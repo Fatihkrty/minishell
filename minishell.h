@@ -72,9 +72,9 @@ extern t_minishell ms;
 
 // TOKENIZE
 void		tokenize(char *str);
+void		parse_token_string(char **str);
 t_token		*init_token(char *str, enum e_ttype type);
 void		token_addback(t_token **token, t_token *new_token);
-void		parse_token_string(char **str);
 
 // LEXICAL ANALYSIS
 void		lexer();
@@ -87,28 +87,30 @@ void		process_addback(t_process **process, t_process *new_process);
 void	free_app();
 void	free_token();
 
-// BUILTIN_FUNC
-void	env_func();
-int		get_env_len();
-void	unset(char *str);
-void	export(char *str);
-
 // CMD
-void 	close_all_fd();
 void 	start_cmd();
+void 	close_all_fd();
 void    run_cmd(t_process *process);
 
 // REDIRECT_FUNCS
 void	red_input(char *file);
 void	red_output(char *file, int mode);
-void	run_heredoc(t_process *process);
 void	run_redirects(t_process *process);
-void	red_heredoc(char *endline);
 
-// PIPE ROUTER
-void    pipe_route(t_process *process);
+//HEREDOC
+void	red_heredoc(char *endline);
+void	run_heredoc(t_process *process);
+void	get_all_inputs(t_process *process);
+void	set_all_outputs(t_process *process);
+
+//ERROR
+void    token_err();
+void    command_err();
+void    directory_err();
 
 // UTILS
+int		is_parent();
+int		get_env_len();
 char	*get_env(char *str);
 void	set_env(char **env);
 char    *get_path(char *cmd);
@@ -130,9 +132,5 @@ char	*ft_substr(char const *str, unsigned int start, size_t len);
 void token_test();
 void lexer_test();
 
-//HEREDOC
-int		is_parent();
-void	get_all_inputs(t_process *process);
-void	set_all_outputs(t_process *process);
 
 #endif

@@ -1,20 +1,26 @@
 #include "../minishell.h"
 
+void    check_dir(char *cmd)
+{
+    DIR		*dir;
+
+    if (!(*cmd))
+        command_err();
+	dir	= opendir(cmd);
+	if (dir && readdir(dir))
+	{
+		closedir(dir);
+        directory_err();
+	}
+}
+
 char    *get_path(char *cmd)
 {
     char    *path;
     char    **paths;
     char    *new_cmd;
-	DIR		*dir;
 
-	dir	= opendir(cmd);
-	if (dir && readdir(dir))
-	{
-		closedir(dir);
-		errno = 21;
-		perror("minishell");
-		exit(errno);
-	}
+    check_dir(cmd);
     if (!access(cmd, F_OK))
         return (ft_strdup(cmd));
     paths = ms.paths;
@@ -31,6 +37,5 @@ char    *get_path(char *cmd)
         paths++;
     }
     free(new_cmd);
-	printf("minishell: %s: Command not found\n", new_cmd + 1);
-    exit(errno);
+    command_err();
 }

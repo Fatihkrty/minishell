@@ -11,10 +11,6 @@ char    *split_env(char *str)
     return(str);
 }
 
-// TODO
-// Freelenmeyecek. Var olan
-// heap adresinin pointer
-// ilerletilmiş halini döndürüyor.
 char    *get_env(char *str)
 {
     char    **env;

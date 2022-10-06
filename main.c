@@ -2,18 +2,6 @@
 
 t_minishell ms;
 
-// int		check_error()
-// {
-// 	t_process *process;
-
-// 	process = ms.process;
-// 	while (process)
-// 	{
-// 		/* code */
-// 	}
-	
-// }
-
 void	init_shell(char *input, char **env)
 {
 	ms.token = NULL;
@@ -66,7 +54,6 @@ int main(int ac, char **av, char **env)
 	char	*tmp;
 
 	ms.parent_pid = getpid();
-	input = "";
 	set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
 	// signal(SIGINT, &ctrl_c);

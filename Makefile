@@ -7,8 +7,8 @@ all:
 	./builtin/*.c \
 	./redirect/*.c \
 	./cmd/*.c \
-	./pipes/*.c \
 	./free/*.c \
+	./error/*.c \
 	-lreadline # -fsanitize=address -g
 run: all
 	clear

@@ -14,38 +14,16 @@ void	init_shell(char *input, char **env)
 
 void	ctrl_c(int sig)
 {
+	// ioctl(STDIN_FILENO, TIOCSTI, "\n"); // input output devicelere inject yapmak için
 	// write(1, "\033c", 2);
 	// write(1, "\r", 1);
 	// write(1, "\033[B\033[2K", 7);
 
-	// write(0, "\033[1K\r", 5); // tüm ekranı sil ve satırbaşına geç
-	// sleep(1);
-	// printf("minishell> ");
-	// write(0, "minishell> ", 11);
+	write(1, "\033[B", 3); // alt satır
+	write(1, "\033[1L", 4); // imleci başa getir
+	// write(1, "\033[1K\r", 5); // tüm ekranı sil ve satırbaşına geç
+	write(1, "minishell> ", 11);
 	// fflush(stdin);
-	// write(1, "\033[H", 3);
-	// sleep(1);
-	// write(0, "\033[B", 3); // alt satır
-	// sleep(1);
-	// write(0, "\033[1L", 4); // imleci başa getir
-	// sleep(1);
-	// write(1, "\n", 1);
-	// write(1, "minishell> ", 12);
-	// fflush(stdin);
-	// char a = 8;
-	// write(0, &a, 1);
-	// readline("minishell> ");
-	// sleep(1);
-	// write(1, "\033[1D", 4);
-	// int a = 10;
-	// write(0, "\r\n", 2);
-	// close(0);
-	// printf("minishell> \n");
-
-	// if (!is_parent())
-	// 	write(1, "\n", 1);
-	// else
-	// 	close(STDIN_FILENO);
 }
 
 int main(int ac, char **av, char **env)
@@ -56,9 +34,9 @@ int main(int ac, char **av, char **env)
 	ms.parent_pid = getpid();
 	set_env(env);
 	ms.paths = ft_split(get_env("PATH"), ':');
-	// signal(SIGINT, &ctrl_c);
 	while (ac && av)
 	{
+		signal(SIGINT, &ctrl_c);
 		input = readline("minishell> ");
 		if (!input)
 		{

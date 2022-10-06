@@ -12,6 +12,7 @@
 #include <fcntl.h>
 #include <dirent.h>
 #include <signal.h>
+#include <sys/ioctl.h>
 
 // Bool defines
 #define true 1

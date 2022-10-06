@@ -13,8 +13,12 @@ void	run_heredoc(t_process *process)
 	int		status;
 
 	get_all_inputs(process);
-	if (errno == ENOENT)
+	if (errno == ENOENT || ms.status == 257)
+	{
+		ms.status = 0;
+		close_heredoc_fd();
 		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 	{

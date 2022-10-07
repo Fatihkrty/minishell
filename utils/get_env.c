@@ -4,18 +4,15 @@ char    *split_env(char *str)
 {
     while(*str != '=')
         str++;
-    if (*str)
-        str++;
-    else
-        return (NULL);
+    str++;
     return(str);
 }
 
 char    *get_env(char *str)
 {
+    size_t  len;
     char    **env;
     char    *new_str;
-    size_t  len;
 
     env = ms.env;
     new_str = ft_strjoin(str, "=");

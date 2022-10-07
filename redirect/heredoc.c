@@ -1,18 +1,5 @@
 #include "../minishell.h"
 
-static int check_endline(char *input, char *endline)
-{
-	int len;
-
-	if(!input)
-		return (true);
-	len = ft_strlen(endline);
-	if (ft_strlen(input) == len)
-		if (!ft_strncmp(input, endline, len))
-			return (true);
-	return (false);
-}
-
 void	close_heredoc(int sig)
 {
 	ms.status = 257;
@@ -29,7 +16,7 @@ void	red_heredoc(char *endline)
 	{
 		signal(SIGINT, &close_heredoc);
 		input = readline("heredoc>> ");
-		if (check_endline(input, endline))
+		if (ft_strcmp(input, endline) || !input)
 		{
 			free(input);
 			break ;

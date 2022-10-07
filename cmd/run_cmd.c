@@ -32,7 +32,7 @@ void    run_cmd(t_process *process)
 {
     pid_t   pid;
     char    *path;
-    int     status;
+    int     builtin_type;
 
     pid = fork();
     if (pid == -1)
@@ -42,10 +42,16 @@ void    run_cmd(t_process *process)
         if (ms.process_count > 1)
             pipe_route(process);
         run_redirects(process);
-		path = get_path(process->execute[0]);
-        status = execve(path, process->execute, ms.env);
-        free(path);
-        exit(status);
+        builtin_type = is_builtin(process->execute[0]);
+        if (builtin_type)
+            run_builtin(process->execute, builtin_type);
+        else
+        {
+		    path = get_path(process->execute[0]);
+            builtin_type = execve(path, process->execute, ms.env);
+            free(path);
+        }
+        exit(builtin_type);
     }
 	else
 		process->pid = pid;

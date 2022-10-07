@@ -23,10 +23,23 @@
 #define DOUBLE_QUOTE '"'
 #define SINGLE_QUOTE '\''
 #define CHILD_PROCESS 0
+#define MAIN_PROCESS 1
 
 // File Mode defines
 #define REPLACE 1
 #define APPEND 0
+
+//Bultins Type
+enum e_builtin_types
+{
+	CD = 1,
+	ENV,
+	PWD,
+	ECHO,
+	EXIT,
+	UNSET,
+	EXPORT
+};
 
 // Type defines
 enum e_ttype
@@ -93,6 +106,16 @@ void 	start_cmd();
 void 	close_all_fd();
 void    run_cmd(t_process *process);
 
+//BUILTINS
+int		is_builtin(char *command);
+void    run_builtin(char **execute, int type);
+void	builtin_env();
+void	builtin_cd(char **input);
+void	builtin_exit(char **input);
+void	builtin_pwd(char **input);
+void	builtin_echo(char **input);
+void	builtin_unset(char **input);
+
 // REDIRECT_FUNCS
 void	red_input(char *file);
 void	red_output(char *file, int mode);
@@ -111,22 +134,26 @@ void    directory_err();
 
 // UTILS
 int		is_parent();
+void    set_paths();
 int		get_env_len();
 char	*get_env(char *str);
 void	set_env(char **env);
+int		check_env(char *str);
 char    *get_path(char *cmd);
 int		is_whitespace(char c);
 int		is_operator(char *str);
 int		is_heredoc(t_process *process);
 
 // LIBFT UTILS
+int		ft_atoi(const char *str);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *str);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char const *str, char c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strncmp(const char *str1, const char *str2, size_t n);
+int		ft_strcmp(const char *str1, const char *str2);
+int 	ft_strncmp(const char *str1, const char *str2, size_t n);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 
 // TESTER

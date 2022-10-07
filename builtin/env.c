@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	env_func()
+void	builtin_env()
 {
 	char	**env;
 

@@ -2,6 +2,14 @@
 
 t_minishell ms;
 
+void	init_env(char **env)
+{
+	ms.paths = NULL;
+	set_env(env);
+	set_paths();
+
+}
+
 void	init_shell(char *input, char **env)
 {
 	ms.token = NULL;
@@ -32,8 +40,7 @@ int main(int ac, char **av, char **env)
 	char	*tmp;
 
 	ms.parent_pid = getpid();
-	set_env(env);
-	ms.paths = ft_split(get_env("PATH"), ':');
+	init_env(env);
 	while (ac && av)
 	{
 		signal(SIGINT, &ctrl_c);

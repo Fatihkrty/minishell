@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int	get_env_len()
+int	env_len()
 {
 	char	**env;
 
@@ -19,28 +19,78 @@ int	check_env(char *str)
 		return (false);
 	if (head == str)
 		return (false);
+	while (*str)
+	{
+		if (is_whitespace(*str))
+			return (false);
+		str++;
+	}
 	return (true);
 }
 
-void	export(char *str)
+void	add_env(char *str)
 {
-	int		len;
 	int		i;
 	char	**env;
 	char	**new_env;
 
-	if (!check_env(str))
-		return ;
 	i = 0;
 	env = ms.env;
-	len = get_env_len();
-	new_env = ft_calloc(sizeof(char *), len + 2);
+	new_env = ft_calloc(sizeof(char **), env_len() + 2);
 	while (env[i])
 	{
-		new_env[i] = env[i];
+		new_env[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new_env[i] = str;
-	free(ms.env);
+	new_env[i] = ft_strdup(str);
+	free_array(ms.env);
 	ms.env = new_env;
+}
+
+int	is_include(char *str)
+{
+	int		i;
+	int		j;
+	char	**env;
+
+	i = 0;
+	env = ms.env;
+	while (env[i])
+	{
+		j = 0;
+		while (env[i][j] && str[j])
+		{
+			if (str[j] == '=' && env[i][j] == '=')
+				return (i);
+			if (str[j] != env[i][j])
+				break ;
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	builtin_export(char **input)
+{
+	int		pos;
+	char	*tmp;
+
+	input++;
+	while (*input)
+	{
+		if (check_env(*input))
+		{
+			pos = is_include(*input);
+			if (pos)
+			{
+				tmp = ms.env[pos];
+				ms.env[pos] = ft_strdup(*input);
+				free(tmp);
+			}
+			else
+				add_env(*input);
+		}
+		input++;
+	}
 }

@@ -10,7 +10,7 @@ void    set_paths()
     else
     {
         if (ms.paths)
-            free(ms.paths);
+            free_array(ms.paths);
         ms.paths = ft_split(path, ':');
     }
 }

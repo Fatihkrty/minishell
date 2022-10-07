@@ -10,8 +10,8 @@ void	set_env(char **env)
 	while(*head)
 		head++;
 	len = head - env;
-	ms.env = ft_calloc(sizeof(char *), len + 1);
+	ms.env = ft_calloc(sizeof(char **), len + 1);
 	i = -1;
 	while (++i < len)
-		ms.env[i] = env[i];
+		ms.env[i] = ft_strdup(env[i]);
 }

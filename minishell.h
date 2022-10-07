@@ -100,6 +100,7 @@ void		process_addback(t_process **process, t_process *new_process);
 // FREE
 void	free_app();
 void	free_token();
+void	free_array(char **arr);
 
 // CMD
 void 	start_cmd();
@@ -115,6 +116,7 @@ void	builtin_exit(char **input);
 void	builtin_pwd(char **input);
 void	builtin_echo(char **input);
 void	builtin_unset(char **input);
+void	builtin_export(char **input);
 
 // REDIRECT_FUNCS
 void	red_input(char *file);
@@ -135,10 +137,9 @@ void    directory_err();
 // UTILS
 int		is_parent();
 void    set_paths();
-int		get_env_len();
+int		env_len();
 char	*get_env(char *str);
 void	set_env(char **env);
-int		check_env(char *str);
 char    *get_path(char *cmd);
 int		is_whitespace(char c);
 int		is_operator(char *str);

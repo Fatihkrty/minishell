@@ -34,4 +34,6 @@ void    run_builtin(char **execute, int type)
         builtin_exit(execute);
     if (type == UNSET)
         builtin_unset(execute);
+    if (type == EXPORT)
+        builtin_export(execute);
 }

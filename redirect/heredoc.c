@@ -16,7 +16,7 @@ void	red_heredoc(char *endline)
 	{
 		signal(SIGINT, &close_heredoc);
 		input = readline("heredoc>> ");
-		if (ft_strcmp(input, endline) || !input)
+		if (!input || ft_strcmp(input, endline))
 		{
 			free(input);
 			break ;

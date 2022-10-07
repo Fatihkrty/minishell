@@ -20,6 +20,21 @@ void	check_cmd(t_process *process)
 	}
 }
 
+void	check_builtin(t_process *process, int type)
+{
+	int	in;
+	int	out;
+
+	in = dup(0);
+	out = dup(1);
+	run_redirects(process);
+	run_builtin(process->execute, type);
+	dup2(in, 0);
+	dup2(out, 1);
+	close(in);
+	close(out);
+}
+
 void	wait_cmd(t_process *process)
 {
 	int a;
@@ -44,16 +59,9 @@ void	start_cmd()
 
 	process = ms.process;
 	type = is_builtin(process->execute[0]);
-	if (type)
+	if (type && ms.process_count == 1 && !is_heredoc(process))
 	{
-		in = dup(0);
-		out = dup(1);
-		run_redirects(process);
-		run_builtin(process->execute, type);
-		dup2(in, 0);
-		dup2(out, 1);
-		close(in);
-		close(out);
+		check_builtin(process, type);
 		process = process->next;
 	}
 	check_heredock(process);

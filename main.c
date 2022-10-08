@@ -7,7 +7,6 @@ void	init_env(char **env)
 	ms.paths = NULL;
 	set_env(env);
 	set_paths();
-
 }
 
 void	init_shell(char *input, char **env)
@@ -22,16 +21,16 @@ void	init_shell(char *input, char **env)
 
 void	ctrl_c(int sig)
 {
-	// ioctl(STDIN_FILENO, TIOCSTI, "\n"); // input output devicelere inject yapmak için
-	// write(1, "\033c", 2);
-	// write(1, "\r", 1);
-	// write(1, "\033[B\033[2K", 7);
+	/* Sistem tarafından açılan sistem fd'leri içine komut göndermek için kullanılır.
+	/* Bu komut ile terminal devicesine \n yani enter komutu gönderilir.
+	/* Komut alt satıra newline atarak geçer.
+	*/
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 
-	write(1, "\033[B", 3); // alt satır
-	write(1, "\033[1L", 4); // imleci başa getir
-	// write(1, "\033[1K\r", 5); // tüm ekranı sil ve satırbaşına geç
-	write(1, "minishell> ", 11);
-	// fflush(stdin);
+	/* Bu komut ile altta kalan imleç yukarı taşınır. 
+	*/
+	write(1, "\033[A", 3);
+
 }
 
 int main(int ac, char **av, char **env)
@@ -60,5 +59,4 @@ int main(int ac, char **av, char **env)
 		free(input);
 	}
 	exit(ms.status);
-	// system("leaks a.out");
 }

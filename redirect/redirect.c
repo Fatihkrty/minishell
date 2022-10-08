@@ -26,9 +26,9 @@ void	run_redirects(t_process *process)
 		if (is_operator(redirects[i]) == RED_INPUT)
 			red_input(redirects[i + 1]);
 		else if (is_operator(redirects[i]) == RED_OUTPUT)
-			red_output(redirects[i + 1], REPLACE);
+			red_output(process, redirects[i + 1], REPLACE);
 		else if (is_operator(redirects[i]) == RED_APPEND)
-			red_output(redirects[i + 1], APPEND);
+			red_output(process, redirects[i + 1], APPEND);
 		i+=2;
 	}
 }
@@ -62,9 +62,9 @@ void	set_all_outputs(t_process *process)
 	while (redirects[i])
 	{
 		if (is_operator(redirects[i]) == RED_OUTPUT)
-			red_output(redirects[i + 1], REPLACE);
+			red_output(process, redirects[i + 1], REPLACE);
 		else if (is_operator(redirects[i]) == RED_APPEND)
-			red_output(redirects[i + 1], APPEND);
+			red_output(process, redirects[i + 1], APPEND);
 		i+=2;
 	}
 }

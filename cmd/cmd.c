@@ -60,10 +60,7 @@ void	start_cmd()
 	process = ms.process;
 	type = is_builtin(process->execute[0]);
 	if (type && ms.process_count == 1 && !is_heredoc(process))
-	{
 		check_builtin(process, type);
-		process = process->next;
-	}
 	check_heredock(process);
 	check_cmd(process);
 	wait_cmd(process);

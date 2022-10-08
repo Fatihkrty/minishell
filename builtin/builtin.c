@@ -2,22 +2,21 @@
 
 int	is_builtin(char *command)
 {
-	if (ft_strcmp(command, "cd")) // ilkse mainde değilse child processde. Yönlendirme yok
+	if (ft_strcmp(command, "cd"))
         return (CD);
-	if (ft_strcmp(command, "env")) // farketmez. child olabilir.
+	if (ft_strcmp(command, "env"))
         return (ENV);
-	if (ft_strcmp(command, "pwd")) // child processde. Konumu main processden miras alıyor. Yönlendirme output var
+	if (ft_strcmp(command, "pwd"))
         return (PWD);
-	if (ft_strcmp(command, "echo")) // Sürekli child olabilir
+	if (ft_strcmp(command, "echo"))
         return (ECHO);
-	if (ft_strcmp(command, "exit")) // ilkse mainde değilse child processde. yönlendirme yok
+	if (ft_strcmp(command, "exit"))
         return (EXIT);
-	if (ft_strcmp(command, "unset")) //  sürekli main process. Pipe ile kullanınca çalışmadı linuxta.
+	if (ft_strcmp(command, "unset"))
         return (UNSET);
-	if (ft_strcmp(command, "export")) // sürekli main process. Pipe ile kullanınca çalışmadı linuxta.
+	if (ft_strcmp(command, "export"))
         return (EXPORT);
     return (0);
-
 }
 
 void    run_builtin(char **execute, int type)

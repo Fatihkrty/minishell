@@ -120,7 +120,7 @@ void	builtin_export(char **input);
 
 // REDIRECT_FUNCS
 void	red_input(char *file);
-void	red_output(char *file, int mode);
+void	red_output(t_process *process, char *file, int mode);
 void	run_redirects(t_process *process);
 
 //HEREDOC

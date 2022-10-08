@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	red_output(char *file, int mode)
+void	red_output(t_process *process, char *file, int mode)
 {
 	int		fd;
 
@@ -12,6 +12,7 @@ void	red_output(char *file, int mode)
 	{
 		if (fd == -1)
 			return perror("minishell");
+		dup2(fd, process->fd[1]);
 	}
 	else
 	{
@@ -20,7 +21,7 @@ void	red_output(char *file, int mode)
 			perror("minishell");
 			exit(errno);
 		}
+		dup2(fd, 1);
 	}
-	dup2(fd, 1);
 	close(fd);
 }

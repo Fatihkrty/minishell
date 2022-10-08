@@ -37,14 +37,13 @@ void	check_builtin(t_process *process, int type)
 
 void	wait_cmd(t_process *process)
 {
-	int a;
 	while (process)
 	{
 		if (!is_heredoc(process))
 		{
 			close_all_fd();
-			waitpid(process->pid, &a, 0);
-			// printf("Child Status: %d\n", a % 255);
+			waitpid(process->pid, &errno, 0);
+			printf("Child Status: %d\n", errno % 255);
 		}
 		process = process->next;
 	}
@@ -52,16 +51,17 @@ void	wait_cmd(t_process *process)
 
 void	start_cmd()
 {
-	int			in;
-	int			out;
-	int			type;
+	int			builtin_type;
 	t_process	*process;
 
 	process = ms.process;
-	type = is_builtin(process->execute[0]);
-	if (type && ms.process_count == 1 && !is_heredoc(process))
-		check_builtin(process, type);
-	check_heredock(process);
-	check_cmd(process);
-	wait_cmd(process);
+	builtin_type = is_builtin(process->execute[0]);
+	if (builtin_type && ms.process_count == 1 && !is_heredoc(process))
+		check_builtin(process, builtin_type);
+	else
+	{
+		check_heredock(process);
+		check_cmd(process);
+		wait_cmd(process);
+	}
 }

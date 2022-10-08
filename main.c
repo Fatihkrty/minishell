@@ -11,6 +11,7 @@ void	init_env(char **env)
 
 void	init_shell(char *input, char **env)
 {
+	ms.status = 0;
 	ms.token = NULL;
 	ms.process = NULL;
 	ms.process_count = 0;
@@ -21,22 +22,13 @@ void	init_shell(char *input, char **env)
 
 void	ctrl_c(int sig)
 {
-	/* Sistem tarafından açılan sistem fd'leri içine komut göndermek için kullanılır.
-	/* Bu komut ile terminal devicesine \n yani enter komutu gönderilir.
-	/* Komut alt satıra newline atarak geçer.
-	*/
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
-
-	/* Bu komut ile altta kalan imleç yukarı taşınır. 
-	*/
 	write(1, "\033[A", 3);
-
 }
 
 int main(int ac, char **av, char **env)
 {
 	char	*input;
-	char	*tmp;
 
 	ms.parent_pid = getpid();
 	init_env(env);

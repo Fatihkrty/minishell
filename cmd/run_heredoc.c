@@ -10,12 +10,10 @@ void	run_heredoc(t_process *process)
 {
 	pid_t	pid;
 	char	*path;
-	int		status;
 
 	get_all_inputs(process);
-	if (errno == ENOENT || ms.status == 257)
+	if (ms.status == -1)
 	{
-		ms.status = 0;
 		close_heredoc_fd();
 		return ;
 	}
@@ -28,9 +26,9 @@ void	run_heredoc(t_process *process)
 			dup2(process->fd[1], 1);
 		set_all_outputs(process);
 		close_heredoc_fd();
-		status = execve(path, process->execute, ms.env);
+		execve(path, process->execute, ms.env);
 		free(path);
-		exit(status);
+		exit(-1);
 	}
 	wait(&ms.status);
 }

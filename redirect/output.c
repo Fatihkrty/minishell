@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	red_output(t_process *process, char *file, int mode)
+void	output(t_process *process, char *file, int mode)
 {
 	int		fd;
 

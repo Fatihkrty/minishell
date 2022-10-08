@@ -16,7 +16,7 @@ void    close_all_fd()
 void    pipe_route(t_process *process)
 {
     if (process->prev == NULL)
-        dup2(process->fd[1], 1);
+        dup2(process->fd[0], 0);
     else if (process->next == NULL)
         dup2(process->prev->fd[0], 0);
     else
@@ -48,8 +48,9 @@ void    run_cmd(t_process *process)
         else
         {
 		    path = get_path(process->execute[0]);
-            builtin_type = execve(path, process->execute, ms.env);
+            execve(path, process->execute, ms.env);
             free(path);
+			exit(0);
         }
         exit(builtin_type);
     }

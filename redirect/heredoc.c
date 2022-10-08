@@ -2,21 +2,28 @@
 
 void	close_heredoc(int sig)
 {
-	ms.status = 257;
+	ms.status = -1;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 }
 
-void	red_heredoc(char *endline)
+void	heredoc(char *endline)
 {
-	char	*input;
+	char		*input;
+	static int	start = 0;
 
+	if (start)
+	{
+		close(ms.heredoc_fd[0]);
+		close(ms.heredoc_fd[1]);
+	}
+	start = 1;
 	if (pipe(ms.heredoc_fd) < 0)
 		return perror("minishell");
-	while (ms.status != 257)
+	while (1)
 	{
 		signal(SIGINT, &close_heredoc);
 		input = readline("heredoc>> ");
-		if (!input || ft_strcmp(input, endline))
+		if (!input || ft_strcmp(input, endline) || ms.status == -1)
 		{
 			free(input);
 			break ;

@@ -40,4 +40,5 @@ char    *get_path(char *cmd)
     }
     free(new_cmd);
     command_err();
+	return (NULL);
 }

@@ -119,12 +119,12 @@ void	builtin_unset(char **input);
 void	builtin_export(char **input);
 
 // REDIRECT_FUNCS
-void	red_input(char *file);
-void	red_output(t_process *process, char *file, int mode);
+void	input(char *file);
+void	output(t_process *process, char *file, int mode);
 void	run_redirects(t_process *process);
 
 //HEREDOC
-void	red_heredoc(char *endline);
+void	heredoc(char *endline);
 void	run_heredoc(t_process *process);
 void	get_all_inputs(t_process *process);
 void	set_all_outputs(t_process *process);
@@ -133,6 +133,7 @@ void	set_all_outputs(t_process *process);
 void    token_err();
 void    command_err();
 void    directory_err();
+void	no_file_err();
 
 // UTILS
 int		is_parent();

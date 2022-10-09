@@ -29,7 +29,7 @@ void	builtin_exit(char **input)
 	if (ft_get_arg_count(input) == 1)
 	{
 		printf("exit\n");
-		exit(55); // Last command exit status variable
+		exit(errno);
 	}
 	else
 	{
@@ -38,7 +38,7 @@ void	builtin_exit(char **input)
 			if (ft_get_arg_count(input) > 2)
 			{
                 write(2, "exit\nminishell: exit: too many arguments\n", 41);
-				//global.exitstatus=1
+				errno = 1;
 				return ;
 			}
 			exit(ft_atoi(input[1]) % 256);

@@ -11,7 +11,7 @@ void    pipe_route(t_process *process)
         dup2(process->prev->fd[0], 0);
         dup2(process->fd[1], 1);
     }
-	close_fd(process);
+	close_all_fd();
 }
 
 void	route_heredoc(t_process *process)
@@ -55,7 +55,7 @@ void    run_cmd(t_process *process)
 		    path = get_path(process->execute[0]);
             execve(path, process->execute, ms.env);
             free(path);
-			exit(-1);
+			command_err();
         }
         exit(errno);
     }

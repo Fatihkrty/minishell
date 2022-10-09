@@ -22,7 +22,7 @@ void	wait_cmd()
 	process = ms.process;
 	if (is_heredoc(process))
 		close_heredoc_fd();
-	close_fd();
+	close_all_fd();
 	while (process)
 	{
 		waitpid(process->pid, &errno, 0);

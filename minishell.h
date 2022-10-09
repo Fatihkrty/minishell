@@ -104,7 +104,6 @@ void	free_array(char **arr);
 
 // CMD
 void 	start_cmd();
-void 	close_fd();
 void    run_cmd(t_process *process);
 
 //BUILTINS
@@ -129,7 +128,7 @@ void	get_all_inputs(t_process *process);
 void	set_all_outputs(t_process *process);
 
 //CLOSE
-void    close_fd();
+void    close_all_fd();
 void	close_heredoc_fd();
 
 //ERROR

@@ -51,5 +51,6 @@ int main(int ac, char **av, char **env)
 		}
 		free(input);
 	}
+	system("leaks a.out");
 	exit(ms.status);
 }

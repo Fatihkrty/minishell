@@ -36,6 +36,8 @@ void	start_cmd()
 	t_process	*process;
 
 	process = ms.process;
+	if (!process)
+		return ;
 	if (is_builtin(process->execute[0]) && ms.process_count == 1 && !is_heredoc(process))
 	{
 		check_builtin(process);

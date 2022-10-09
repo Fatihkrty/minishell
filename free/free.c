@@ -19,6 +19,8 @@ void	free_process()
 	t_process	*tmp;
 
 	process = ms.process;
+	if (!process)
+		return ;
 	free_array(process->execute);
 	free_array(process->redirects);
 	while (process)

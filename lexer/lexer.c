@@ -33,7 +33,7 @@ void	lexer()
 			process->execute = push_array(process->execute, clean_quote(token->str));
 		else
 		{
-			process->redirects = push_array(process->redirects, clean_quote(token->str));
+			process->redirects = push_array(process->redirects, ft_strdup(token->str));
 			token = token->next;
 			if (token)
 				process->redirects = push_array(process->redirects, clean_quote(token->str));

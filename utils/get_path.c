@@ -4,8 +4,8 @@ void    check_dir(char *cmd)
 {
     DIR		*dir;
 
-    if (!(*cmd))
-        command_err();
+    if (!cmd)
+        exit(EXIT_SUCCESS);
 	dir	= opendir(cmd);
 	if (dir && readdir(dir))
 	{
@@ -39,6 +39,5 @@ char    *get_path(char *cmd)
         paths++;
     }
     free(new_cmd);
-    command_err();
 	return (NULL);
 }

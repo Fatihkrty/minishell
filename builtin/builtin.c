@@ -19,8 +19,11 @@ int	is_builtin(char *command)
     return (0);
 }
 
-void    run_builtin(char **execute, int type)
+void    run_builtin(char **execute)
 {
+	int	type;
+
+	type = is_builtin(execute[0]);
     if (type == CD)
         builtin_cd(execute);
     if (type == ENV)

@@ -12,10 +12,7 @@ void	heredoc(char *endline)
 	static int	start = 0;
 
 	if (start)
-	{
 		close(ms.heredoc_fd[0]);
-		close(ms.heredoc_fd[1]);
-	}
 	start = 1;
 	if (pipe(ms.heredoc_fd) < 0)
 		return perror("minishell");

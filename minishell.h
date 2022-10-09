@@ -109,7 +109,7 @@ void    run_cmd(t_process *process);
 
 //BUILTINS
 int		is_builtin(char *command);
-void    run_builtin(char **execute, int type);
+void    run_builtin(char **execute);
 void	builtin_env();
 void	builtin_cd(char **input);
 void	builtin_exit(char **input);
@@ -120,14 +120,17 @@ void	builtin_export(char **input);
 
 // REDIRECT_FUNCS
 void	input(char *file);
+void	heredoc(char *endline);
 void	output(t_process *process, char *file, int mode);
 void	run_redirects(t_process *process);
 
 //HEREDOC
-void	heredoc(char *endline);
-void	run_heredoc(t_process *process);
 void	get_all_inputs(t_process *process);
 void	set_all_outputs(t_process *process);
+
+//CLOSE
+void    close_all_fd();
+void	close_heredoc_fd();
 
 //ERROR
 void    token_err();

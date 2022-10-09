@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-void    close_all_fd()
+void    close_fd()
 {
-	t_process *process;
+	t_process	*process;
 
 	process = ms.process;
 	while (process)

@@ -3,7 +3,7 @@
 void    pipe_route(t_process *process)
 {
     if (process->prev == NULL)
-        dup2(process->fd[0], 0);
+        dup2(process->fd[1], 1);
     else if (process->next == NULL)
         dup2(process->prev->fd[0], 0);
     else
@@ -11,7 +11,7 @@ void    pipe_route(t_process *process)
         dup2(process->prev->fd[0], 0);
         dup2(process->fd[1], 1);
     }
-    close_all_fd();
+	close_fd(process);
 }
 
 void	route_heredoc(t_process *process)
@@ -33,7 +33,6 @@ void    run_cmd(t_process *process)
 {
     pid_t   pid;
     char    *path;
-    int     builtin_type;
 
 	if (is_heredoc(process))
 		get_all_inputs(process);
@@ -49,18 +48,16 @@ void    run_cmd(t_process *process)
 			route_heredoc(process);
 		else
 			route_cmd(process);
-        builtin_type = is_builtin(process->execute[0]);
-        if (builtin_type)
-            run_builtin(process->execute, builtin_type);
+        if (is_builtin(process->execute[0]))
+            run_builtin(process->execute);
         else
         {
-			close_heredoc_fd();
 		    path = get_path(process->execute[0]);
             execve(path, process->execute, ms.env);
             free(path);
 			exit(-1);
         }
-        exit(builtin_type);
+        exit(errno);
     }
 	else
 		process->pid = pid;

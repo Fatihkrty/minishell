@@ -15,12 +15,16 @@ void	check_builtin(t_process *process)
 	close(out);
 }
 
-void	wait_cmd(t_process *process)
+void	wait_cmd()
 {
+	t_process *process;
+
+	process = ms.process;
+	if (is_heredoc(process))
+		close_heredoc_fd();
+	close_fd();
 	while (process)
 	{
-		close_all_fd();
-		close_heredoc_fd();
 		waitpid(process->pid, &errno, 0);
 		printf("Child Status: %d\n", errno % 255);
 		process = process->next;
@@ -33,10 +37,14 @@ void	start_cmd()
 
 	process = ms.process;
 	if (is_builtin(process->execute[0]) && ms.process_count == 1 && !is_heredoc(process))
+	{
 		check_builtin(process);
-	else
+		process = process->next;
+	}
+	while (process)
 	{
 		run_cmd(process);
-		wait_cmd(process);
+		process = process->next;
 	}
+	wait_cmd();
 }

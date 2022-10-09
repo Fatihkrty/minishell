@@ -39,5 +39,6 @@ char    *get_path(char *cmd)
         paths++;
     }
     free(new_cmd);
+	command_err();
 	return (NULL);
 }

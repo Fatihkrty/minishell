@@ -91,7 +91,7 @@ t_token		*init_token(char *str, enum e_ttype type);
 void		token_addback(t_token **token, t_token *new_token);
 
 // LEXICAL ANALYSIS
-void		lexer();
+int			lexer();
 t_process	*init_process();
 char		*clean_quote(char *str);
 char		**push_array(char **arg_arr, char *str);

@@ -12,8 +12,6 @@ void    token_err()
 {
     errno = 258;
     write(2, "minishell: Unexpected Token\n", 28);
-    if (!is_parent())
-        exit(errno);
 }
 
 void    directory_err()

@@ -5,7 +5,7 @@ char    *split_env(char *str)
     while(*str != '=')
         str++;
     str++;
-    return(str);
+    return(ft_strdup(str));
 }
 
 char    *get_env(char *str)
@@ -27,5 +27,5 @@ char    *get_env(char *str)
         env++;
     }
     free(new_str);
-    return (NULL);
+    return (ft_calloc(sizeof(char *), 1));
 }

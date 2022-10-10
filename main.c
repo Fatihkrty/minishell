@@ -11,13 +11,14 @@ void	init_env(char **env)
 
 void	init_shell(char *input, char **env)
 {
-	ms.status = 0;
 	errno = 0;
+	ms.status = 0;
 	ms.token = NULL;
 	ms.process = NULL;
 	ms.process_count = 0;
 	tokenize(input);
-	lexer();
+	if (!lexer())
+		return ;
 	start_cmd();
 }
 

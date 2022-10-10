@@ -22,12 +22,33 @@ void	push_new_str(char **new_str, char *str)
 	*new_str = ft_strjoin(*new_str, str);
 	free(tmp);
 }
+char	*parse_dollar_op(char *str, int *pos)
+{
+	int		first;
+	char	*env;
+	char	*result;
+
+	while (str[*pos] != DOLLAR_OP)
+		(*pos)++;
+	(*pos)++;
+	first = *pos;
+	while (valid_op(str[*pos]))
+		(*pos)++;
+	env = ft_substr(str, first, *pos - first);
+	result = get_env(env);
+	free(env);
+	return (result);
+}
 
 char *clean_quote_with_type(char *str, int *pos, char type)
 {
 	int		first;
 	char	*new_str;
 
+	if (type == DOUBLE_QUOTE && ft_strchr(str, DOLLAR_OP))
+	{
+		
+	}
 	(*pos)++;
 	first = *pos;
 	while (str[*pos] && str[*pos] != type)
@@ -38,41 +59,6 @@ char *clean_quote_with_type(char *str, int *pos, char type)
 	return (new_str);
 }
 
-// char	*parse_dollar_op(char *str)
-// {
-// 	char	*tmp;
-// 	char	*head;
-// 	char	*new_str;
-// 	head = str;
-// 	new_str = NULL;
-// 	while (*str)
-// 	{
-// 		while (*str && *str != '$')
-// 			str++;
-// 		if (str - head > 0)
-// 		{
-// 			tmp = ft_substr(head, 0, str - head);
-// 			push_new_str(&new_str, tmp);
-// 			free(tmp);
-// 			head = str;
-// 		}
-// 		if (*str == '$')
-// 		{
-// 			str++;
-// 			head = str;
-// 			while(*str && valid_op(*str))
-// 				str++;
-// 			tmp = ft_substr(head, 0, str - head);
-// 			push_new_str(&new_str, get_env(tmp));
-// 			free(tmp);
-// 			head = str;
-// 		}
-// 	}
-// 	tmp = new_str;
-// 	new_str = clean_quote_with_type(new_str, DOUBLE_QUOTE);
-// 	free(tmp);
-// 	return (new_str);
-// }
 
 char *clean_quote(char *str)
 {
@@ -83,7 +69,7 @@ char *clean_quote(char *str)
 
 	i = 0;
 	result = NULL;
-	while (str[i])
+	while (str[i]) // $USER'ABC123'
 	{
 		if (str[i] == DOUBLE_QUOTE)
 		{

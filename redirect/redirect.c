@@ -1,17 +1,5 @@
 #include "../minishell.h"
 
-int	check_redirects(char **redirects)
-{
-	int	i;
-
-	i = 0;
-	while(redirects[i])
-		i++;
-	if (i % 2)
-		return (false);
-	return (true);
-}
-
 void	run_redirects(t_process *process)
 {
 	int		i;
@@ -19,8 +7,6 @@ void	run_redirects(t_process *process)
 
 	i = 0;
 	redirects = process->redirects;
-	if (!check_redirects(redirects))
-		token_err();
 	while (redirects[i])
 	{
 		if (is_operator(redirects[i]) == RED_INPUT)
@@ -40,8 +26,6 @@ void	get_all_inputs(t_process *process)
 
 	i = 0;
 	redirects = process->redirects;
-	if (!check_redirects(redirects))
-		token_err();
 	while (redirects[i])
 	{
 		if (is_operator(redirects[i]) == RED_INPUT)
@@ -59,8 +43,6 @@ void	set_all_outputs(t_process *process)
 
 	i = 0;
 	redirects = process->redirects;
-	if (!check_redirects(redirects))
-		token_err();
 	while (redirects[i])
 	{
 		if (is_operator(redirects[i]) == RED_OUTPUT)

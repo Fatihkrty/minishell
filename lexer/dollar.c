@@ -22,12 +22,7 @@ int	check_dollar(char *str)
 	while (str[i] && str[i] != DOLLAR_OP)
 	{
 		if (str[i] == SINGLE_QUOTE)
-		{
-			if (double_quote)
-				single_quote = true;
-			else
-				single_quote = false;
-		}
+			double_quote = single_quote;
 		if (str[i] == DOUBLE_QUOTE)
 			double_quote = !double_quote;
 		i++;

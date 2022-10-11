@@ -13,6 +13,7 @@
 #include <dirent.h>
 #include <signal.h>
 #include <sys/ioctl.h>
+#include <termios.h>
 
 // Bool defines
 #define true 1
@@ -35,7 +36,7 @@ enum e_builtin_types
 	CD = 1,
 	ENV,
 	PWD,
-	ECHO,
+	ECHOL,
 	EXIT,
 	UNSET,
 	EXPORT
@@ -80,6 +81,7 @@ typedef struct s_minishell
 	char		**paths;
 	t_token		*token;
 	t_process	*process;
+	struct		termios	termios_p;
 } t_minishell;
 
 extern t_minishell ms;

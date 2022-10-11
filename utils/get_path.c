@@ -10,7 +10,7 @@ void    check_dir(char *cmd)
 	if (dir && readdir(dir))
 	{
 		closedir(dir);
-        directory_err();
+        directory_err(cmd);
 	}
 }
 
@@ -25,7 +25,7 @@ char    *get_path(char *cmd)
         return (ft_strdup(cmd));
     paths = ms.paths;
     if (!paths)
-        command_err();
+        command_err(cmd);
     new_cmd = ft_strjoin("/", cmd);
     while (*paths)
     {
@@ -38,7 +38,8 @@ char    *get_path(char *cmd)
         free(path);
         paths++;
     }
+	if (ft_strchr(cmd, '/'))
+		no_file_err(cmd);
     free(new_cmd);
-	command_err();
 	return (NULL);
 }

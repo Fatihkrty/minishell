@@ -22,12 +22,11 @@ int	check_dollar(char *str)
 	while (str[i] && str[i] != DOLLAR_OP)
 	{
 		if (str[i] == SINGLE_QUOTE)
-			double_quote = single_quote;
+			single_quote = double_quote;
 		if (str[i] == DOUBLE_QUOTE)
 			double_quote = !double_quote;
 		i++;
 	}
-
 	if (!valid_op(*(ft_strchr(str, DOLLAR_OP) + 1)))
 		return (false);
 	return(single_quote);
@@ -57,13 +56,21 @@ char	*parse_dollar_op(char *str)
 	push_new_str(&result, data);
 	i++;
 	first = i;
-	while (valid_op(str[i]))
-		(i)++;
-	data = ft_substr(str, first, i - first);
-	env = get_env(data);
-	push_new_str(&result, env);
-	free(data);
-
+	if (str[i] == '?')
+	{
+		data = ft_itoa(errno);
+		push_new_str(&result, data);
+		i++;
+	}
+	else
+	{
+		while (valid_op(str[i]))
+			(i)++;
+		data = ft_substr(str, first, i - first);
+		env = get_env(data);
+		push_new_str(&result, env);
+		free(data);
+	}
 	data = get_str(str, &i, 0);
 	push_new_str(&result, data);
 	return (result);

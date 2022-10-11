@@ -9,7 +9,7 @@ int	is_builtin(char *command)
 	if (ft_strcmp(command, "pwd"))
         return (PWD);
 	if (ft_strcmp(command, "echo"))
-        return (ECHOL);
+        return (ECHO);
 	if (ft_strcmp(command, "exit"))
         return (EXIT);
 	if (ft_strcmp(command, "unset"))
@@ -30,7 +30,7 @@ void    run_builtin(char **execute)
         builtin_env();
     if (type == PWD)
         builtin_pwd(execute);
-    if (type == ECHOL)
+    if (type == ECHO)
         builtin_echo(execute);
     if (type == EXIT)
         builtin_exit(execute);

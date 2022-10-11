@@ -26,7 +26,7 @@ void	wait_cmd()
 	while (process)
 	{
 		waitpid(process->pid, &errno, 0);
-		printf("Child Status: %d\n", errno % 255);
+		errno = WEXITSTATUS(errno);
 		process = process->next;
 	}
 }

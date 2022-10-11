@@ -13,7 +13,6 @@
 #include <dirent.h>
 #include <signal.h>
 #include <sys/ioctl.h>
-#include <termios.h>
 
 // Bool defines
 #define true 1
@@ -36,7 +35,7 @@ enum e_builtin_types
 	CD = 1,
 	ENV,
 	PWD,
-	ECHOL,
+	ECHO,
 	EXIT,
 	UNSET,
 	EXPORT
@@ -76,12 +75,11 @@ typedef struct s_minishell
 	int			parent_pid;
 	int			heredoc_fd[2];
 	int			process_count;
-	int			status;
+	int			ignore;
 	char		**env;
 	char		**paths;
 	t_token		*token;
 	t_process	*process;
-	struct		termios	termios_p;
 } t_minishell;
 
 extern t_minishell ms;
@@ -141,14 +139,15 @@ void	close_heredoc_fd();
 
 //ERROR
 void    token_err();
-void    command_err();
+void    command_err(char *str);
 void    directory_err();
 void	no_file_err();
 
 // UTILS
+int		env_len();
 int		is_parent();
 void    set_paths();
-int		env_len();
+char	*ft_itoa(int n);
 char	*get_env(char *str);
 void	set_env(char **env);
 char    *get_path(char *cmd);

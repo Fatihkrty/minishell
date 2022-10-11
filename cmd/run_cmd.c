@@ -14,7 +14,7 @@ void    pipe_route(t_process *process)
 	close_all_fd();
 }
 
-void	route_heredoc(t_process *process)
+void	heredoc_route(t_process *process)
 {
 	dup2(ms.heredoc_fd[0], 0);
 	if (ms.process_count > 1 && process->next != NULL)
@@ -36,7 +36,7 @@ void    run_cmd(t_process *process)
 
 	if (is_heredoc(process))
 		get_all_inputs(process);
-	if (ms.status == -1)
+	if (ms.ignore)
 	{
 		close_heredoc_fd();
 		return ;
@@ -45,7 +45,7 @@ void    run_cmd(t_process *process)
     if (pid == CHILD_PROCESS)
     {
 		if (is_heredoc(process))
-			route_heredoc(process);
+			heredoc_route(process);
 		else
 			route_cmd(process);
         if (is_builtin(process->execute[0]))
@@ -54,8 +54,7 @@ void    run_cmd(t_process *process)
         {
 		    path = get_path(process->execute[0]);
             execve(path, process->execute, ms.env);
-            free(path);
-			command_err();
+			command_err(process->execute[0]);
         }
         exit(errno);
     }

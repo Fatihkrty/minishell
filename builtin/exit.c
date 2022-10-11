@@ -44,6 +44,6 @@ void	builtin_exit(char **input)
 			exit(ft_atoi(input[1]) % 256);
 		}
         write(2, "exit\nminishell: exit: numeric argument required\n", 48);
-		exit(-1 % 255);
+		exit(-1 % 256);
 	}
 }

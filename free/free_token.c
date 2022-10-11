@@ -8,8 +8,7 @@ void	free_token()
 	token = ms.token;
     while (token)
     {
-        if (token->type == STRING)
-            free(token->str);
+        free(token->str);
         token = token->next;
     }
 	token = ms.token;

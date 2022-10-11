@@ -2,7 +2,7 @@
 
 void	close_heredoc(int sig)
 {
-	ms.status = -1;
+	ms.ignore = true;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 }
 
@@ -20,7 +20,7 @@ void	heredoc(char *endline)
 	{
 		signal(SIGINT, &close_heredoc);
 		input = readline("heredoc>> ");
-		if (!input || ft_strcmp(input, endline) || ms.status == -1)
+		if (!input || ft_strcmp(input, endline) || ms.ignore)
 		{
 			free(input);
 			break ;

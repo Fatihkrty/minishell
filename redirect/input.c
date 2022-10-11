@@ -9,15 +9,15 @@ void	input(char *file)
 	{
 		if (fd == -1)
 		{
-			ms.status = -1;
-			return no_file_err();
+			ms.ignore = true;
+			return no_file_err(file);
 		}
 		dup2(fd, ms.heredoc_fd[0]);
 	}
 	else
 	{
 		if (fd == -1)
-			no_file_err();
+			no_file_err(file);
 		dup2(fd, 0);
 	}
 	close(fd);

@@ -31,7 +31,8 @@ void	free_process()
 	}
 }
 
-void	free_app()
+void free_str(char *str)
 {
-	free_process();
+	if (str)
+		free(str);
 }

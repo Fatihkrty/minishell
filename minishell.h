@@ -98,13 +98,19 @@ char		**push_array(char **arg_arr, char *str);
 void		process_addback(t_process **process, t_process *new_process);
 
 // FREE
-void	free_app();
 void	free_token();
+void	free_process();
+void	free_str(char *str);
 void	free_array(char **arr);
 
 // CMD
 void 	start_cmd();
 void    run_cmd(t_process *process);
+
+//DOLLAR
+char	*parse_dollar_op(char *str);
+int	check_dollar(char *str);
+void	push_new_str(char **new_str, char *str);
 
 //BUILTINS
 int		is_builtin(char *command);

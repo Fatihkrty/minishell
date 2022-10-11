@@ -36,7 +36,7 @@ int main(int ac, char **av, char **env)
 	init_env(env);
 	while (ac && av)
 	{
-		signal(SIGINT, &ctrl_c);
+		// signal(SIGINT, &ctrl_c);
 		input = readline("\033[34mminishell> \033[0m");
 		if (!input)
 		{
@@ -48,7 +48,7 @@ int main(int ac, char **av, char **env)
 		{
 			init_shell(input, env);
 			add_history(input);
-			free_app();
+			free_process();
 		}
 		free(input);
 	}

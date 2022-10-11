@@ -9,7 +9,7 @@ all:
 	./cmd/*.c \
 	./free/*.c \
 	./error/*.c \
-	-lreadline -ggdb # -fsanitize=address -ggdb -g
+	-lreadline -ggdb # -fsanitize=address 
 run: all
 	clear
 	./a.out

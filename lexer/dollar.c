@@ -13,21 +13,29 @@ int	check_dollar(char *str)
 {
 	int		i;
 	char	*pos;
-	int		quote_len;
+	int		single_quote;
+	int		double_quote;
 
 	i = 0;
-	quote_len = 0;
+	single_quote = true;
+	double_quote = false; 
 	while (str[i] && str[i] != DOLLAR_OP)
 	{
 		if (str[i] == SINGLE_QUOTE)
-			quote_len++;
+		{
+			if (double_quote)
+				single_quote = true;
+			else
+				single_quote = false;
+		}
+		if (str[i] == DOUBLE_QUOTE)
+			double_quote = !double_quote;
 		i++;
 	}
+
 	if (!valid_op(*(ft_strchr(str, DOLLAR_OP) + 1)))
 		return (false);
-	if (!(quote_len % 2))
-		return (true);
-	return(false);
+	return(single_quote);
 }
 
 static char	*get_str(char *str, int	*pos, int type)

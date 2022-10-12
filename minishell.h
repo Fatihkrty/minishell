@@ -54,7 +54,7 @@ enum e_ttype
 
 typedef struct s_token
 {
-	char			*str; // malloc
+	char			*str;
 	enum	e_ttype	type;
 	struct	s_token	*prev;
 	struct	s_token	*next;
@@ -64,8 +64,8 @@ typedef struct s_process
 {
 	pid_t				pid;
 	int					fd[2];
-	char				**execute; // malloc
-	char				**redirects; // malloc
+	char				**execute;
+	char				**redirects;
 	struct s_process	*prev;
 	struct s_process	*next;
 }	t_process;
@@ -76,8 +76,8 @@ typedef struct s_minishell
 	int			heredoc_fd[2];
 	int			process_count;
 	int			ignore;
-	char		**env; // malloc
-	char		**paths; //malloc
+	char		**env;
+	char		**paths;
 	t_token		*token;
 	t_process	*process;
 } t_minishell;
@@ -88,7 +88,7 @@ extern t_minishell ms;
 void		tokenize(char *str);
 void		parse_token_string(char **str);
 t_token		*init_token(char *str, enum e_ttype type);
-void		token_addback(t_token **token, t_token *new_token, int plus);
+int			token_addback(t_token **token, t_token *new_token, int plus);
 
 // LEXICAL ANALYSIS
 int			lexer(void);
@@ -100,7 +100,6 @@ void		process_addback(t_process **process, t_process *new_process);
 // FREE
 void	free_token(void);
 void	free_process(void);
-void	free_str(char *str);
 void	free_array(char **arr);
 
 // CMD

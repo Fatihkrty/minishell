@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollar.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/12 21:55:44 by fkaratay          #+#    #+#             */
+/*   Updated: 2022/10/12 22:06:47 by fkaratay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	valid_op(char c)
 {
-	return ((c >= 'a' && c <= 'z') ||
-			(c >= 'A' && c <= 'Z') ||
-			(c >= '0' && c <= '9') ||
-			(c == '_') || (c=='?')
-	);
+	return ((c >= 'a' && c <= 'z') || \
+			(c >= 'A' && c <= 'Z') || \
+			(c >= '0' && c <= '9') || \
+			(c == '_') || (c == '?'));
 }
 
 int	check_dollar(char *str)
@@ -18,7 +29,7 @@ int	check_dollar(char *str)
 
 	i = 0;
 	single_quote = true;
-	double_quote = false; 
+	double_quote = false;
 	while (str[i] && str[i] != DOLLAR_OP)
 	{
 		if (str[i] == SINGLE_QUOTE)
@@ -29,7 +40,7 @@ int	check_dollar(char *str)
 	}
 	if (!valid_op(*(ft_strchr(str, DOLLAR_OP) + 1)))
 		return (false);
-	return(single_quote);
+	return (single_quote);
 }
 
 static char	*get_str(char *str, int	*pos, int type)
@@ -58,8 +69,7 @@ char	*parse_dollar_op(char *str)
 	first = i;
 	if (str[i] == '?')
 	{
-		data = ft_itoa(errno);
-		push_new_str(&result, data);
+		push_new_str(&result, ft_itoa(errno));
 		i++;
 	}
 	else

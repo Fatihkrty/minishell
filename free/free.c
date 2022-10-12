@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/12 21:51:00 by fkaratay          #+#    #+#             */
+/*   Updated: 2022/10/12 21:51:22 by fkaratay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	free_array(char **arr)
@@ -13,7 +25,7 @@ void	free_array(char **arr)
 	free(arr);
 }
 
-void	free_process()
+void	free_process(void)
 {
 	t_process	*tmp;
 	t_process	*process;
@@ -29,10 +41,4 @@ void	free_process()
 		process = process->next;
 		free(tmp);
 	}
-}
-
-void free_str(char *str)
-{
-	if (str)
-		free(str);
 }

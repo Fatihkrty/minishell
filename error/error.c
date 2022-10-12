@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/12 21:47:38 by fkaratay          #+#    #+#             */
+/*   Updated: 2022/10/12 21:47:39 by fkaratay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void    command_err(char *str)
+void	command_err(char *str)
 {
-    errno = 127;
+	errno = 127;
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": command not found\n", 20);
-    if (!is_parent())
-        exit(errno);
+	if (!is_parent())
+		exit(errno);
 }
 
-void    token_err(void)
+void	token_err(void)
 {
-    errno = 258;
-    write(2, "minishell: syntax error near unexpected token\n", 46);
+	errno = 258;
+	write(2, "minishell: syntax error near unexpected token\n", 46);
 }
 
-void    directory_err(char *str)
+void	directory_err(char *str)
 {
-    errno = 126;
+	errno = 126;
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": is a directory\n", 17);
 	if (!is_parent())
-        exit(errno);
+		exit(errno);
 }
 
 void	no_file_err(char *str)
@@ -33,5 +45,5 @@ void	no_file_err(char *str)
 	write(2, str, ft_strlen(str));
 	write(2, ": No such file or directory\n", 28);
 	if (!is_parent())
-        exit(errno);
+		exit(errno);
 }

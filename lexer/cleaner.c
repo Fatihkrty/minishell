@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleaner.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/12 21:51:54 by fkaratay          #+#    #+#             */
+/*   Updated: 2022/10/12 21:54:42 by fkaratay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	push_new_str(char **new_str, char *str)
@@ -39,13 +51,13 @@ static char	*get_str(char *str, int	*pos)
 	first = *pos;
 	while (str[*pos] && str[*pos] != DOUBLE_QUOTE && str[*pos] != SINGLE_QUOTE)
 		(*pos)++;
-	return(ft_substr(str, first, *pos - first));
+	return (ft_substr(str, first, *pos - first));
 }
 
-char *clean_quote(char *str)
+char	*clean_quote(char *str)
 {
 	int		i;
-	char 	*tmp;
+	char	*tmp;
 	char	*data;
 	char	*new_str;
 	char	*result;
@@ -70,7 +82,6 @@ char *clean_quote(char *str)
 			data = get_str(str, &i);
 		push_new_str(&result, data);
 	}
-
 	free(new_str);
 	return (result);
 }

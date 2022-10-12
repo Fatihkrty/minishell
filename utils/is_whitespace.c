@@ -1,4 +1,4 @@
 int	is_whitespace(char c)
 {
-	return (c  == ' ');
+	return (c == ' ');
 }

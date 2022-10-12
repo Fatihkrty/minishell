@@ -24,6 +24,21 @@ void	put_char(char *input)
 	}
 }
 
+int	skip_flag(char **str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (ft_strcmp(str[i], "-n"))
+			i++;
+		else
+			break ;
+	}
+	return (i);
+}
+
 void	builtin_echo(char **input)
 {
 	int	i;
@@ -33,16 +48,10 @@ void	builtin_echo(char **input)
 	flag = FALSE;
 	if (input[i] != NULL)
 	{
-		flag = ft_strcmp(input[i], "-n");
-		if (flag)
-			i++;
-		while (input[i])
-		{
-			put_char(input[i]);
-			if (input[i + 1])
-				write(STDOUT_FILENO, " ", 1);
-			i++;
-		}
+		put_char(input[i]);
+		if (input[i + 1])
+			write(STDOUT_FILENO, " ", 1);
+		i++;
 	}
 	if (!flag)
 		write(STDOUT_FILENO, "\n", 1);

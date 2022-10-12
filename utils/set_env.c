@@ -7,7 +7,7 @@ void	set_env(char **env)
 	char	**head;
 
 	head = env;
-	while(*head)
+	while (*head)
 		head++;
 	len = head - env;
 	ms.env = ft_calloc(sizeof(char **), len + 1);

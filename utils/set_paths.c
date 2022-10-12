@@ -1,17 +1,17 @@
 #include "../minishell.h"
 
-void    set_paths()
+void	set_paths(void)
 {
-    char    *path;
+	char	*path;
 
-    path = get_env("PATH");
-    if (!(*path))
-        ms.paths = NULL;
-    else
-    {
-        if (ms.paths)
-            free_array(ms.paths);
-        ms.paths = ft_split(path, ':');
-    }
+	path = get_env("PATH");
+	if (!(*path))
+		ms.paths = NULL;
+	else
+	{
+		if (ms.paths)
+			free_array(ms.paths);
+		ms.paths = ft_split(path, ':');
+	}
 	free(path);
 }

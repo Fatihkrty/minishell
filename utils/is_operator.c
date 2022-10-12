@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int		is_operator(char *str)
+int	is_operator(char *str)
 {
 	if (!str)
 		return (0);

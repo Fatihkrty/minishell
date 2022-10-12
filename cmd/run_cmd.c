@@ -54,6 +54,7 @@ void    run_cmd(t_process *process)
         {
 		    path = get_path(process->execute[0]);
             execve(path, process->execute, ms.env);
+			free(path);
 			command_err(process->execute[0]);
         }
         exit(errno);

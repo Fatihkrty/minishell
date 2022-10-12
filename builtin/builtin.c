@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/12 13:22:36 by fkaratay          #+#    #+#             */
+/*   Updated: 2022/10/12 13:25:38 by fkaratay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	is_builtin(char *command)
 {
 	if (ft_strcmp(command, "cd"))
-        return (CD);
+		return (CD);
 	if (ft_strcmp(command, "env"))
-        return (ENV);
+		return (ENV);
 	if (ft_strcmp(command, "pwd"))
-        return (PWD);
+		return (PWD);
 	if (ft_strcmp(command, "echo"))
-        return (ECHO);
+		return (ECHO);
 	if (ft_strcmp(command, "exit"))
-        return (EXIT);
+		return (EXIT);
 	if (ft_strcmp(command, "unset"))
-        return (UNSET);
+		return (UNSET);
 	if (ft_strcmp(command, "export"))
-        return (EXPORT);
+		return (EXPORT);
     return (0);
 }
 

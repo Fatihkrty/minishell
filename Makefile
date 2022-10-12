@@ -9,8 +9,12 @@ all:
 	./cmd/*.c \
 	./free/*.c \
 	./error/*.c \
-	-lreadline -ggdb # -fsanitize=address 
+	-lreadline -g # -ggdb # -fsanitize=address 
 run: all
 	clear
 	./a.out
+
+valgrind: all
+	clear
+	valgrind --leak-check=full  ./a.out
 

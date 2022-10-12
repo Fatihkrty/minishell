@@ -38,7 +38,9 @@ int main(int ac, char **av, char **env)
 	{
 		signal(SIGINT, &ctrl_c);
 		signal(SIGQUIT, SIG_IGN);
+		printf("\033[32m");
 		input = readline("minishell_> ");
+		printf("\033[0m");
 		fflush(stdout);
 		if (!input)
 		{

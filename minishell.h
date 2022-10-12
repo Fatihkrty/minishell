@@ -54,7 +54,7 @@ enum e_ttype
 
 typedef struct s_token
 {
-	char			*str;
+	char			*str; // malloc
 	enum	e_ttype	type;
 	struct	s_token	*prev;
 	struct	s_token	*next;
@@ -64,8 +64,8 @@ typedef struct s_process
 {
 	pid_t				pid;
 	int					fd[2];
-	char				**execute;
-	char				**redirects;
+	char				**execute; // malloc
+	char				**redirects; // malloc
 	struct s_process	*prev;
 	struct s_process	*next;
 }	t_process;
@@ -76,8 +76,8 @@ typedef struct s_minishell
 	int			heredoc_fd[2];
 	int			process_count;
 	int			ignore;
-	char		**env;
-	char		**paths;
+	char		**env; // malloc
+	char		**paths; //malloc
 	t_token		*token;
 	t_process	*process;
 } t_minishell;

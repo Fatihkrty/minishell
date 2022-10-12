@@ -70,6 +70,7 @@ char *clean_quote(char *str)
 			data = get_str(str, &i);
 		push_new_str(&result, data);
 	}
+
 	free(new_str);
 	return (result);
 }

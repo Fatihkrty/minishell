@@ -1,18 +1,5 @@
 #include "../minishell.h"
 
-
-void	append_redirects(t_process *process, t_token **token)
-{
-	t_token	*i_token;
-
-	i_token = *token;
-	process->redirects = push_array(process->redirects, i_token->str);
-	i_token = i_token->next;
-	*token = i_token;
-	if (i_token)
-		process->redirects = push_array(process->redirects, clean_quote(i_token->str));
-}
-
 int	lexer()
 {
 	t_token		*token;
@@ -35,7 +22,7 @@ int	lexer()
 			process->execute = push_array(process->execute, clean_quote(token->str));
 		else
 		{
-			process->redirects = push_array(process->redirects, ft_strdup(token->str));
+			process->redirects = push_array(process->redirects, clean_quote(token->str));
 			token = token->next;
 			if (!token || token->type != STRING)
 			{

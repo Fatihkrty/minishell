@@ -21,10 +21,10 @@ void	free_process()
 	process = ms.process;
 	if (!process)
 		return ;
-	free_array(process->execute);
-	free_array(process->redirects);
 	while (process)
 	{
+		free_array(process->execute);
+		free_array(process->redirects);
 		tmp = process;
 		process = process->next;
 		free(tmp);

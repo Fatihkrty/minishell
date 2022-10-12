@@ -17,7 +17,6 @@ char	**push_array(char **arg_arr, char *str)
 		i++;
 	}
 	new_arr[i] = str;
-	if (arg_arr)
-		free(arg_arr);
+	free(arg_arr);
 	return (new_arr);
 }

@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:23 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:24 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 22:35:47 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int main(int ac, char **av, char **env)
 		}
 		free(input);
 	}
+	system("leaks a.out");
 	exit(errno);
 }

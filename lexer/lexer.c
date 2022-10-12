@@ -6,11 +6,40 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:08:25 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:08:31 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 23:02:58 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	append_arguments(t_token **tmp_token, t_process *process)
+{
+	char		*data;
+	t_token		*token;
+
+	token = *tmp_token;
+	if (token->type == STRING)
+	{
+		data = clean_quote(token->str);
+		process->execute = push_array(process->execute, data);
+	}
+	else
+	{
+		data = clean_quote(token->str);
+		process->redirects = push_array(process->redirects, data);
+		token = token->next;
+		*tmp_token = token;
+		if (!token || token->type != STRING)
+		{
+			free_token();
+			token_err();
+			return (false);
+		}
+		data = clean_quote(token->str);
+		process->redirects = push_array(process->redirects, data);
+	}
+	return (true);
+}
 
 int	lexer(void)
 {
@@ -30,22 +59,9 @@ int	lexer(void)
 		}
 		if (!token)
 			break ;
-		if (token->type == STRING)
-			process->execute = push_array(process->execute, clean_quote(token->str));
+		if (!append_arguments(&token, process))
+			return (false);
 		else
-		{
-			process->redirects = push_array(process->redirects, clean_quote(token->str));
-			token = token->next;
-			if (!token || token->type != STRING)
-			{
-				free_token();
-				token_err();
-				return (false);
-			}
-			if (token)
-				process->redirects = push_array(process->redirects, clean_quote(token->str));
-		}
-		if (token)
 			token = token->next;
 	}
 	free_token();

@@ -107,6 +107,7 @@ void 	start_cmd(void);
 void    run_cmd(t_process *process);
 
 //DOLLAR
+char	*dollar(char *str);
 int		check_dollar(char *str);
 char	*parse_dollar_op(char *str);
 void	push_new_str(char **new_str, char *str);

@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:55:44 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:06:47 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 22:37:58 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ int	check_dollar(char *str)
 static char	*get_str(char *str, int	*pos, int type)
 {
 	int		first;
+	char	*data;
 
 	first = *pos;
 	while (str[*pos] != type)
 		(*pos)++;
-	return (ft_substr(str, first, *pos - first));
+	data = ft_substr(str, first, *pos - first);
+	(*pos)++;
+	return (data);
 }
 
 char	*parse_dollar_op(char *str)
@@ -65,13 +68,9 @@ char	*parse_dollar_op(char *str)
 	result = NULL;
 	data = get_str(str, &i, DOLLAR_OP);
 	push_new_str(&result, data);
-	i++;
 	first = i;
-	if (str[i] == '?')
-	{
+	if (str[i] == '?' && ++i)
 		push_new_str(&result, ft_itoa(errno));
-		i++;
-	}
 	else
 	{
 		while (valid_op(str[i]))
@@ -84,4 +83,19 @@ char	*parse_dollar_op(char *str)
 	data = get_str(str, &i, 0);
 	push_new_str(&result, data);
 	return (result);
+}
+
+char	*dollar(char *str)
+{
+	char	*tmp;
+	char	*new_str;
+
+	new_str = ft_strdup(str);
+	while (ft_strchr(new_str, DOLLAR_OP) && check_dollar(new_str))
+	{
+		tmp = new_str;
+		new_str = parse_dollar_op(new_str);
+		free(tmp);
+	}
+	return (new_str);
 }

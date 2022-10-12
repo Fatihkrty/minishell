@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:51:54 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 21:54:42 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 22:29:48 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,12 @@ static char	*get_str(char *str, int	*pos)
 char	*clean_quote(char *str)
 {
 	int		i;
-	char	*tmp;
 	char	*data;
-	char	*new_str;
 	char	*result;
 
 	i = 0;
 	result = NULL;
-	new_str = ft_strdup(str);
-	while (ft_strchr(new_str, DOLLAR_OP) && check_dollar(new_str))
-	{
-		tmp = new_str;
-		new_str = parse_dollar_op(new_str);
-		free(tmp);
-	}
-	str = new_str;
+	str = dollar(str);
 	while (str[i])
 	{
 		if (str[i] == DOUBLE_QUOTE)
@@ -82,6 +73,6 @@ char	*clean_quote(char *str)
 			data = get_str(str, &i);
 		push_new_str(&result, data);
 	}
-	free(new_str);
+	free(str);
 	return (result);
 }

@@ -15,7 +15,7 @@ void	heredoc(char *endline)
 		close(ms.heredoc_fd[0]);
 	start = 1;
 	if (pipe(ms.heredoc_fd) < 0)
-		return perror("minishell");
+		return (perror("minishell"));
 	while (1)
 	{
 		signal(SIGINT, &close_heredoc);

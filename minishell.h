@@ -88,7 +88,7 @@ extern t_minishell ms;
 void		tokenize(char *str);
 void		parse_token_string(char **str);
 t_token		*init_token(char *str, enum e_ttype type);
-void		token_addback(t_token **token, t_token *new_token);
+void		token_addback(t_token **token, t_token *new_token, int plus);
 
 // LEXICAL ANALYSIS
 int			lexer(void);

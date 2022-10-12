@@ -9,7 +9,7 @@ void	find_end_pos(char **str, char type)
 		{
 			(*str)++;
 			if (is_whitespace(**str) || is_operator(*str))
-				break;
+				break ;
 			else
 				while (**str && !is_whitespace(**str) && !is_operator(*str))
 					(*str)++;
@@ -21,17 +21,17 @@ void	find_end_pos(char **str, char type)
 
 void	without_quote_parse(char **str)
 {
-	int	len;
-	char *token_str;
-	char *head;
+	int		len;
+	char	*token_str;
+	char	*head;
 
 	head = *str;
 	while (**str)
 	{
 		if (is_whitespace(**str))
-			break;
+			break ;
 		if (is_operator(*str))
-			break;
+			break ;
 		(*str)++;
 	}
 }
@@ -43,7 +43,7 @@ void	skip_whitespace(char **str, char **head)
 	*head = *str;
 }
 
-void parse_token_string(char **str)
+void	parse_token_string(char **str)
 {
 	int		len;
 	char	*head;
@@ -60,6 +60,6 @@ void parse_token_string(char **str)
 	if (len > 0)
 	{
 		token_str = ft_substr(head, 0, len);
-		token_addback(&ms.token, init_token(token_str, STRING));
+		token_addback(&ms.token, init_token(token_str, STRING), 0);
 	}
 }

@@ -12,9 +12,9 @@ t_token	*init_token(char *str, enum e_ttype type)
 	return (token);
 }
 
-void	token_addback(t_token **token, t_token *new_token)
+int	token_addback(t_token **token, t_token *new_token, int plus)
 {
-	t_token *i_token;
+	t_token	*i_token;
 
 	i_token = *token;
 	if (!i_token)
@@ -26,6 +26,7 @@ void	token_addback(t_token **token, t_token *new_token)
 		i_token->next = new_token;
 		new_token->prev = i_token;
 	}
+	return (plus);
 }
 
 void	tokenize(char *str)
@@ -33,30 +34,20 @@ void	tokenize(char *str)
 	while (*str)
 	{
 		if (is_operator(str) == RED_APPEND)
-		{
-			token_addback(&ms.token, init_token(ft_strdup(">>"), RED_APPEND));
-			str+=2;
-		}
+			str += token_addback(&ms.token, init_token(ft_strdup(">>"), \
+			RED_APPEND), 2);
 		else if (is_operator(str) == HERE_DOC)
-		{
-			token_addback(&ms.token, init_token(ft_strdup("<<"), HERE_DOC));
-			str+=2;
-		}
+			str += token_addback(&ms.token, init_token(ft_strdup("<<"), \
+			HERE_DOC), 2);
 		else if (is_operator(str) == PIPE)
-		{
-			token_addback(&ms.token, init_token(ft_strdup("|"), PIPE));
-			str++;
-		}
+			str += token_addback(&ms.token, init_token(ft_strdup("|"), \
+			PIPE), 1);
 		else if (is_operator(str) == RED_INPUT)
-		{
-			token_addback(&ms.token, init_token(ft_strdup("<"), RED_INPUT));
-			str++;
-		}
+			str += token_addback(&ms.token, init_token(ft_strdup("<"), \
+			RED_INPUT), 1);
 		else if (is_operator(str) == RED_OUTPUT)
-		{
-			token_addback(&ms.token, init_token(ft_strdup(">"), RED_OUTPUT));
-			str++;
-		}
+			str += token_addback(&ms.token, init_token(ft_strdup(">"), \
+			RED_OUTPUT), 1);
 		else
 			parse_token_string(&str);
 	}

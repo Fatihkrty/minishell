@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:16 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 13:24:12 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 18:52:14 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_get_arg_count(char **input)
 	return (i);
 }
 
-int ft_isnumber_with_sign(char *arg)
+int	ft_isnumber_with_sign(char *arg)
 {
 	while (*arg)
 	{
@@ -33,7 +33,6 @@ int ft_isnumber_with_sign(char *arg)
 	}
 	return (true);
 }
-
 
 void	builtin_exit(char **input)
 {
@@ -48,13 +47,13 @@ void	builtin_exit(char **input)
 		{
 			if (ft_get_arg_count(input) > 2)
 			{
-                write(2, "exit\nminishell: exit: too many arguments\n", 41);
+				write(2, "exit\nminishell: exit: too many arguments\n", 41);
 				errno = 1;
 				return ;
 			}
 			exit(ft_atoi(input[1]) % 256);
 		}
-        write(2, "exit\nminishell: exit: numeric argument required\n", 48);
+		write(2, "exit\nminishell: exit: numeric argument required\n", 48);
 		exit(-1 % 256);
 	}
 }

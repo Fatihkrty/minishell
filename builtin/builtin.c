@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:22:36 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 13:25:38 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 18:34:41 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ int	is_builtin(char *command)
 		return (UNSET);
 	if (ft_strcmp(command, "export"))
 		return (EXPORT);
-    return (0);
+	return (0);
 }
 
-void    run_builtin(char **execute)
+void	run_builtin(char **execute)
 {
 	int	type;
 
 	type = is_builtin(execute[0]);
-    if (type == CD)
-        builtin_cd(execute);
-    if (type == ENV)
-        builtin_env();
-    if (type == PWD)
-        builtin_pwd(execute);
-    if (type == ECHO)
-        builtin_echo(execute);
-    if (type == EXIT)
-        builtin_exit(execute);
-    if (type == UNSET)
-        builtin_unset(execute);
-    if (type == EXPORT)
-        builtin_export(execute);
+	if (type == CD)
+		builtin_cd(execute);
+	if (type == ENV)
+		builtin_env();
+	if (type == PWD)
+		builtin_pwd(execute);
+	if (type == ECHO)
+		builtin_echo(execute);
+	if (type == EXIT)
+		builtin_exit(execute);
+	if (type == UNSET)
+		builtin_unset(execute);
+	if (type == EXPORT)
+		builtin_export(execute);
 }

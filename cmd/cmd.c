@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/12 18:58:46 by fkaratay          #+#    #+#             */
+/*   Updated: 2022/10/12 20:11:28 by fkaratay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	check_builtin(t_process *process)
@@ -7,7 +19,8 @@ void	check_builtin(t_process *process)
 
 	in = dup(0);
 	out = dup(1);
-	run_redirects(process);
+	get_all_inputs(process);
+	set_all_outputs(process);
 	run_builtin(process->execute);
 	dup2(in, 0);
 	dup2(out, 1);
@@ -15,12 +28,12 @@ void	check_builtin(t_process *process)
 	close(out);
 }
 
-void	wait_cmd()
+void	wait_cmd(void)
 {
-	t_process *process;
+	t_process	*process;
 
 	process = ms.process;
-	if (is_heredoc(process))
+	if (contain_heredoc(process))
 		close_heredoc_fd();
 	close_all_fd();
 	while (process)
@@ -31,14 +44,14 @@ void	wait_cmd()
 	}
 }
 
-void	start_cmd()
+void	start_cmd(void)
 {
 	t_process	*process;
 
 	process = ms.process;
 	if (!process)
 		return ;
-	if (is_builtin(process->execute[0]) && ms.process_count == 1 && !is_heredoc(process))
+	if (is_builtin(process->execute[0]) && ms.process_count == 1)
 	{
 		check_builtin(process);
 		process = process->next;

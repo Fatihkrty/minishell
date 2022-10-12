@@ -6,13 +6,13 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:14 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 13:23:15 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 18:47:30 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	builtin_env()
+void	builtin_env(void)
 {
 	char	**env;
 

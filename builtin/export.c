@@ -6,20 +6,20 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:18 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 13:24:16 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 18:54:01 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	env_len()
+int	env_len(void)
 {
 	char	**env;
 
 	env = ms.env;
-	while(*env)
+	while (*env)
 		env++;
-	return(env - ms.env);
+	return (env - ms.env);
 }
 
 int	check_env(char *str)

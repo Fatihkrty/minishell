@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:08:25 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 23:05:12 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 23:45:51 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	append_arguments(t_token **tmp_token, t_process *process)
 		if (!token || token->type != STRING)
 		{
 			free_token();
-			token_err();
+			if (!token)
+				token_err(0);
+			else
+				token_err(token->type);
 			return (false);
 		}
 		data = clean_quote(token->str);
@@ -61,7 +64,8 @@ int	lexer(void)
 			break ;
 		if (!append_arguments(&token, process))
 			return (false);
-		token = token->next;
+		if (token)
+			token = token->next;
 	}
 	free_token();
 	return (true);

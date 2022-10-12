@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:47:38 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 21:47:39 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 23:39:28 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,26 @@ void	command_err(char *str)
 		exit(errno);
 }
 
-void	token_err(void)
+void	token_err(int type)
 {
+	char *red;
+
+	if (type == HERE_DOC)
+		red = "<<";
+	else if (type == RED_INPUT)
+		red = "<";
+	else if (type == RED_OUTPUT)
+		red = ">";
+	else if (type == RED_APPEND)
+		red = ">>";
+	else if (type == PIPE)
+		red = "|";
+	else
+		red = "newline";
 	errno = 258;
-	write(2, "minishell: syntax error near unexpected token\n", 46);
+	write(2, "minishell: syntax error near unexpected token '", 47);
+	write(2, red, ft_strlen(red));
+	write(2, "'\n", 2);
 }
 
 void	directory_err(char *str)

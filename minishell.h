@@ -138,7 +138,7 @@ void	close_all_fd(void);
 void	close_heredoc_fd(void);
 
 //ERROR
-void    token_err(void);
+void    token_err(int type);
 void	no_file_err(char *str);
 void    directory_err(char *str);
 void    command_err(char *str);

@@ -15,8 +15,8 @@ void	free_array(char **arr)
 
 void	free_process()
 {
-	t_process	*process;
 	t_process	*tmp;
+	t_process	*process;
 
 	process = ms.process;
 	if (!process)

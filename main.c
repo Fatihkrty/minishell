@@ -61,7 +61,5 @@ int main(int ac, char **av, char **env)
 			free_process();
 		}
 		free(input);
-	}
-	system("leaks a.out");
-	exit(errno);
+	}	exit(errno);
 }

@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int is_heredoc(t_process *process)
+int contain_heredoc(t_process *process)
 {
     int i;
 

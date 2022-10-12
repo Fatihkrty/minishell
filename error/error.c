@@ -10,7 +10,7 @@ void    command_err(char *str)
         exit(errno);
 }
 
-void    token_err()
+void    token_err(void)
 {
     errno = 258;
     write(2, "minishell: syntax error near unexpected token\n", 46);

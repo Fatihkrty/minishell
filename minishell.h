@@ -91,34 +91,34 @@ t_token		*init_token(char *str, enum e_ttype type);
 void		token_addback(t_token **token, t_token *new_token);
 
 // LEXICAL ANALYSIS
-int			lexer();
-t_process	*init_process();
+int			lexer(void);
+t_process	*init_process(void);
 char		*clean_quote(char *str);
 char		**push_array(char **arg_arr, char *str);
 void		process_addback(t_process **process, t_process *new_process);
 
 // FREE
-void	free_token();
-void	free_process();
+void	free_token(void);
+void	free_process(void);
 void	free_str(char *str);
 void	free_array(char **arr);
 
 // CMD
-void 	start_cmd();
+void 	start_cmd(void);
 void    run_cmd(t_process *process);
 
 //DOLLAR
+int		check_dollar(char *str);
 char	*parse_dollar_op(char *str);
-int	check_dollar(char *str);
 void	push_new_str(char **new_str, char *str);
 
 //BUILTINS
 int		is_builtin(char *command);
 void    run_builtin(char **execute);
-void	builtin_env();
+void	builtin_env(void);
 void	builtin_cd(char **input);
-void	builtin_exit(char **input);
 void	builtin_pwd(char **input);
+void	builtin_exit(char **input);
 void	builtin_echo(char **input);
 void	builtin_unset(char **input);
 void	builtin_export(char **input);
@@ -130,30 +130,30 @@ void	output(t_process *process, char *file, int mode);
 void	run_redirects(t_process *process);
 
 //HEREDOC
-void	get_all_inputs(t_process *process);
+int		get_all_inputs(t_process *process);
 void	set_all_outputs(t_process *process);
 
 //CLOSE
-void    close_all_fd();
-void	close_heredoc_fd();
+void	close_all_fd(void);
+void	close_heredoc_fd(void);
 
 //ERROR
-void    token_err();
+void    token_err(void);
+void	no_file_err(char *str);
+void    directory_err(char *str);
 void    command_err(char *str);
-void    directory_err();
-void	no_file_err();
 
 // UTILS
-int		env_len();
-int		is_parent();
-void    set_paths();
+int		env_len(void);
+int		is_parent(void);
+void    set_paths(void);
 char	*ft_itoa(int n);
 char	*get_env(char *str);
 void	set_env(char **env);
 char    *get_path(char *cmd);
 int		is_whitespace(char c);
 int		is_operator(char *str);
-int		is_heredoc(t_process *process);
+int		contain_heredoc(t_process *process);
 
 // LIBFT UTILS
 int		ft_atoi(const char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:16 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 18:52:14 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:28:10 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	ft_isnumber_with_sign(char *arg)
 		if ((*arg >= '0' && *arg <= '9') || *arg == '+' || *arg == '-')
 			arg++;
 		else
-			return (false);
+			return (FALSE);
 	}
-	return (true);
+	return (TRUE);
 }
 
 void	builtin_exit(char **input)

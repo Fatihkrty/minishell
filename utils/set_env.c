@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:18 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:19 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	set_env(char **env)
 	while (*head)
 		head++;
 	len = head - env;
-	ms.env = ft_calloc(sizeof(char **), len + 1);
+	g_ms.env = ft_calloc(sizeof(char **), len + 1);
 	i = -1;
 	while (++i < len)
-		ms.env[i] = ft_strdup(env[i]);
+		g_ms.env[i] = ft_strdup(env[i]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:11:59 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:12:32 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	get_all_inputs(t_process *process)
 			heredoc(redirects[i + 1]);
 		i += 2;
 	}
-	if (ms.ignore)
+	if (g_ms.ignore)
 	{
 		close_heredoc_fd();
-		return (false);
+		return (FALSE);
 	}
-	return (true);
+	return (TRUE);
 }
 
 void	set_all_outputs(t_process *process)

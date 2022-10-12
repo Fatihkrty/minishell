@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_parent.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:13 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:14 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	is_parent(void)
 {
-	return (ms.parent_pid == getpid());
+	return (g_ms.parent_pid == getpid());
 }

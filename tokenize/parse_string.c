@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:13:04 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:13:05 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	parse_token_string(char **str)
 	if (len > 0)
 	{
 		token_str = ft_substr(head, 0, len);
-		token_addback(&ms.token, init_token(token_str, STRING), 0);
+		token_addback(&g_ms.token, init_token(token_str, STRING), 0);
 	}
 }

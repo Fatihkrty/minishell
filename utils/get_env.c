@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:03 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:04 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_env(char *str)
 	char	**env;
 	char	*new_str;
 
-	env = ms.env;
+	env = g_ms.env;
 	new_str = ft_strjoin(str, "=");
 	len = ft_strlen(new_str);
 	while (*env)

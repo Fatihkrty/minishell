@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:18 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 18:54:01 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:15:52 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	env_len(void)
 {
 	char	**env;
 
-	env = ms.env;
+	env = g_ms.env;
 	while (*env)
 		env++;
-	return (env - ms.env);
+	return (env - g_ms.env);
 }
 
 int	check_env(char *str)
@@ -28,16 +28,16 @@ int	check_env(char *str)
 
 	head = ft_strchr(str, '=');
 	if (!head)
-		return (false);
+		return (FALSE);
 	if (head == str)
-		return (false);
+		return (FALSE);
 	while (*str)
 	{
 		if (is_whitespace(*str))
-			return (false);
+			return (FALSE);
 		str++;
 	}
-	return (true);
+	return (TRUE);
 }
 
 void	add_env(char *str)
@@ -47,7 +47,7 @@ void	add_env(char *str)
 	char	**new_env;
 
 	i = 0;
-	env = ms.env;
+	env = g_ms.env;
 	new_env = ft_calloc(sizeof(char **), env_len() + 2);
 	while (env[i])
 	{
@@ -55,8 +55,8 @@ void	add_env(char *str)
 		i++;
 	}
 	new_env[i] = ft_strdup(str);
-	free_array(ms.env);
-	ms.env = new_env;
+	free_array(g_ms.env);
+	g_ms.env = new_env;
 }
 
 int	is_include(char *str)
@@ -66,7 +66,7 @@ int	is_include(char *str)
 	char	**env;
 
 	i = 0;
-	env = ms.env;
+	env = g_ms.env;
 	while (env[i])
 	{
 		j = 0;
@@ -96,8 +96,8 @@ void	builtin_export(char **input)
 			pos = is_include(*input);
 			if (pos)
 			{
-				tmp = ms.env[pos];
-				ms.env[pos] = ft_strdup(*input);
+				tmp = g_ms.env[pos];
+				g_ms.env[pos] = ft_strdup(*input);
 				free(tmp);
 			}
 			else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:56:52 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 19:51:24 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	close_all_fd(void)
 {
 	t_process	*process;
 
-	process = ms.process;
+	process = g_ms.process;
 	while (process)
 	{
 		close(process->fd[0]);
@@ -27,6 +27,6 @@ void	close_all_fd(void)
 
 void	close_heredoc_fd(void)
 {
-	close(ms.heredoc_fd[0]);
-	close(ms.heredoc_fd[1]);
+	close(g_ms.heredoc_fd[0]);
+	close(g_ms.heredoc_fd[1]);
 }

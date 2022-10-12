@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:23 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:35:47 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:09:32 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_minishell ms;
+t_minishell	g_ms;
 
 void	init_env(char **env)
 {
-	ms.paths = NULL;
+	g_ms.paths = NULL;
 	set_env(env);
 	set_paths();
 }
 
 void	init_shell(char *input, char **env)
 {
-	ms.token = NULL;
-	ms.ignore = false;
-	ms.process = NULL;
-	ms.process_count = 0;
+	g_ms.token = NULL;
+	g_ms.ignore = FALSE;
+	g_ms.process = NULL;
+	g_ms.process_count = 0;
 	tokenize(input);
 	if (!lexer())
 		return ;
@@ -35,7 +35,7 @@ void	init_shell(char *input, char **env)
 
 void	ctrl_c(int sig)
 {
-	ms.ignore = true;
+	g_ms.ignore = TRUE;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
 }
@@ -44,7 +44,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	ms.parent_pid = getpid();
+	g_ms.parent_pid = getpid();
 	init_env(env);
 	while (ac && av)
 	{
@@ -60,9 +60,9 @@ int main(int ac, char **av, char **env)
 			free(input);
 			break ;
 		}
-		if (ms.ignore)
+		if (g_ms.ignore)
 		{
-			ms.ignore = false;
+			g_ms.ignore = FALSE;
 			free(input);
 			input = ft_calloc(sizeof(char *), 1);
 		}

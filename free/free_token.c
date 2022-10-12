@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:47:57 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 21:50:02 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	free_token(void)
 	t_token		*tmp;
 	t_token		*token;
 
-	token = ms.token;
+	token = g_ms.token;
 	while (token)
 	{
 		free(token->str);
 		token = token->next;
 	}
-	token = ms.token;
+	token = g_ms.token;
 	while (token)
 	{
 		tmp = token;

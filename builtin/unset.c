@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:22 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 13:24:22 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	remove_env(char *data)
 	i = 0;
 	j = 0;
 	new_env = ft_calloc(sizeof(char *), env_len() + 1);
-	while (ms.env[i])
+	while (g_ms.env[i])
 	{
-		if (ft_strncmp(ms.env[i], data, ft_strlen(data)))
+		if (ft_strncmp(g_ms.env[i], data, ft_strlen(data)))
 		{
-			new_env[j] = ft_strdup(ms.env[i]);
+			new_env[j] = ft_strdup(g_ms.env[i]);
 			j++;
 		}
 		i++;
 	}
 	new_env[j] = 0;
-	free_array(ms.env);
-	ms.env = new_env;
+	free_array(g_ms.env);
+	g_ms.env = new_env;
 }
 
 void	builtin_unset(char **input)

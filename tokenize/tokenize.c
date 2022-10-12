@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:13:13 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:13:14 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ void	tokenize(char *str)
 	while (*str)
 	{
 		if (is_operator(str) == RED_APPEND)
-			str += token_addback(&ms.token, init_token(ft_strdup(">>"), \
+			str += token_addback(&g_ms.token, init_token(ft_strdup(">>"), \
 			RED_APPEND), 2);
 		else if (is_operator(str) == HERE_DOC)
-			str += token_addback(&ms.token, init_token(ft_strdup("<<"), \
+			str += token_addback(&g_ms.token, init_token(ft_strdup("<<"), \
 			HERE_DOC), 2);
 		else if (is_operator(str) == PIPE)
-			str += token_addback(&ms.token, init_token(ft_strdup("|"), \
+			str += token_addback(&g_ms.token, init_token(ft_strdup("|"), \
 			PIPE), 1);
 		else if (is_operator(str) == RED_INPUT)
-			str += token_addback(&ms.token, init_token(ft_strdup("<"), \
+			str += token_addback(&g_ms.token, init_token(ft_strdup("<"), \
 			RED_INPUT), 1);
 		else if (is_operator(str) == RED_OUTPUT)
-			str += token_addback(&ms.token, init_token(ft_strdup(">"), \
+			str += token_addback(&g_ms.token, init_token(ft_strdup(">"), \
 			RED_OUTPUT), 1);
 		else
 			parse_token_string(&str);

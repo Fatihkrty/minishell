@@ -3,7 +3,6 @@ all:
 	./utils/*.c \
 	./lexer/*.c \
 	./tokenize/*.c \
-	./test/test.c \
 	./builtin/*.c \
 	./redirect/*.c \
 	./cmd/*.c \

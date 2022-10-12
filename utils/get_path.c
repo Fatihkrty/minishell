@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:06 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:07 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_path(char *cmd)
 	check_dir(cmd);
 	if (!access(cmd, F_OK))
 		return (ft_strdup(cmd));
-	paths = ms.paths;
+	paths = g_ms.paths;
 	if (!paths)
 		command_err(cmd);
 	new_cmd = ft_strjoin("/", cmd);

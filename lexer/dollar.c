@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:55:44 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:37:58 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:28:10 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	check_dollar(char *str)
 	int		double_quote;
 
 	i = 0;
-	single_quote = true;
-	double_quote = false;
+	single_quote = TRUE;
+	double_quote = FALSE;
 	while (str[i] && str[i] != DOLLAR_OP)
 	{
 		if (str[i] == SINGLE_QUOTE)
@@ -39,7 +39,7 @@ int	check_dollar(char *str)
 		i++;
 	}
 	if (!valid_op(*(ft_strchr(str, DOLLAR_OP) + 1)))
-		return (false);
+		return (FALSE);
 	return (single_quote);
 }
 

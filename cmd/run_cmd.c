@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:15:09 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 20:44:03 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	pipe_route(t_process *process)
 
 void	heredoc_route(t_process *process)
 {
-	dup2(ms.heredoc_fd[0], 0);
-	if (ms.process_count > 1 && process->next != NULL)
+	dup2(g_ms.heredoc_fd[0], 0);
+	if (g_ms.process_count > 1 && process->next != NULL)
 		dup2(process->fd[1], 1);
 	set_all_outputs(process);
 }
 
 void	cmd_route(t_process *process)
 {
-	if (ms.process_count > 1)
+	if (g_ms.process_count > 1)
 		pipe_route(process);
 	get_all_inputs(process);
 	set_all_outputs(process);
@@ -49,7 +49,7 @@ void	run_cmd(t_process *process)
 
 	if (!get_all_inputs(process))
 	{
-		ms.ignore = false;
+		g_ms.ignore = FALSE;
 		return ;
 	}
 	pid = fork();
@@ -61,7 +61,7 @@ void	run_cmd(t_process *process)
 			cmd_route(process);
 		run_builtin(process->execute);
 		path = get_path(process->execute[0]);
-		execve(path, process->execute, ms.env);
+		execve(path, process->execute, g_ms.env);
 		command_err(process->execute[0]);
 		exit(errno);
 	}

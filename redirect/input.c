@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:10:49 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:11:21 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	input(char *file)
 	{
 		if (fd == -1)
 		{
-			ms.ignore = true;
+			g_ms.ignore = TRUE;
 			return (no_file_err(file));
 		}
-		if (ms.heredoc_fd[0] != 0)
-			dup2(fd, ms.heredoc_fd[0]);
+		if (g_ms.heredoc_fd[0] != 0)
+			dup2(fd, g_ms.heredoc_fd[0]);
 	}
 	else
 	{

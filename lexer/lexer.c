@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:08:25 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 23:45:51 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	append_arguments(t_token **tmp_token, t_process *process)
 				token_err(0);
 			else
 				token_err(token->type);
-			return (false);
+			return (FALSE);
 		}
 		data = clean_quote(token->str);
 		process->redirects = push_array(process->redirects, data);
 	}
-	return (true);
+	return (TRUE);
 }
 
 int	lexer(void)
@@ -49,7 +49,7 @@ int	lexer(void)
 	t_token		*token;
 	t_process	*process;
 
-	token = ms.token;
+	token = g_ms.token;
 	while (token)
 	{
 		if (token->type == PIPE || token->prev == NULL)
@@ -57,16 +57,16 @@ int	lexer(void)
 			if (token->type == PIPE)
 				token = token->next;
 			process = init_process();
-			process_addback(&ms.process, process);
-			ms.process_count++;
+			process_addback(&g_ms.process, process);
+			g_ms.process_count++;
 		}
 		if (!token)
 			break ;
 		if (!append_arguments(&token, process))
-			return (false);
+			return (FALSE);
 		if (token)
 			token = token->next;
 	}
 	free_token();
-	return (true);
+	return (TRUE);
 }

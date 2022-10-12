@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:58:46 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 20:11:28 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	wait_cmd(void)
 {
 	t_process	*process;
 
-	process = ms.process;
+	process = g_ms.process;
 	if (contain_heredoc(process))
 		close_heredoc_fd();
 	close_all_fd();
@@ -48,10 +48,10 @@ void	start_cmd(void)
 {
 	t_process	*process;
 
-	process = ms.process;
+	process = g_ms.process;
 	if (!process)
 		return ;
-	if (is_builtin(process->execute[0]) && ms.process_count == 1)
+	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
 		check_builtin(process);
 		process = process->next;

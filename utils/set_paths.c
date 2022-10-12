@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:21 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:22 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	set_paths(void)
 
 	path = get_env("PATH");
 	if (!(*path))
-		ms.paths = NULL;
+		g_ms.paths = NULL;
 	else
 	{
-		if (ms.paths)
-			free_array(ms.paths);
-		ms.paths = ft_split(path, ':');
+		if (g_ms.paths)
+			free_array(g_ms.paths);
+		g_ms.paths = ft_split(path, ':');
 	}
 	free(path);
 }

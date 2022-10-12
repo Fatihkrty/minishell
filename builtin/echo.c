@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:12 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 18:37:57 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:28:10 by scakmak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	builtin_echo(char **input)
 	int	flag;
 
 	i = 1;
-	flag = false;
+	flag = FALSE;
 	if (input[i] != NULL)
 	{
 		flag = ft_strcmp(input[i], "-n");

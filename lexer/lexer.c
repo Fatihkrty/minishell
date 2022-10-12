@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:08:25 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 23:02:58 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/12 23:05:12 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	lexer(void)
 			break ;
 		if (!append_arguments(&token, process))
 			return (false);
-		else
-			token = token->next;
+		token = token->next;
 	}
 	free_token();
 	return (true);

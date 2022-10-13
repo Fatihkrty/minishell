@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:58:46 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 02:35:06 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:12:56 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	wait_cmd(void)
 	close_all_fd();
 	while (process)
 	{
-		waitpid(process->pid, &errno, 0);
-		errno = WEXITSTATUS(errno);
+		if (process->pid != -1)
+		{
+			waitpid(process->pid, &errno, 0);
+			errno = WEXITSTATUS(errno);
+		}
 		process = process->next;
 	}
 }

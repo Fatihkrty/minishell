@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:15:09 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:38:48 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:27:32 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	run_cmd(t_process *process)
 	pid = fork();
 	if (pid == CHILD_PROCESS)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (contain_heredoc(process))
 			heredoc_route(process);
 		else

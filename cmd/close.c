@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:56:52 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:53:48 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	close_all_fd(void)
 
 void	close_heredoc_fd(void)
 {
-	close(g_ms.heredoc_fd[0]);
-	close(g_ms.heredoc_fd[1]);
+	if (g_ms.heredoc_fd[0] > 2)
+		close(g_ms.heredoc_fd[0]);
+	if (g_ms.heredoc_fd[1] > 2)
+		close(g_ms.heredoc_fd[1]);
 }

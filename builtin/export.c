@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:18 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 02:37:11 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:42:32 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	is_include(char *str)
 		}
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 void	builtin_export(char **input)
@@ -94,7 +94,7 @@ void	builtin_export(char **input)
 		if (check_env(*input))
 		{
 			pos = is_include(*input);
-			if (pos)
+			if (pos != -1)
 			{
 				tmp = g_ms.env[pos];
 				g_ms.env[pos] = ft_strdup(*input);

@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:47:38 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:29:53 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:17:45 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	directory_err(char *str)
 
 void	no_file_err(char *str)
 {
-	errno = 1;
+	if (ft_strchr(str, '/'))
+		errno = 127;
+	else
+		errno = 1;
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": No such file or directory\n", 28);

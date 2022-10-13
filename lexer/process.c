@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:10:01 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:10:02 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:11:56 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_process	*init_process(void)
 
 	process = ft_calloc(sizeof(t_process), 1);
 	pipe(process->fd);
+	process->pid = -1;
 	process->execute = ft_calloc(sizeof(char *), 1);
 	process->redirects = ft_calloc(sizeof(char *), 1);
 	process->prev = NULL;

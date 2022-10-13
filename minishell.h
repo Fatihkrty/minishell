@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 00:24:38 by scakmak           #+#    #+#             */
-/*   Updated: 2022/10/13 01:00:52 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 01:28:57 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,16 @@
 # include <signal.h>
 # include <sys/ioctl.h>
 
-// Bool defines
 # define TRUE 1
 # define FALSE 0
-
-// Program defines
 # define DOLLAR_OP '$'
 # define DOUBLE_QUOTE '"'
 # define SINGLE_QUOTE '\''
 # define CHILD_PROCESS 0
 # define MAIN_PROCESS 1
-
-// File Mode defines
 # define REPLACE 1
 # define APPEND 0
 
-//Bultins Type
 enum e_builtin_types
 {
 	CD = 1,
@@ -53,7 +47,6 @@ enum e_builtin_types
 	EXPORT
 };
 
-// Type defines
 enum e_ttype
 {
 	PIPE = 1,

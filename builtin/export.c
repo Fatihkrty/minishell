@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:18 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:15:52 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 02:37:11 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,7 @@ void	builtin_export(char **input)
 		}
 		input++;
 	}
+	set_paths();
+	if (!is_parent())
+		exit (EXIT_SUCCESS);
 }

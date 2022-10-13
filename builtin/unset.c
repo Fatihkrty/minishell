@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:22 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 02:37:42 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ void	builtin_unset(char **input)
 		input++;
 	}
 	set_paths();
+	if (!is_parent())
+		exit (EXIT_SUCCESS);
 }

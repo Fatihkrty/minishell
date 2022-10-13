@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:23 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:09:32 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 04:41:12 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 t_minishell	g_ms;
 
-void	init_env(char **env)
+void	init_app(char **env)
 {
+	errno = 0;
 	g_ms.paths = NULL;
+	g_ms.parent_pid = getpid();
 	set_env(env);
 	set_paths();
 }
@@ -31,6 +33,7 @@ void	init_shell(char *input, char **env)
 	if (!lexer())
 		return ;
 	start_cmd();
+	free_process();
 }
 
 void	ctrl_c(int sig)
@@ -40,26 +43,28 @@ void	ctrl_c(int sig)
 	write(1, "\033[A", 3);
 }
 
-int main(int ac, char **av, char **env)
+void	ctrl_d(char *input)
+{
+	if (!input)
+	{
+		printf("exit\n");
+		exit(errno);
+	}
+}
+
+int	main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	g_ms.parent_pid = getpid();
-	init_env(env);
+	init_app(env);
 	while (ac && av)
 	{
 		signal(SIGINT, &ctrl_c);
 		signal(SIGQUIT, SIG_IGN);
-		printf("\033[32m");
+		write(1, "\033[32m", 5);
 		input = readline("minishell_> ");
-		printf("\033[0m");
-		fflush(stdout);
-		if (!input)
-		{
-			printf("exit\n");
-			free(input);
-			break ;
-		}
+		write(1, "\033[0m", 4);
+		ctrl_d(input);
 		if (g_ms.ignore)
 		{
 			g_ms.ignore = FALSE;
@@ -70,10 +75,8 @@ int main(int ac, char **av, char **env)
 		{
 			init_shell(input, env);
 			add_history(input);
-			free_process();
 		}
 		free(input);
 	}
-	system("leaks a.out");
 	exit(errno);
 }

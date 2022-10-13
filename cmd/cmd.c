@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:58:46 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 02:35:06 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	check_builtin(t_process *process)
+void	get_builtin(t_process *process)
 {
 	int	in;
 	int	out;
@@ -53,7 +53,7 @@ void	start_cmd(void)
 		return ;
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
-		check_builtin(process);
+		get_builtin(process);
 		process = process->next;
 	}
 	while (process)

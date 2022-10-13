@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:47:38 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 23:39:28 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 01:29:53 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	command_err(char *str)
 
 void	token_err(int type)
 {
-	char *red;
+	char	*red;
 
 	if (type == HERE_DOC)
 		red = "<<";

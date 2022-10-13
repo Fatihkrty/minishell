@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:22:36 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 18:34:41 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:36:51 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	run_builtin(char **execute)
 	if (type == ENV)
 		builtin_env();
 	if (type == PWD)
-		builtin_pwd(execute);
+		builtin_pwd();
 	if (type == ECHO)
 		builtin_echo(execute);
 	if (type == EXIT)

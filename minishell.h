@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 00:24:38 by scakmak           #+#    #+#             */
-/*   Updated: 2022/10/13 01:28:57 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:09:23 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_minishell
 extern t_minishell	g_ms;
 
 int			lexer(void);
+void		builtin_pwd();
 int			env_len(void);
 int			is_parent(void);
 void		start_cmd(void);
@@ -121,7 +122,6 @@ void		directory_err(char *str);
 size_t		ft_strlen(const char *s);
 void		builtin_cd(char **input);
 int			is_builtin(char *command);
-void		builtin_pwd(char **input);
 void		builtin_exit(char **input);
 void		builtin_echo(char **input);
 char		*parse_dollar_op(char *str);
@@ -129,6 +129,7 @@ char		*ft_strdup(const char *str);
 void		builtin_unset(char **input);
 void		run_builtin(char **execute);
 void		run_cmd(t_process *process);
+void		output(char *file, int mode);
 void		builtin_export(char **input);
 void		parse_token_string(char **str);
 char		*ft_strchr(const char *s, int c);
@@ -143,7 +144,6 @@ void		push_new_str(char **new_str, char *str);
 t_token		*init_token(char *str, enum e_ttype type);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_strcmp(const char *str1, const char *str2);
-void		output(t_process *process, char *file, int mode);
 int			ft_strncmp(const char *str1, const char *str2, size_t n);
 char		*ft_substr(char const *str, unsigned int start, size_t len);
 int			token_addback(t_token **token, t_token *new_token, int plus);

@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:51:54 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:29:48 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:06:45 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	push_new_str(char **new_str, char *str)
 char	*clean_quote_with_type(char *str, int *pos, char type)
 {
 	int		first;
-	char	*data;
 	char	*new_str;
 
 	(*pos)++;

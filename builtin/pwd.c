@@ -6,13 +6,13 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:20 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 18:54:46 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:07:30 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	builtin_pwd(char **input)
+void	builtin_pwd()
 {
 	char	*result;
 

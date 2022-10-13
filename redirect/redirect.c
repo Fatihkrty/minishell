@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:11:59 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 01:03:20 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 11:09:40 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	set_all_outputs(t_process *process)
 	while (redirects[i])
 	{
 		if (is_operator(redirects[i]) == RED_OUTPUT)
-			output(process, redirects[i + 1], REPLACE);
+			output(redirects[i + 1], REPLACE);
 		else if (is_operator(redirects[i]) == RED_APPEND)
-			output(process, redirects[i + 1], APPEND);
+			output(redirects[i + 1], APPEND);
 		i += 2;
 	}
 }

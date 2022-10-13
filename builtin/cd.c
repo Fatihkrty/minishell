@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:09 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 18:33:09 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:07:18 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	builtin_cd(char **input)
 {
 	char	*home;
-	char	*err;
 
 	if (input[1] != NULL)
 	{

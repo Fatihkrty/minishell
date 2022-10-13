@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:23 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 04:41:12 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:25:35 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_app(char **env)
 	set_paths();
 }
 
-void	init_shell(char *input, char **env)
+void	init_shell(char *input)
 {
 	g_ms.token = NULL;
 	g_ms.ignore = FALSE;
@@ -38,6 +38,7 @@ void	init_shell(char *input, char **env)
 
 void	ctrl_c(int sig)
 {
+	(void)sig;
 	g_ms.ignore = TRUE;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	write(1, "\033[A", 3);
@@ -73,7 +74,7 @@ int	main(int ac, char **av, char **env)
 		}
 		if (*input)
 		{
-			init_shell(input, env);
+			init_shell(input);
 			add_history(input);
 		}
 		free(input);

@@ -6,16 +6,17 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:11:39 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:11:40 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:09:09 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	output(t_process *process, char *file, int mode)
+void	output(char *file, int mode)
 {
 	int		fd;
 
+	fd = 0;
 	if (mode == REPLACE)
 		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	else if (mode == APPEND)

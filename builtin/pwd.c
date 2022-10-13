@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:20 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 11:29:17 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 12:07:22 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	builtin_pwd(void)
 		perror("minishell ");
 	else
 		printf("%s\n", result);
+	free(result);
 	if (!is_parent())
 		exit(errno);
 }

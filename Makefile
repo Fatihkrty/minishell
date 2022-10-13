@@ -21,7 +21,6 @@ D_TOKENIZE	=	tokenize/parse_string.c	tokenize/tokenize.c
 D_MINISHELL	=	main.c
 
 # COMMAND
-BUILD		=	@echo "$(YELLOW)...building$(RESET)"
 SUCCESS		=	@echo "$(GREEN)Build successfull !$(RESET)"
 REMOVE		=	@echo "$(RED)Deleted !$(RESET)"
 

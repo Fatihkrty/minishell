@@ -6,7 +6,7 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 00:24:38 by scakmak           #+#    #+#             */
-/*   Updated: 2022/10/13 11:09:23 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:29:04 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_minishell
 extern t_minishell	g_ms;
 
 int			lexer(void);
-void		builtin_pwd();
+void		builtin_pwd(void);
 int			env_len(void);
 int			is_parent(void);
 void		start_cmd(void);

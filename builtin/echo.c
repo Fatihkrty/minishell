@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scakmak <scakmak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:12 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/13 00:28:10 by scakmak          ###   ########.fr       */
+/*   Updated: 2022/10/13 11:59:04 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,18 @@ void	builtin_echo(char **input)
 	int	flag;
 
 	i = 1;
-	flag = FALSE;
-	if (input[i] != NULL)
+	flag = TRUE;
+	i = skip_flag(input);
+	if (i > 1)
+		flag = FALSE;
+	while (input[i])
 	{
 		put_char(input[i]);
 		if (input[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
-	if (!flag)
+	if (flag)
 		write(STDOUT_FILENO, "\n", 1);
 	if (!is_parent())
 		exit(EXIT_SUCCESS);

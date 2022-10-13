@@ -26,7 +26,7 @@ REMOVE		=	@echo "$(RED)Deleted !$(RESET)"
 
 
 # VARIABLES
-NAME		=	mimishell
+NAME		=	minishell
 OBJ			=	$(D_CMD:%.c=%.o) \
 				$(D_FREE:%.c=%.o) \
 				$(D_ERROR:%.c=%.o) \

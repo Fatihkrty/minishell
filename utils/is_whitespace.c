@@ -6,11 +6,11 @@
 /*   By: fkaratay <fkaratay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:16 by fkaratay          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:17 by fkaratay         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:54:26 by fkaratay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	is_whitespace(char c)
 {
-	return (c == ' ');
+	return (c == ' ' || c == '\t');
 }

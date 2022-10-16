@@ -12,6 +12,15 @@
 
 #include "../minishell.h"
 
+void	close_heredoc_fd(t_process *process)
+{
+	if (contain_heredoc(process))
+	{
+		close(process->heredoc_fd[0]);
+		close(process->heredoc_fd[1]);
+	}
+}
+
 void	close_all_fd(void)
 {
 	t_process	*process;
@@ -19,16 +28,11 @@ void	close_all_fd(void)
 	process = g_ms.process;
 	while (process)
 	{
+		close_heredoc_fd(process);
 		close(process->fd[0]);
 		close(process->fd[1]);
 		process = process->next;
 	}
 }
 
-void	close_heredoc_fd(void)
-{
-	if (g_ms.heredoc_fd[0] > 2)
-		close(g_ms.heredoc_fd[0]);
-	if (g_ms.heredoc_fd[1] > 2)
-		close(g_ms.heredoc_fd[1]);
-}
+

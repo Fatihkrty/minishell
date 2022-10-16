@@ -19,15 +19,11 @@ void	close_heredoc(int sig)
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 }
 
-void	heredoc(char *endline)
+void	heredoc(int *fd, char *endline)
 {
 	char		*input;
-	static int	start = 0;
 
-	if (start)
-		close(g_ms.heredoc_fd[0]);
-	start = 1;
-	if (pipe(g_ms.heredoc_fd) < 0)
+	if (pipe(fd) < 0)
 		return (perror("minishell"));
 	while (1)
 	{
@@ -38,9 +34,9 @@ void	heredoc(char *endline)
 			free(input);
 			break ;
 		}
-		write(g_ms.heredoc_fd[1], input, ft_strlen(input));
-		write(g_ms.heredoc_fd[1], "\n", 1);
+		write(fd[1], input, ft_strlen(input));
+		write(fd[1], "\n", 1);
 		free(input);
 	}
-	close(g_ms.heredoc_fd[1]);
+	close(fd[1]);
 }

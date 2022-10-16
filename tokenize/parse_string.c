@@ -33,9 +33,6 @@ void	find_end_pos(char **str, char type)
 
 void	without_quote_parse(char **str)
 {
-	char	*head;
-
-	head = *str;
 	while (**str)
 	{
 		if (is_whitespace(**str))

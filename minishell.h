@@ -69,6 +69,7 @@ typedef struct s_process
 {
 	pid_t				pid;
 	int					fd[2];
+	int					heredoc_fd[2];
 	char				**execute;
 	char				**redirects;
 	struct s_process	*prev;
@@ -78,7 +79,6 @@ typedef struct s_process
 typedef struct s_minishell
 {
 	int			parent_pid;
-	int			heredoc_fd[2];
 	int			process_count;
 	int			ignore;
 	char		**env;
@@ -90,13 +90,13 @@ typedef struct s_minishell
 extern t_minishell	g_ms;
 
 int			lexer(void);
-void		builtin_pwd(void);
 int			env_len(void);
 int			is_parent(void);
 void		start_cmd(void);
 void		set_paths(void);
 char		*ft_itoa(int n);
 void		free_token(void);
+void		builtin_pwd(void);
 void		input(char *file);
 void		builtin_env(void);
 char		*dollar(char *str);
@@ -109,12 +109,11 @@ void		tokenize(char *str);
 void		set_env(char **env);
 char		*get_path(char *cmd);
 int			is_whitespace(char c);
-void		close_heredoc_fd(void);
 void		command_err(char *str);
 void		free_array(char **arr);
-void		heredoc(char *endline);
 void		no_file_err(char *str);
 int			is_operator(char *str);
+void		fill_all_heredoc(void);
 int			check_dollar(char *str);
 char		*clean_quote(char *str);
 int			ft_atoi(const char *str);
@@ -132,9 +131,10 @@ void		run_cmd(t_process *process);
 void		output(char *file, int mode);
 void		builtin_export(char **input);
 void		parse_token_string(char **str);
+void		heredoc(int *fd, char *endline);
 char		*ft_strchr(const char *s, int c);
 void		run_redirects(t_process *process);
-int			get_all_inputs(t_process *process);
+void		get_all_inputs(t_process *process);
 void		set_all_outputs(t_process *process);
 int			contain_heredoc(t_process *process);
 char		**ft_split(char const *str, char c);

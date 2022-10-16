@@ -26,7 +26,6 @@ void	init_app(char **env)
 void	init_shell(char *input)
 {
 	g_ms.token = NULL;
-	g_ms.ignore = FALSE;
 	g_ms.process = NULL;
 	g_ms.process_count = 0;
 	tokenize(input);
@@ -60,6 +59,7 @@ int	main(int ac, char **av, char **env)
 	init_app(env);
 	while (ac && av)
 	{
+		g_ms.ignore = FALSE;
 		signal(SIGINT, &ctrl_c);
 		signal(SIGQUIT, SIG_IGN);
 		write(1, "\033[32m", 5);
@@ -68,9 +68,8 @@ int	main(int ac, char **av, char **env)
 		ctrl_d(input);
 		if (g_ms.ignore)
 		{
-			g_ms.ignore = FALSE;
 			free(input);
-			input = ft_calloc(sizeof(char *), 1);
+			input = malloc(1);
 		}
 		if (*input)
 		{

@@ -33,8 +33,6 @@ void	wait_cmd(void)
 	t_process	*process;
 
 	process = g_ms.process;
-	if (contain_heredoc(process))
-		close_heredoc_fd();
 	close_all_fd();
 	while (process)
 	{
@@ -53,6 +51,9 @@ void	start_cmd(void)
 
 	process = g_ms.process;
 	if (!process)
+		return ;
+	fill_all_heredoc();
+	if (g_ms.ignore)
 		return ;
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{

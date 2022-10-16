@@ -28,7 +28,7 @@ void	pipe_route(t_process *process)
 
 void	heredoc_route(t_process *process)
 {
-	dup2(g_ms.heredoc_fd[0], 0);
+	dup2(process->heredoc_fd[0], 0);
 	if (g_ms.process_count > 1 && process->next != NULL)
 		dup2(process->fd[1], 1);
 	set_all_outputs(process);
@@ -47,19 +47,12 @@ void	run_cmd(t_process *process)
 	pid_t	pid;
 	char	*path;
 
-	if (!get_all_inputs(process))
-	{
-		g_ms.ignore = FALSE;
-		return ;
-	}
 	pid = fork();
 	if (pid == CHILD_PROCESS)
 	{
 		signal(SIGQUIT, SIG_DFL);
-		if (contain_heredoc(process))
-			heredoc_route(process);
-		else
-			cmd_route(process);
+		signal(SIGINT, SIG_DFL);
+		cmd_route(process);
 		run_builtin(process->execute);
 		path = get_path(process->execute[0]);
 		execve(path, process->execute, g_ms.env);

@@ -47,7 +47,7 @@ all: $(NAME)
 
 $(NAME)	:	$(OBJ)
 			@echo "\n"
-			$(CC) $(READLINE) $(CFLAGS) $(OBJ) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(READLINE)
 			$(SUCCESS)
 
 %.o: %.c

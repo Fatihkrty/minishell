@@ -22,7 +22,14 @@ void	close_heredoc(int sig)
 void	heredoc(int *fd, char *endline)
 {
 	char		*input;
+	static int	start = 0;
 
+	if (start)
+	{
+		start = 1;
+		close(fd[0]);
+		close(fd[1]);
+	}
 	if (pipe(fd) < 0)
 		return (perror("minishell"));
 	while (1)

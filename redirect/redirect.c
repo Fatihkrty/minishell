@@ -52,16 +52,16 @@ void	fill_all_heredoc(void)
 	char		**redirects;
 	t_process	*process;
 
-	i = 0;
 	process = g_ms.process;
 	while (process)
 	{
+		i = 0;
 		redirects = process->redirects;
-		while (redirects[i])
+		while (redirects[i] && !(g_ms.ignore))
 		{
 			if (is_operator(redirects[i]) == HERE_DOC)
 				heredoc(process->heredoc_fd, redirects[i + 1]);
-			i+=2;
+			i += 2;
 		}
 		process = process->next;
 	}

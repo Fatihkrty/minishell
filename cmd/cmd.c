@@ -54,7 +54,7 @@ void	start_cmd(void)
 		return ;
 	fill_all_heredoc();
 	if (g_ms.ignore)
-		return ;
+		return (close_all_fd());
 	if (is_builtin(process->execute[0]) && g_ms.process_count == 1)
 	{
 		get_builtin(process);

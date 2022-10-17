@@ -23,23 +23,27 @@ void	pipe_route(t_process *process)
 		dup2(process->prev->fd[0], 0);
 		dup2(process->fd[1], 1);
 	}
-	close_all_fd();
 }
 
 void	heredoc_route(t_process *process)
 {
 	dup2(process->heredoc_fd[0], 0);
-	if (g_ms.process_count > 1 && process->next != NULL)
+	if (process->next != NULL)
 		dup2(process->fd[1], 1);
-	set_all_outputs(process);
 }
 
 void	cmd_route(t_process *process)
 {
 	if (g_ms.process_count > 1)
-		pipe_route(process);
+	{
+		if (contain_heredoc(process))
+			heredoc_route(process);
+		else
+			pipe_route(process);
+	}
 	get_all_inputs(process);
 	set_all_outputs(process);
+	close_all_fd();
 }
 
 void	run_cmd(t_process *process)
